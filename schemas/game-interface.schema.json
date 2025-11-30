@@ -1,0 +1,315 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RideWire Game Engine Interface Schema",
+  "description": "Comprehensive JSON schema for AI-Game communication in RideWire AR diagnostic platform",
+  "version": "1.0",
+  "definitions": {
+    "aiResponse": {
+      "type": "object",
+      "title": "Individual AI Response",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": ["chatgpt", "claude", "gemini"],
+          "description": "Which AI provided this response"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Confidence score (0-100) for this recommendation"
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "The diagnostic recommendation from this AI"
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "Brief explanation of how the AI arrived at this recommendation"
+        },
+        "responseTime": {
+          "type": "number",
+          "description": "Time in milliseconds for AI to generate response"
+        }
+      },
+      "required": ["provider", "confidence", "recommendation", "reasoning", "responseTime"]
+    },
+    "consensusResult": {
+      "type": "object",
+      "title": "Multi-AI Consensus Result",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Unique identifier for this diagnostic query"
+        },
+        "query": {
+          "type": "string",
+          "description": "Original user query or error code"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the consensus was reached"
+        },
+        "consensus": {
+          "type": "string",
+          "description": "Final agreed-upon diagnostic recommendation"
+        },
+        "overallConfidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Weighted confidence score across all AI providers"
+        },
+        "aiResponses": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/aiResponse" },
+          "description": "Individual responses from each AI provider"
+        },
+        "safetyZone": {
+          "type": "string",
+          "enum": ["red", "yellow", "green", "teal"],
+          "description": "Safety confidence zone (red: <60%, yellow: 60-75%, green: 75-85%, teal: >85%)"
+        },
+        "estimatedCost": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "currency": { "type": "string", "default": "USD" }
+          },
+          "description": "Estimated cost range for recommended repair"
+        },
+        "relatedCodes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related OBD-II diagnostic codes"
+        }
+      },
+      "required": ["queryId", "query", "timestamp", "consensus", "overallConfidence", "aiResponses", "safetyZone"]
+    },
+    "arOverlay": {
+      "type": "object",
+      "title": "AR Overlay Command",
+      "properties": {
+        "overlayId": {
+          "type": "string",
+          "description": "Unique ID for this overlay element"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["highlight", "arrow", "label", "diagram", "annotation"],
+          "description": "Type of AR overlay to render"
+        },
+        "componentId": {
+          "type": "string",
+          "description": "ID of vehicle component to highlight (e.g., 'spark_plug_1', 'engine_block')"
+        },
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" }
+          },
+          "description": "3D world position in AR space"
+        },
+        "color": {
+          "type": "object",
+          "properties": {
+            "r": { "type": "number", "minimum": 0, "maximum": 255 },
+            "g": { "type": "number", "minimum": 0, "maximum": 255 },
+            "b": { "type": "number", "minimum": 0, "maximum": 255 },
+            "a": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "description": "RGBA color for overlay"
+        },
+        "label": {
+          "type": "string",
+          "description": "Text to display on overlay"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration in seconds to display this overlay (0 = permanent until dismissed)"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Rendering priority (higher = rendered on top)"
+        }
+      },
+      "required": ["overlayId", "type", "componentId", "position"]
+    },
+    "hudPanel": {
+      "type": "object",
+      "title": "HUD Panel State",
+      "properties": {
+        "panelId": {
+          "type": "string",
+          "description": "Unique panel identifier"
+        },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "position": {
+          "type": "string",
+          "enum": ["top-left", "top-right", "bottom-left", "bottom-right", "center"],
+          "description": "Screen position for panel"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "CSS color or hex code for background"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["visible", "hidden", "minimized"],
+          "description": "Panel visibility state"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "action": { "type": "string" },
+              "enabled": { "type": "boolean" }
+            }
+          }
+        }
+      },
+      "required": ["panelId", "title", "content", "position"]
+    },
+    "gamificationPayload": {
+      "type": "object",
+      "title": "Gamification & Progression Update",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User identifier"
+        },
+        "xpGained": {
+          "type": "number",
+          "description": "Experience points earned from this diagnostic"
+        },
+        "totalXp": {
+          "type": "number",
+          "description": "User's total XP after this update"
+        },
+        "levelUp": {
+          "type": "boolean",
+          "description": "Whether user leveled up"
+        },
+        "newLevel": {
+          "type": "integer",
+          "description": "New user level if leveled up"
+        },
+        "achievementsUnlocked": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of achievement IDs earned"
+        },
+        "missionProgress": {
+          "type": "object",
+          "properties": {
+            "missionId": { "type": "string" },
+            "progress": { "type": "number", "minimum": 0, "maximum": 100 },
+            "completed": { "type": "boolean" }
+          }
+        }
+      },
+      "required": ["userId"]
+    },
+    "safetyRule": {
+      "type": "object",
+      "title": "Safety Rule Definition",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Unique rule identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable rule name"
+        },
+        "condition": {
+          "type": "string",
+          "description": "Condition that triggers this rule (e.g., 'confidence < 0.75 AND action_type == ignition_disable')"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["block", "warn", "require-confirmation", "log"],
+          "description": "Action to take when rule is triggered"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message to display to user"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["info", "warning", "critical"],
+          "description": "Severity level of safety concern"
+        }
+      },
+      "required": ["ruleId", "name", "condition", "action"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "queryRequest": {
+      "type": "object",
+      "title": "User Query Request",
+      "properties": {
+        "queryId": { "type": "string" },
+        "userId": { "type": "string" },
+        "vehicleId": { "type": "string" },
+        "vehicleModel": { "type": "string" },
+        "vehicleYear": { "type": "integer" },
+        "query": { "type": "string" },
+        "errorCodes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sensorData": {
+          "type": "object",
+          "description": "Additional sensor readings from vehicle"
+        },
+        "context": {
+          "type": "string",
+          "enum": ["ar-diagnostic", "remote-diagnosis", "learning-mode"],
+          "description": "Context in which query is being made"
+        },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["queryId", "userId", "vehicleId", "query"]
+    },
+    "consensusResponse": {
+      "$ref": "#/definitions/consensusResult"
+    },
+    "gameCommand": {
+      "type": "object",
+      "title": "Command to Update Game State",
+      "properties": {
+        "commandId": { "type": "string" },
+        "commandType": {
+          "type": "string",
+          "enum": ["update-hud", "show-overlay", "play-sound", "update-xp", "apply-safety-rule", "stream-response"]
+        },
+        "arOverlays": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/arOverlay" }
+        },
+        "hudPanel": {
+          "$ref": "#/definitions/hudPanel"
+        },
+        "gamification": {
+          "$ref": "#/definitions/gamificationPayload"
+        },
+        "safetyRules": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/safetyRule" }
+        }
+      },
+      "required": ["commandId", "commandType"]
+    }
+  }
+}
