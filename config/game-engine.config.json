@@ -413,7 +413,7 @@
   "analytics": {
     "enabled": true,
     "provider": "Google Analytics",
-    "tracking_id": "GA-XXXXXXXXXX",
+    "tracking_id": "${GOOGLE_ANALYTICS_ID}",
     "events": {
       "query_submitted": true,
       "consensus_reached": true,

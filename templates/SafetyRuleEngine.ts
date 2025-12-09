@@ -316,7 +316,13 @@ namespace RideWire.GameEngine
             if (condition.Contains("confidence <"))
             {
                 int thresholdIndex = condition.IndexOf("confidence <") + 12;
-                if (float.TryParse(condition.Substring(thresholdIndex, 2), out float threshold))
+                string remainingStr = condition.Substring(thresholdIndex).Trim();
+                int endIndex = 0;
+                while (endIndex < remainingStr.Length && (char.IsDigit(remainingStr[endIndex]) || remainingStr[endIndex] == '.'))
+                {
+                    endIndex++;
+                }
+                if (endIndex > 0 && float.TryParse(remainingStr.Substring(0, endIndex), out float threshold))
                 {
                     if (currentConsensus.overallConfidence < threshold)
                     {

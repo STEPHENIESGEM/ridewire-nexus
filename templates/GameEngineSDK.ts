@@ -205,7 +205,11 @@ namespace RideWire.GameEngine
         /// </summary>
         private void HandleWebSocketMessage(string message)
         {
+            #if UNITY_EDITOR
             Debug.Log($"[GameEngineSDK] Received: {message}");
+            #else
+            Debug.Log($"[GameEngineSDK] Received message ({message.Length} bytes)");
+            #endif
 
             try
             {

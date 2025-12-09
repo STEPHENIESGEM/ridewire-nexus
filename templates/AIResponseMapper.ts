@@ -245,7 +245,7 @@ class AIResponseMapper {
       achievementsUnlocked: achievements,
       missionProgress: {
         missionId: 'diagnose_5_vehicles',
-        progress: 20, // Placeholder - calculate from database
+        progress: 20, // TODO: Calculate from actual database query: SELECT COUNT(*) FROM diagnostics WHERE user_id = ?
         completed: false
       }
     };

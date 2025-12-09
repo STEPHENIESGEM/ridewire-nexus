@@ -665,7 +665,8 @@ namespace RideWire.GameEngine
         /// </summary>
         public void OnDiagnoseButtonClicked()
         {
-            // Get query input from UI
+            // TODO: Add InputField component reference and get actual user input
+            // For now using placeholder - replace with: query = queryInputField.text;
             string query = "P0300 - Random misfire detected"; // Placeholder
 
             // Create query request
