@@ -1,0 +1,94 @@
+{
+  "game_engine": {
+    "type": "unity",
+    "version": "2022.3+",
+    "export_target": "webgl",
+    "build_size_mb": 50,
+    "webgl_compression": "gzip"
+  },
+  "ar_framework": {
+    "library": "ar.js",
+    "version": "3.4+",
+    "marker_type": "hiro",
+    "vehicle_detection": true,
+    "camera_permission_required": true
+  },
+  "frontend": {
+    "framework": "react",
+    "ui_library": "three.js",
+    "responsive_breakpoints": {
+      "mobile": 375,
+      "tablet": 768,
+      "desktop": 1920
+    }
+  },
+  "communication": {
+    "protocol_primary": "websocket",
+    "protocol_fallback": "rest",
+    "query_timeout_ms": 30000,
+    "retry_max_attempts": 3,
+    "retry_backoff_factor": 2
+  },
+  "safety": {
+    "min_confidence_threshold": 0.70,
+    "high_cost_threshold_usd": 1000,
+    "min_confidence_for_high_cost": 0.80,
+    "duplicate_action_cooldown_minutes": 60,
+    "conflicting_actions": {
+      "replace_engine": ["replace_transmission"],
+      "flush_coolant": ["replace_coolant_hoses"]
+    }
+  },
+  "visual_style": {
+    "colors": {
+      "primary": "#007AFF",
+      "warning": "#FF6B35",
+      "success": "#34C759",
+      "error": "#FF3B30"
+    },
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter"
+    },
+    "animation": {
+      "duration_ms": 300,
+      "easing": "ease-in-out"
+    }
+  },
+  "environments": {
+    "development": {
+      "api_endpoint": "http://localhost:3000",
+      "ws_endpoint": "ws://localhost:3000",
+      "log_level": "debug"
+    },
+    "staging": {
+      "api_endpoint": "https://staging-api.ridewire.com",
+      "ws_endpoint": "wss://staging-api.ridewire.com",
+      "log_level": "info"
+    },
+    "production": {
+      "api_endpoint": "https://api.ridewire.com",
+      "ws_endpoint": "wss://api.ridewire.com",
+      "log_level": "warn"
+    }
+  },
+  "gamification": {
+    "enabled": true,
+    "points_per_diagnosis": 50,
+    "streak_bonus_multiplier": 2.0,
+    "achievements": {
+      "first_diagnosis": 10,
+      "diagnostic_expert": 100,
+      "perfect_week": 250
+    }
+  },
+  "deployment": {
+    "cdn": "cloudfront",
+    "cdn_ttl_seconds": 3600,
+    "gzip_compression": true,
+    "cache_headers": {
+      "static": 86400,
+      "dynamic": 0
+    }
+  }
+}
