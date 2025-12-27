@@ -1,380 +1,294 @@
-# 🏠 House Work Requirements & Equity Vesting
+# 🏠 Roommate Chore Rotation & Equity Gift
 
 ## The Deal
 
-**Extended family members earn equity by contributing 4 hours/day of productive work while living in the house during the bootstrap phase (6-12 months).**
+**Extended family members may receive equity as a GIFT from Stephanie for being good roommates during the founding period (6-12 months).**
 
-This is **NOT** charity. This is **compensation for work** that supports Stephanie, Tracy, and Steve in building RideWire.
+This is **Stephanie's voluntary generosity**, not payment for RideWire work. You're roommates, not employees.
 
 ---
 
-## ⚖️ The Exchange
+## 🎁 What "Good Roommate" Means
 
-### What Extended Family Provides:
-- **4 hours/day minimum** of documented productive work
-- **House operations:** Kitchen, shared areas, yards always spotless
-- **Business support:** Help Tracy/Steve with operational tasks
-- **Timeline:** 6-12 months (until company generates salaries)
+### Basic Expectations:
+- **Clean up after yourself**
+- **Do your share of house chores** (rotating schedule)
+- **Don't trash shared spaces**
+- **Don't eat all the food without replacing**
+- **Be respectful to everyone**
+- **Help when asked occasionally**
 
-### What Extended Family Receives:
+**That's it. Normal roommate stuff.**
+
+### What You Get:
 - **Free housing:** Worth $500-1,000/month
 - **Free food:** Worth $300-500/month  
-- **Monthly income:** $84-336/month during bootstrap
-- **Equity:** $607K-$4.85M at $800M exit
+- **Support getting on your feet**
+- **OPTIONAL GIFT if you're a good roommate:** $607K-$4.85M equity at $800M exit
 
-**Total compensation for 1,200 hours of work over 12 months: $617K-$4.865M**
-
-**Effective hourly rate if exit happens: $514-$4,054/hour**
-
-**This is the best job on Earth - but ONLY if you DO THE WORK.**
+**This is Stephanie being incredibly generous, not you earning wages.**
 
 ---
 
-## 👷 Detailed Work Requirements
+## 🔄 Weekly Rotating Chore Schedule
 
-### Women's Responsibilities (Melissa Adams & Daughter)
+**All 7 extended family members rotate through ALL chores equally. No gender-based assignments.**
 
-#### Daily Tasks (4+ hours):
+### The 7 Extended Family Members:
+1. Melissa Adams
+2. Melissa's Daughter
+3. Matt Nicoles
+4. Community Member 1
+5. Community Member 2 (Rachelle)
+6. Community Member 3 (Russ)
+7. Community Member 4
 
-**Kitchen (1.5 hours/day):**
-- [ ] All dishes washed and put away
+### Weekly Chore Assignments (Rotate Every Sunday):
+
+#### Week 1 Example:
+
+| Person | Chore Assignment |
+|--------|------------------|
+| Melissa Adams | Kitchen (dishes, counters, floor) |
+| Melissa's Daughter | Bathrooms (all 2-3 bathrooms) |
+| Matt Nicoles | Yard work (mowing, trimming, weeding) |
+| Community 1 | Living areas (vacuuming, dusting, trash) |
+| Rachelle | Laundry (everyone's clothes, linens) |
+| Russ | Kitchen support (groceries, organization, deep clean) |
+| Community 4 | Yard support (watering, cleanup, maintenance) |
+
+#### Week 2 - Everyone Shifts:
+
+| Person | Chore Assignment |
+|--------|------------------|
+| Melissa Adams | Bathrooms |
+| Melissa's Daughter | Yard work |
+| Matt Nicoles | Living areas |
+| Community 1 | Laundry |
+| Rachelle | Kitchen support |
+| Russ | Yard support |
+| Community 4 | Kitchen (primary) |
+
+**Pattern continues rotating so everyone does everything over 7 weeks.**
+
+### Daily Checklist (For Person Assigned):
+
+#### Kitchen (Primary):
+- [ ] All dishes washed after each meal
 - [ ] Counters wiped and sanitized
-- [ ] Stovetop cleaned after each meal
+- [ ] Stovetop cleaned
+- [ ] Floor swept/mopped daily
 - [ ] Sink empty and clean
-- [ ] Floor swept/mopped
-- [ ] Refrigerator organized weekly
-- [ ] Groceries stocked and managed
+- [ ] Trash taken out when full
 
-**Shared Living Areas (1 hour/day):**
-- [ ] Living room clean (no clutter)
-- [ ] Coffee tables wiped
-- [ ] Floors vacuumed/swept
-- [ ] Furniture dusted weekly
-- [ ] Trash taken out daily
-
-**Bathrooms (1 hour/day):**
+#### Bathrooms:
 - [ ] Toilets cleaned daily
 - [ ] Sinks/counters wiped
 - [ ] Mirrors cleaned
-- [ ] Showers/tubs scrubbed weekly
+- [ ] Showers scrubbed 2x/week
 - [ ] Floors mopped
-- [ ] Supplies stocked (TP, soap, etc.)
+- [ ] Supplies stocked
 
-**Laundry & Organization (0.5+ hours/day):**
-- [ ] Household laundry done
-- [ ] Clothes folded and distributed
-- [ ] Linens changed weekly
-- [ ] General household organization
+#### Yard Work:
+- [ ] Mow lawn (if needed this week)
+- [ ] Pull weeds
+- [ ] Trim/edge
+- [ ] Water plants
+- [ ] Clear debris
+- [ ] Keep exterior perfect
 
-**TOTAL: 4 hours minimum documented daily**
+#### Living Areas:
+- [ ] Vacuum/sweep floors
+- [ ] Dust furniture
+- [ ] Organize clutter
+- [ ] Wipe surfaces
+- [ ] Take out trash
+- [ ] Keep presentable
 
----
+#### Laundry:
+- [ ] Wash everyone's clothes
+- [ ] Fold and distribute
+- [ ] Change linens weekly
+- [ ] Keep up with all laundry
 
-### Men's Responsibilities (Matt Nicoles & 4 Community Members)
+#### Kitchen Support:
+- [ ] Help primary kitchen person
+- [ ] Grocery shopping
+- [ ] Organize cabinets/fridge
+- [ ] Deep cleaning tasks
 
-#### Daily Tasks (4+ hours):
-
-**Yard Maintenance (2 hours/day):**
-- [ ] Grass mowed weekly (rotating schedule)
-- [ ] Weeds pulled regularly
-- [ ] Hedges trimmed monthly
-- [ ] Lawn edged
-- [ ] Debris cleared (leaves, branches)
-- [ ] Watering plants/lawn
-- [ ] Exterior looking PERFECT
-
-**Tracy Support (1 hour/day):**
-- [ ] Help with mechanic work as needed
-- [ ] Tool organization and cleaning
-- [ ] Parts fetching/delivery
-- [ ] Workshop cleanup
-- [ ] Vehicle maintenance help
-- [ ] Whatever Tracy asks
-
-**Steve Support (0.5 hours/day):**
-- [ ] Business operations tasks
-- [ ] Errands as needed
-- [ ] Supply runs
-- [ ] Document organization
-- [ ] Whatever Steve asks
-
-**Maintenance & Repairs (0.5+ hours/day):**
-- [ ] Fix things that break
-- [ ] Preventive maintenance
-- [ ] Heavy lifting tasks
-- [ ] Building/assembling things
-- [ ] Property upkeep
-
-**TOTAL: 4 hours minimum documented daily**
+#### Yard Support:
+- [ ] Help primary yard person
+- [ ] Water plants daily
+- [ ] Cleanup tasks
+- [ ] Maintenance items
 
 ---
 
-## 📊 Work Logging System
+## ✅ Weekly Sign-Off by Tracy
 
-### Google Sheet Tracker (Required):
+### Every Sunday Evening:
 
-**Daily Log Format:**
+**Tracy Kelly reviews the week's chores and signs off:**
 
-| Date | Name | Hours | Tasks Completed | Verified By | Notes |
-|------|------|-------|-----------------|-------------|-------|
-| 12/27/25 | Melissa | 4.5 | Kitchen deep clean, laundry, bathrooms | Stephanie ✅ | Great job |
-| 12/27/25 | Matt | 5.0 | Mowed lawn, helped Tracy, fixed door | Steve ✅ | Excellent |
-| 12/27/25 | Rachelle | 1.0 | (Only breakfast dishes) | Stephanie ❌ | WARNING |
+| Week | Person | Chore | Completed? | Tracy's Sign-Off | Notes |
+|------|--------|-------|------------|------------------|-------|
+| Week 1 | Melissa | Kitchen | Yes | ✅ Tracy Kelly | Excellent work |
+| Week 1 | Melissa's Daughter | Bathrooms | Yes | ✅ Tracy Kelly | Very clean |
+| Week 1 | Matt | Yard | Yes | ✅ Tracy Kelly | Looks great |
+| Week 1 | Community 1 | Living | Yes | ✅ Tracy Kelly | Good job |
+| Week 1 | Rachelle | Laundry | Partial | ⚠️ Tracy Kelly | Only did 2 days |
+| Week 1 | Russ | Kitchen Support | No | ❌ Tracy Kelly | Didn't help |
+| Week 1 | Community 4 | Yard Support | Yes | ✅ Tracy Kelly | Helped Matt well |
 
-**Weekly Review:**
-- Every Sunday evening
-- Stephanie/Tracy/Steve review logs
-- Calculate vesting percentage for week
-- Address any issues immediately
+**Tracy's Role:**
+- Inspect all chore areas Sunday evening
+- Mark each person as ✅ (good), ⚠️ (partial), or ❌ (not done)
+- Sign off on weekly completion
+- Report to Stephanie who did well and who didn't
+- Track patterns over time
 
-**Monthly Summary:**
-- Total hours worked
-- Vesting percentage earned
-- Cumulative equity vested
-- Any warnings or issues
-
----
-
-## 💰 Vesting Calculation Formula
-
-### How Equity Accumulates:
-
-**Formula:** (Days Worked with 4+ Hours) ÷ (Total Days Needed) × (Total Equity) = Vested Equity
-
-**Example - Melissa Adams (1.6% total equity available):**
-
-**Month 1:**
-- 28 days worked full 4+ hours
-- 2 days only 2 hours (sick)
-- 1 day 0 hours (family emergency)
-- **Vesting earned:** 28 ÷ 31 = 90.3% for the month
-- **If 12-month period:** 90.3% of (1.6% ÷ 12) = 0.121% vested
-
-**After 12 Months (300 total days needed):**
-- Worked 280 days with full 4+ hours
-- Worked 15 days with only 2-3 hours (50% credit = 7.5 days)
-- Worked 5 days with <2 hours (no credit)
-- **Total credit:** 280 + 7.5 = 287.5 days
-- **Vesting:** 287.5 ÷ 300 = 95.8% vested
-- **Final equity:** 95.8% of 1.6% = 1.53%
-- **Exit value:** 1.53% of $800M = $12.24M (after tax: $9.33M)
+**Why Tracy:**
+- He's a co-founder with authority
+- He's fair and objective
+- He knows what "done right" looks like
+- Stephanie trusts his judgment
 
 ---
 
-## ⚠️ Three-Strike Warning System
+## 🎁 How Equity Gift Decisions Are Made
 
-### Strike 1: First Warning
-**Trigger:** Week with <50% work (less than 14 hours documented)
+### Stephanie's Gift Decision Based on:
 
-**Consequences:**
-- Written warning emailed
-- One-on-one meeting with Stephanie
-- Explanation of what's expected
-- One week to improve
+**Good Roommate Behavior (Gets Gift):**
+- Consistently completes assigned chores
+- Cleans up after themselves
+- Doesn't trash shared spaces
+- Respectful to everyone
+- Tracy signs off positively most weeks
+- **Result:** Stephanie gives equity gift at exit
 
-**Example:** "Rachelle, you only logged 10 hours this week (expected 28+). We need to see 4+ hours daily. This is your first warning. Let's talk about what's going on and how to improve."
+**Bad Roommate Behavior (No Gift):**
+- Skips chores regularly
+- Messy, doesn't clean up after self
+- Eats all food without replacing
+- Disrespectful or causes problems
+- Tracy repeatedly marks as ❌
+- **Result:** Stephanie doesn't give gift ($0)
 
----
+### Example Outcomes After 12 Months:
 
-### Strike 2: Serious Warning
-**Trigger:** Second week <50% work within 30 days
+**Melissa Adams:**
+- 48 weeks: Tracy signed off ✅
+- 4 weeks: Tracy signed off ⚠️ (sick/emergency, understandable)
+- 0 weeks: ❌
+- **Stephanie's decision:** Full 1.6% gift = $4.85M ✅
 
-**Consequences:**
-- Equity vesting PAUSED
-- Must work 2 full weeks (28+ hours each) to resume vesting
-- Serious conversation about commitment
-- If improvement, vesting resumes at previous rate
+**Rachelle:**
+- 20 weeks: Tracy signed off ✅
+- 15 weeks: Tracy signed off ⚠️
+- 17 weeks: Tracy signed off ❌ (didn't do chores)
+- **Stephanie's decision:** No gift = $0 ❌
 
-**Example:** "Rachelle, this is your second week under 14 hours. Your equity vesting is now paused. You need to complete 2 full weeks of 28+ hours to restart vesting. Are you committed to this?"
+**Matt Nicoles:**
+- 45 weeks: ✅
+- 7 weeks: ⚠️
+- 0 weeks: ❌
+- **Stephanie's decision:** Full 1% gift = $3.04M ✅
 
----
+### It's Stephanie's Choice:
 
-### Strike 3: Equity Forfeiture
-**Trigger:** Third week <50% work, or consistent pattern of slacking
+This is **her company**, **her equity**, **her gift to give or not give**.
 
-**Consequences:**
-- **ALL equity forfeited** (back to 0%)
-- 30-day notice to find new housing
-- Must continue contributing or leave immediately
-- No equity at exit (even if company sells for billions)
-
-**Example:** "Rachelle, you've received two warnings and failed to improve. Your equity is now forfeited. You have 30 days to find new housing. We wish you well, but this isn't working."
-
----
-
-## 🚨 Immediate Termination Events
-
-### No Warnings - Instant Equity Loss:
-
-**1. Intentional Property Damage**
-- Break things on purpose → $0 equity + lawsuit for damages
-- Example: Punch hole in wall, break appliances, vandalism
-
-**2. Theft**
-- Steal from anyone in house → $0 equity + lawsuit + police report
-- Example: Take money, steal belongings, use someone's car without permission
-
-**3. Physical Violence**
-- Assault anyone → $0 equity + eviction + restraining order + police
-- Example: Hit, push, threaten physical harm
-
-**4. Repeated Sabotage**
-- Deliberately undermine work → $0 equity + immediate eviction
-- Example: Trash areas after others clean, waste food, break things
-
-**5. Illegal Activity**
-- Any illegal activity in house → $0 equity + eviction + police if needed
-- Example: Drugs, stolen goods, etc.
+Tracy's sign-offs inform her decision, but ultimately it's 100% Stephanie's discretion.
 
 ---
 
-## 📋 Special Case: Rachelle & Russ
+## ⚠️ Consequences of Bad Roommate Behavior
 
-### Current Status:
+### If You Don't Do Your Chores:
 
-**Rachelle:** 0.2% equity potential = $607K at exit
-**Russ:** 0.2% equity potential = $607K at exit
+**After 2 Weeks of Tracy Marking ❌:**
+- Sit-down conversation with Stephanie
+- Explanation of expectations
+- Chance to improve
 
-**Current Issues (Per Stephanie):**
-- "Eat everything"
-- "Trash the place"
+**After 4 Weeks of Consistent ❌:**
+- Warning: "You're not being a good roommate"
+- Equity gift in jeopardy
+- Must improve immediately
 
-### Options:
+**After 8+ Weeks of Poor Behavior:**
+- No equity gift (Stephanie decides you don't deserve it)
+- May be asked to move out
+- If you've damaged property: Lawsuit
 
-**Option 1: Shape Up**
-- Start contributing 4 hours/day immediately
-- Stop excessive eating without replacement
-- Stop trashing shared areas
-- If improve within 2 weeks: Equity vesting continues
+### Special Case - Property Damage:
 
-**Option 2: Opt Out**
-- Don't want to work 4 hours/day? That's fine
-- Move out within 30 days
-- Get $0 equity (haven't earned it yet)
-- No hard feelings, just not a fit
+**If you intentionally damage the house:**
+- Immediate $0 equity
+- Lawsuit for replacement costs
+- Eviction
+- No second chances
 
-**Option 3: Get Kicked Out**
-- Continue current behavior → Strike system → Equity forfeited
-- Cause damage → Lawsuit for replacement costs
-- It's your choice
-
-**Stephanie's Message:** "If Rachelle and Russ still want to eat everything and trash the place, I won't pay them. I will sue them. Their choice."
+**Examples:** Breaking appliances, punching walls, ruining furniture, etc.
 
 ---
 
-## 💼 Why This Matters
+## 💬 Message to Rachelle & Russ
 
-### Stephanie, Tracy & Steve's Reality:
+**Current situation:** You've been eating all the food and trashing shared spaces. That's not okay.
 
-**They are building a company to hit $180M ARR in 3 years.**
+**The offer:** Be good roommates (do your weekly chores, clean up after yourselves) and Stephanie will gift you $607,000 EACH when RideWire exits.
 
-**They CANNOT also:**
-- Clean the entire house daily (3+ hours)
-- Maintain all yards (2+ hours)
-- Cook all meals (2+ hours)
-- Do everyone's laundry (1+ hour)
-- Manage household operations (1+ hour)
+**Your options:**
 
-**That's 9+ hours/day that extended family is saving them.**
+**Option 1:** Start being good roommates
+- Do your assigned chore each week
+- Clean up after yourselves
+- Stop eating all the food
+- Be respectful
+- **Result:** $607K gift each at exit ✅
 
-**Without this support:**
-- Founders work 18+ hour days
-- Get burned out in 2 months
-- Company fails
-- Nobody gets anything
+**Option 2:** Continue current behavior
+- Tracy keeps marking you ❌
+- Stephanie decides no gift
+- Asked to move out eventually
+- **Result:** $0 ❌
 
-**With this support:**
-- Founders focus 100% on RideWire
-- Company succeeds
-- 11 people become millionaires
-- 267 Albuquerque families get homes
+**Option 3:** Damage property
+- Intentional damage = immediate eviction
+- Lawsuit for repair costs
+- $0 equity
+- **Result:** $0 + lawsuit ❌❌
 
-**Your 4 hours/day of house work = Foundation for $800M exit**
-
----
-
-## ✅ Success Metrics
-
-### Weekly Goals (Per Person):
-
-**Minimum Acceptable:**
-- 28 hours logged (4 hours × 7 days)
-- All assigned areas clean
-- No complaints from founders
-- Equity vests at 100% rate
-
-**Good Performance:**
-- 30-35 hours logged (extra initiative)
-- Areas spotless proactively
-- Help others who need it
-- Positive feedback from founders
-
-**Excellent Performance:**
-- 35+ hours logged
-- Go above and beyond
-- Solve problems before asked
-- Equity vests + potential bonus equity
+**Your choice. Simple as that.**
 
 ---
 
-## 📞 Questions to Ask Yourself
+## 🎯 The Bottom Line
 
-**Before you commit to this equity deal:**
+**This is simple:**
 
-1. **Am I willing to work 4 hours/day for 6-12 months?**
-   - If no → Don't accept equity, just live here as guest (no equity)
+1. **Do your weekly chore** (rotates every Sunday)
+2. **Clean up after yourself** (basic roommate behavior)
+3. **Don't trash shared spaces**
+4. **Tracy signs off each week**
+5. **After 6-12 months:** Stephanie decides if you deserve equity gift
+6. **Good roommate = $607K-$4.85M gift**
+7. **Bad roommate = $0**
 
-2. **Can I keep a kitchen spotless? Yard perfect?**
-   - If no → This might not be for you
+**You don't work FOR RideWire. You're just being a decent roommate.**
 
-3. **Am I okay with Stephanie/Tracy/Steve verifying my work?**
-   - If no → You won't be comfortable here
+**Stephanie chooses to reward good roommates with life-changing gifts.**
 
-4. **Do I believe RideWire will succeed?**
-   - If no → The equity is worthless to you anyway
-
-5. **Am I committed to the team winning together?**
-   - If no → You'll resent the work and fail
-
-**If you answered "no" to any of these: DON'T TAKE THE EQUITY.**
-
-**It's okay to just live here, help out casually, and move on when you can. No equity, no pressure, no problem.**
-
-**But if you want the $607K-$4.85M: DO THE WORK.** ✅
+**Simple. Fair. Your choice.**
 
 ---
 
-## 🎯 Final Message
+**From surviving together to Stephanie paying it forward to good roommates.** 🎁
 
-**This is not complicated:**
+**Be a good roommate = Get a huge gift**
+**Be a bad roommate = Get nothing**
 
-- Work 4 hours/day on house/yard/support
-- Log your hours honestly
-- Keep your areas perfect
-- Help the founders succeed
-- Get equity worth hundreds of thousands to millions
-
-**OR**
-
-- Don't want to work? That's fine
-- Live here as a guest (no equity)
-- Move out when you can afford it
-- No hard feelings
-
-**OR**
-
-- Slack off and trash the place?
-- Get kicked out with $0
-- Possible lawsuit if you cause damage
-
-**Your choice. Choose wisely.**
-
----
-
-**From surviving together to thriving together - but ONLY if everyone works.** 🚀
-
-**Work = Equity**
-**Slack = Nothing**
-**Damage = Lawsuit**
-
-**Simple as that.** ✅
+**That's the deal.** ✅
