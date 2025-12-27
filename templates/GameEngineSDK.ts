@@ -74,7 +74,7 @@ export class GameEngineSDK {
       
       this.ws.onerror = () => console.error('WebSocket error');
     } catch (err) {
-      console.warn('WebSocket unavailable, using REST fallback');
+      console.warn('WebSocket unavailable. Real-time updates will not be received.');
     }
   }
 
