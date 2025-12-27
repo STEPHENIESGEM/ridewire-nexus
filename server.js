@@ -28,7 +28,7 @@ app.post('/register', async (req, res) => {
     
     // Generate token for auto-login after registration
     const token = jwt.sign({ id: result.rows[0].id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '24h',
     });
     
     res.status(201).json({ message: 'User registered successfully', token, userId: result.rows[0].id });
@@ -54,7 +54,7 @@ app.post('/login', async (req, res) => {
     }
     
     const token = jwt.sign({ id: rows[0].id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '24h',
     });
     res.json({ token, userId: rows[0].id });
   } catch (err) {
