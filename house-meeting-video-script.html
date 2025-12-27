@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Meeting - Miss RideWire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .video-container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .video-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .video-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .video-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .video-content {
+            padding: 40px;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .slide h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .slide p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .slide ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .slide ul li {
+            font-size: 1.1em;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .money {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-prev {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-prev:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .video-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .video-content {
+                padding: 20px;
+            }
+            
+            .slide h2 {
+                font-size: 1.5em;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <div class="video-header">
+            <h1>🚗 House Meeting: Our Future 🚀</h1>
+            <p>From Miss RideWire (Stephanie)</p>
+        </div>
+
+        <div class="video-content">
+            <!-- Slide 1: Introduction -->
+            <div class="slide active">
+                <h2><span class="emoji">👋</span>Hey Family</h2>
+                <p>This is Stephanie, aka Miss RideWire. I wanted to talk to everyone about something amazing that's happening.</p>
+                
+                <p>First, I want to say <span class="highlight">THANK YOU</span> to every single person in this house. We've been through hell together. Living in tight spaces, sharing everything, taking care of each other when nobody else would.</p>
+                
+                <div class="success">
+                    <p><strong>You saved my life.</strong> Without Tracy, Steve, Melissa, and everyone here, I would have frozen on the streets of Albuquerque or died from depression after losing my family.</p>
+                </div>
+                
+                <p>Now I want to tell you about what we're building and how <span class="highlight">everyone in this house can become a millionaire.</span></p>
+            </div>
+
+            <!-- Slide 2: What is RideWire? -->
+            <div class="slide">
+                <h2><span class="emoji">🤖</span>What is RideWire?</h2>
+                <p>RideWire is an AI platform that helps people diagnose car problems instantly. Instead of paying a mechanic $100-200/hour, people can use our AI for $9.99 and get answers in seconds.</p>
+                
+                <h3>Why It's Special:</h3>
+                <ul>
+                    <li><span class="emoji">🧠</span> Uses 3 different AI systems (ChatGPT, Claude, Gemini) at once</li>
+                    <li><span class="emoji">⚡</span> Gives answers in under 5 seconds</li>
+                    <li><span class="emoji">💰</span> 99% cheaper than traditional diagnostics</li>
+                    <li><span class="emoji">🏆</span> No competitor has anything like this</li>
+                </ul>
+                
+                <p>Tracy's mechanic skills helped me understand what mechanics need. Steve's garage gave us a place to build. Melissa's support kept the house running so I could code.</p>
+                
+                <p class="highlight">This is OUR company, built by ALL of us together.</p>
+            </div>
+
+            <!-- Slide 3: The Opportunity -->
+            <div class="slide">
+                <h2><span class="emoji">💎</span>The Opportunity</h2>
+                <p>The auto repair industry is worth <span class="money">$800 BILLION dollars</span> in the US alone. There are 280,000 auto shops, and most still use paper manuals from the 1990s.</p>
+                
+                <h3>Our Path:</h3>
+                <ul>
+                    <li><span class="emoji">📅</span> <strong>Week 4:</strong> First $100 from sales</li>
+                    <li><span class="emoji">📈</span> <strong>Month 6:</strong> $10,000/month revenue</li>
+                    <li><span class="emoji">🚀</span> <strong>Year 1:</strong> Get angel funding ($500K-1M)</li>
+                    <li><span class="emoji">💰</span> <strong>Year 3:</strong> $15 million/month revenue</li>
+                    <li><span class="emoji">🏆</span> <strong>Year 7:</strong> Sell company for $800 MILLION</li>
+                </ul>
+                
+                <div class="success">
+                    <p><strong>This is real.</strong> We have 37,000+ lines of working code. The technology exists. The market is hungry. We just need to execute.</p>
+                </div>
+            </div>
+
+            <!-- Slide 4: Equity Breakdown -->
+            <div class="slide">
+                <h2><span class="emoji">📊</span>Who Gets What</h2>
+                <p>I've decided to share ownership of this company with everyone who's helping us survive. Here's the breakdown:</p>
+                
+                <table>
+                    <tr>
+                        <th>Person</th>
+                        <th>Ownership %</th>
+                        <th>Value at $800M Exit</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Stephanie (Me)</strong></td>
+                        <td>40%</td>
+                        <td class="money">$121 Million</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tracy Kelly</strong></td>
+                        <td>30%</td>
+                        <td class="money">$91 Million</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Steve McCarty</strong></td>
+                        <td>20%</td>
+                        <td class="money">$61 Million</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Melissa Adams</strong></td>
+                        <td>1.6%</td>
+                        <td class="money">$4.85 Million</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Melissa's Daughter</strong></td>
+                        <td>0.4%</td>
+                        <td class="money">$1.21 Million</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Matt Nicoles</strong></td>
+                        <td>1%</td>
+                        <td class="money">$3.04 Million</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4 Community Members</strong></td>
+                        <td>0.2% each</td>
+                        <td class="money">$607K each</td>
+                    </tr>
+                </table>
+                
+                <p class="highlight">All 11 of us become millionaires if this works.</p>
+            </div>
+
+            <!-- Slide 5: The Condition -->
+            <div class="slide">
+                <h2><span class="emoji">⚠️</span>The Condition (Important!)</h2>
+                <p>There's one condition for the extended family (everyone except Stephanie, Tracy, and Steve):</p>
+                
+                <div class="warning">
+                    <p><strong>You only get your equity if you help until we can all afford to live separately.</strong></p>
+                </div>
+                
+                <h3>What This Means:</h3>
+                <ul>
+                    <li><span class="emoji">⏰</span> Timeline: About 6-12 months from now</li>
+                    <li><span class="emoji">💰</span> When we get angel funding (around Month 6), we'll have money for everyone to get their own places</li>
+                    <li><span class="emoji">🏠</span> As people move out over the next 6 months, you need to keep helping</li>
+                    <li><span class="emoji">✅</span> When the LAST person moves out, your equity "vests" (becomes yours)</li>
+                </ul>
+                
+                <h3>Examples:</h3>
+                <p><strong>If you stay through Month 12:</strong> You get your full equity (millions) ✅</p>
+                <p><strong>If you leave in Month 4:</strong> You get $0 equity (but keep monthly pay you earned) ❌</p>
+                
+                <div class="success">
+                    <p><strong>Why this rule?</strong> To make sure we stay together through the hardest part. Once we can afford separate places, THEN everyone gets their reward.</p>
+                </div>
+            </div>
+
+            <!-- Slide 6: Monthly Income -->
+            <div class="slide">
+                <h2><span class="emoji">💵</span>What You Get Paid Now</h2>
+                <p>While we're building this, everyone gets monthly income from the company:</p>
+                
+                <h3>Month 1-6 (Bootstrap Phase): $10,500/month total</h3>
+                <table>
+                    <tr>
+                        <th>Person</th>
+                        <th>Monthly Pay</th>
+                    </tr>
+                    <tr>
+                        <td>Stephanie</td>
+                        <td class="money">$4,200</td>
+                    </tr>
+                    <tr>
+                        <td>Tracy</td>
+                        <td class="money">$3,150</td>
+                    </tr>
+                    <tr>
+                        <td>Steve</td>
+                        <td class="money">$2,100</td>
+                    </tr>
+                    <tr>
+                        <td>Melissa Adams</td>
+                        <td class="money">$336</td>
+                    </tr>
+                    <tr>
+                        <td>Melissa's Daughter</td>
+                        <td class="money">$84</td>
+                    </tr>
+                    <tr>
+                        <td>Matt Nicoles</td>
+                        <td class="money">$210</td>
+                    </tr>
+                    <tr>
+                        <td>4 Community (each)</td>
+                        <td class="money">$105</td>
+                    </tr>
+                </table>
+                
+                <p><strong>Important:</strong> You get paid every month regardless. Even if you leave early, you keep what you earned. The equity is the bonus for staying through.</p>
+            </div>
+
+            <!-- Slide 7: Next 7 Days -->
+            <div class="slide">
+                <h2><span class="emoji">🎯</span>What Happens in the Next 7 Days</h2>
+                <p>We need to generate <span class="money">$2,000 this week</span> to keep everyone warm and fed. Here's the plan:</p>
+                
+                <h3>This Week's Strategy:</h3>
+                <ul>
+                    <li><span class="emoji">💻</span> <strong>Today:</strong> Post freelance AI consulting jobs online</li>
+                    <li><span class="emoji">🛒</span> <strong>Tomorrow:</strong> Upload 20 car diagnostic diagrams to Gumroad ($9.99 each)</li>
+                    <li><span class="emoji">📹</span> <strong>This Weekend:</strong> Record 10 YouTube shorts about AI car diagnostics</li>
+                    <li><span class="emoji">📞</span> <strong>Monday:</strong> Call 20 local Albuquerque auto shops, offer AI demos</li>
+                    <li><span class="emoji">💰</span> <strong>By Friday:</strong> Collect $2,000+ from multiple income sources</li>
+                </ul>
+                
+                <div class="success">
+                    <p><strong>This is our proof-of-concept.</strong> If we can make $2,000 in 7 days, we can make $2 million in 7 months, and $200 million in 7 years.</p>
+                </div>
+                
+                <p>Tracy will help with technical validation. Steve will handle operations. Melissa will keep the house running. Everyone has a role.</p>
+            </div>
+
+            <!-- Slide 8: Social Impact -->
+            <div class="slide">
+                <h2><span class="emoji">❤️</span>Giving Back to Albuquerque</h2>
+                <p>I'm also committing to give back to the city that almost broke us but also gave us a chance to survive.</p>
+                
+                <h3>The 10% Pledge:</h3>
+                <p>I'm giving <span class="highlight">10% of all revenue</span> to help homeless people in Albuquerque by buying empty buildings and turning them into homes people can OWN (not rent).</p>
+                
+                <ul>
+                    <li><span class="emoji">🏠</span> <strong>Year 1:</strong> Buy 2 small houses with $148K</li>
+                    <li><span class="emoji">🏘️</span> <strong>Year 2:</strong> Build 20-unit tiny home village ($500K)</li>
+                    <li><span class="emoji">🏢</span> <strong>Year 3:</strong> Buy apartment building, 30 families ($1.5M)</li>
+                    <li><span class="emoji">🌆</span> <strong>Year 7:</strong> Entire city block, 267 families housed ($33M total)</li>
+                </ul>
+                
+                <div class="success">
+                    <p><strong>Impact:</strong> About 1,000 people off the streets. All through rent-to-own, so they BUILD WEALTH, not just have a roof.</p>
+                </div>
+                
+                <p>We know what it's like to be cold, hungry, and homeless. Now we're going to make sure 267 other families never feel that again.</p>
+            </div>
+
+            <!-- Slide 9: The Timeline -->
+            <div class="slide">
+                <h2><span class="emoji">📅</span>The Complete Timeline</h2>
+                
+                <h3>Next 7 Days:</h3>
+                <p>Generate $2,000 to prove this works</p>
+                
+                <h3>Month 1-6 (Bootstrap):</h3>
+                <p>Everyone lives together, build company to $10K/month revenue</p>
+                
+                <h3>Month 6 (Angel Funding):</h3>
+                <p>Raise $500K-1M from investors, start transitioning to separate housing</p>
+                
+                <h3>Month 6-12 (Transition):</h3>
+                <p>People gradually move to own apartments, company grows to $100K/month</p>
+                
+                <h3>Month 12 (Vesting Event):</h3>
+                <p>Last person moves out, extended family equity VESTS → You're officially millionaires-in-waiting!</p>
+                
+                <h3>Year 2-3 (Scale):</h3>
+                <p>Grow to $15M/month, everyone on salary, living comfortably</p>
+                
+                <h3>Year 5-7 (Exit):</h3>
+                <p>Sell company for $800M, everyone gets their payout</p>
+                
+                <div class="success">
+                    <p><strong>From sleeping in a garage to millionaires in 7 years.</strong></p>
+                </div>
+            </div>
+
+            <!-- Slide 10: The Ask -->
+            <div class="slide">
+                <h2><span class="emoji">🙏</span>What I'm Asking</h2>
+                <p>Here's what I need from each of you:</p>
+                
+                <h3>For Everyone:</h3>
+                <ul>
+                    <li><span class="emoji">⏰</span> <strong>Time:</strong> Stay for 6-12 more months while we transition</li>
+                    <li><span class="emoji">💪</span> <strong>Support:</strong> Keep doing what you're doing (cooking, cleaning, helping)</li>
+                    <li><span class="emoji">🤐</span> <strong>Discretion:</strong> Don't tell everyone about the equity until it's official</li>
+                    <li><span class="emoji">🙌</span> <strong>Patience:</strong> This takes time, but the payoff is HUGE</li>
+                </ul>
+                
+                <h3>Specifically:</h3>
+                <ul>
+                    <li><strong>Tracy:</strong> Continue validating diagnostics, be the technical expert</li>
+                    <li><strong>Steve:</strong> Handle operations, keep the garage/house running</li>
+                    <li><strong>Melissa:</strong> Keep the house running, be the mom figure</li>
+                    <li><strong>Matt & Others:</strong> Help with daily tasks, be supportive</li>
+                </ul>
+                
+                <div class="warning">
+                    <p><strong>Remember:</strong> If you leave before Month 12, you lose the equity. But if you stay, you become a millionaire. Your choice.</p>
+                </div>
+            </div>
+
+            <!-- Slide 11: Questions & Answers -->
+            <div class="slide">
+                <h2><span class="emoji">❓</span>Common Questions</h2>
+                
+                <h3>Q: Is this legal?</h3>
+                <p><strong>A:</strong> Yes. We'll set up a proper Delaware C-Corporation and issue stock options to everyone. This is standard startup practice.</p>
+                
+                <h3>Q: What if the company doesn't sell for $800M?</h3>
+                <p><strong>A:</strong> Even at $100M (worst case), extended family still gets $150K-600K each. At $400M (middle case), you get $2.4M-1.2M. Any exit makes you rich.</p>
+                
+                <h3>Q: Do I have to invest money?</h3>
+                <p><strong>A:</strong> NO. Your equity is earned through helping the team survive. Zero money required from you.</p>
+                
+                <h3>Q: What if I need to leave for an emergency?</h3>
+                <p><strong>A:</strong> We'll be reasonable. If there's a true emergency (family illness, etc.), we can work something out. But if you just decide to bail, you lose equity.</p>
+                
+                <h3>Q: When do I get paid?</h3>
+                <p><strong>A:</strong> Monthly income starts NOW. Equity payout happens when we sell the company (Year 5-7).</p>
+                
+                <h3>Q: Is this too good to be true?</h3>
+                <p><strong>A:</strong> I understand the skepticism. But startups really do this. Tech employees really do become millionaires. This is how Silicon Valley works. Now it's happening in an Albuquerque garage.</p>
+            </div>
+
+            <!-- Slide 12: Final Message -->
+            <div class="slide">
+                <h2><span class="emoji">💜</span>Final Message</h2>
+                <p>We've been through hell together. We've slept in garages, skipped meals, wondered if we'd survive the winter.</p>
+                
+                <p><span class="highlight">But we DID survive. Because we had each other.</span></p>
+                
+                <p>Now I'm not asking you to just survive with me. I'm asking you to <span class="highlight">WIN with me.</span></p>
+                
+                <div class="success">
+                    <p style="font-size: 1.3em; text-align: center; line-height: 2;">
+                        <strong>From homeless to housing 1,000 people.<br>
+                        From 11 people in a garage to 11 millionaires.<br>
+                        From pain to purpose.<br>
+                        From survival to SUCCESS.</strong>
+                    </p>
+                </div>
+                
+                <p>I can't do this without you. Tracy, Steve, Melissa, everyone – you're not just roommates. You're my FAMILY. You're CO-FOUNDERS of this movement.</p>
+                
+                <p>So here's my ask: <span class="highlight">Give me 6-12 more months. Help me get everyone to their own places. And then let's watch as we all become millionaires together.</span></p>
+                
+                <p style="text-align: center; font-size: 1.5em; margin: 30px 0;">
+                    <span class="emoji">🚀</span> <strong>Are you in?</strong> <span class="emoji">🚀</span>
+                </p>
+                
+                <p style="text-align: center;">
+                    <strong>- Miss RideWire (Stephanie)</strong><br>
+                    <em>"We survived together. Now let's win together."</em>
+                </p>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="btn-prev" onclick="prevSlide()">← Previous</button>
+                <button class="btn-next" onclick="nextSlide()">Next →</button>
+            </div>
+            
+            <div class="progress">
+                <span id="slideNumber">1</span> of <span id="totalSlides">12</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            
+            document.getElementById('slideNumber').textContent = n + 1;
+            
+            // Update button states
+            const prevBtn = document.querySelector('.btn-prev');
+            const nextBtn = document.querySelector('.btn-next');
+            
+            prevBtn.disabled = n === 0;
+            
+            if (n === totalSlides - 1) {
+                nextBtn.textContent = '✓ Finish';
+                nextBtn.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
+            } else {
+                nextBtn.textContent = 'Next →';
+                nextBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            } else {
+                alert('🎉 Meeting Complete! Let\'s build RideWire together! 🚀');
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
