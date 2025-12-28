@@ -84,7 +84,7 @@ export default function NotFound() {
           </Link>
 
           <Link
-            to="/chat"
+            to="/pricing"
             style={{
               padding: '12px 30px',
               background: 'rgba(255,255,255,0.1)',
@@ -98,7 +98,7 @@ export default function NotFound() {
               display: 'inline-block'
             }}
           >
-            💬 Chat
+            💎 Pricing
           </Link>
         </div>
 
@@ -113,7 +113,7 @@ export default function NotFound() {
           <p><strong>Need help?</strong></p>
           <p style={{ marginTop: '10px' }}>
             Visit our <Link to="/" style={{ color: '#00d9ff', textDecoration: 'none' }}>homepage</Link> or 
-            start a <Link to="/chat" style={{ color: '#00d9ff', textDecoration: 'none' }}>new chat session</Link> with our AI team.
+            check out <Link to="/pricing" style={{ color: '#00d9ff', textDecoration: 'none' }}>pricing options</Link>.
           </p>
         </div>
       </div>

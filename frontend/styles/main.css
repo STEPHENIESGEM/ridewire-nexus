@@ -17,11 +17,6 @@ body {
   min-height: 100vh;
 }
 
-/* Import component styles */
-@import './Auth.css';
-@import './Chat.css';
-@import './Pricing.css';
-
 /* Global utility classes */
 .container {
   max-width: 1200px;

@@ -33,7 +33,8 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/register', {
+      const apiUrl = process.env.REACT_APP_API_URL || '';
+      const response = await axios.post(`${apiUrl}/register`, {
         email,
         password
       });

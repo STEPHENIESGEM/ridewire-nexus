@@ -43,8 +43,6 @@ module.exports = {
     port: 3001,
     proxy: {
       '/api': 'http://localhost:3000',
-      '/register': 'http://localhost:3000',
-      '/login': 'http://localhost:3000',
       '/messages': 'http://localhost:3000',
     },
   },
