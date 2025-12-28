@@ -172,6 +172,81 @@ ridewire-ai-hub/
 
 ---
 
+## 🌐 Frontend Routes
+
+The RideWire AI Hub uses React Router for client-side navigation. All routes are defined in `frontend/App.jsx`:
+
+### Public Routes (No Authentication Required)
+
+- **`/`** - Landing page with hero section and feature overview
+  - Displays Multi-AI platform introduction
+  - Call-to-action buttons for login and registration
+  - Redirects to `/dashboard` if user is already authenticated
+
+- **`/login`** - User login page
+  - Email and password authentication
+  - Redirects to `/dashboard` on successful login
+
+- **`/register`** - New user registration
+  - Create account with email and password
+  - Auto-login and redirect to `/dashboard` after registration
+
+- **`/pricing`** - Pricing tiers and subscription plans
+  - Free, Pro ($9.99/month), and Enterprise ($99/month) plans
+  - Feature comparison and FAQ section
+
+- **`/disclaimer`** - Legal disclaimer and warnings
+  - AI-generated content disclaimer
+  - Automotive diagnostic warnings
+  - No professional advice disclaimer
+
+- **`/terms`** - Terms of service
+  - User agreement and acceptable use policy
+  - Subscription terms and payment information
+  - Intellectual property and liability disclaimers
+
+### Protected Routes (Authentication Required)
+
+- **`/dashboard`** - Main user dashboard
+  - Usage statistics and account overview
+  - Quick access to chat and pricing
+  - Protected: Redirects to `/login` if not authenticated
+
+- **`/chat`** - Multi-AI consensus chat interface
+  - Real-time chat with ChatGPT, Claude, and Gemini
+  - Encrypted message storage
+  - Consensus results display
+  - Protected: Redirects to `/login` if not authenticated
+
+### Error Handling
+
+- **`*`** (404 Catch-all) - Page not found
+  - User-friendly 404 error page
+  - Navigation options to return home or start chatting
+  - Matches any undefined route
+
+### Testing Routes
+
+To test all routes are working correctly:
+
+```bash
+# Run the automated link testing script
+npm run test-links
+```
+
+Or manually visit each route:
+- http://localhost:3000/
+- http://localhost:3000/login
+- http://localhost:3000/register
+- http://localhost:3000/dashboard
+- http://localhost:3000/chat
+- http://localhost:3000/pricing
+- http://localhost:3000/disclaimer
+- http://localhost:3000/terms
+- http://localhost:3000/nonexistent-page (tests 404)
+
+---
+
 ## 🛡️ Security Features
 
 - **Encryption**: All messages encrypted client-side with AES-256 before storage

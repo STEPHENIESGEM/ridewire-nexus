@@ -9,7 +9,6 @@ import HeroSection from './components/HeroSection';
 import Disclaimer from './components/Disclaimer';
 import Terms from './components/Terms';
 import NotFound from './components/NotFound';
-import './App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
