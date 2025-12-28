@@ -3,6 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import Register from './components/Register';
 import Chat from './components/Chat';
+import Dashboard from './components/Dashboard';
+import Pricing from './components/Pricing';
+import HeroSection from './components/HeroSection';
+import Disclaimer from './components/Disclaimer';
+import Terms from './components/Terms';
+import NotFound from './components/NotFound';
 import './App.css';
 
 function App() {
@@ -23,22 +29,30 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header className="app-header">
-          <h1>🤖 RIDEWIRE AI Hub</h1>
-          <p>Where Multiple AIs Collaborate & Reach Consensus</p>
-        </header>
-        
         <Routes>
+          {/* Public Routes */}
+          <Route 
+            path="/" 
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <HeroSection />} 
+          />
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/terms" element={<Terms />} />
+          
+          {/* Protected Routes */}
+          <Route 
+            path="/dashboard" 
+            element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
+          />
           <Route 
             path="/chat" 
             element={isAuthenticated ? <Chat /> : <Navigate to="/login" />} 
           />
-          <Route 
-            path="/" 
-            element={isAuthenticated ? <Navigate to="/chat" /> : <Navigate to="/login" />} 
-          />
+          
+          {/* 404 Fallback */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
