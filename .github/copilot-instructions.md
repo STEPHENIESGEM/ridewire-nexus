@@ -73,7 +73,14 @@ RideWire AI Hub is a production-ready multi-AI orchestration platform for enterp
 ### Testing
 - No testing framework is currently configured
 - Manual testing is done via server endpoints and frontend UI
-- When adding tests in the future, follow Node.js/Jest conventions
+- When adding tests in the future:
+  - Use Jest or Mocha for unit and integration tests
+  - Test authentication flows (registration, login, JWT validation)
+  - Test AI orchestration logic and consensus mechanisms
+  - Test encryption/decryption functions
+  - Test database queries and error handling
+  - Test API endpoints with various input scenarios
+  - Mock external AI API calls to avoid rate limits
 
 ### Building
 - No build step for backend (Node.js runs directly)
@@ -105,7 +112,13 @@ RideWire AI Hub is a production-ready multi-AI orchestration platform for enterp
 ### Critical Security Practices
 - **Never log or expose API keys** (OpenAI, Anthropic, Google)
 - **Never commit secrets** to version control (use .env.example instead)
-- **Always validate user input** before processing or database insertion
+- **Always validate user input** before processing or database insertion:
+  - Check for required fields (email, password, query text)
+  - Validate email format with regex or validation library
+  - Enforce password minimum length and complexity
+  - Sanitize input to prevent XSS attacks
+  - Check data types match expected values
+  - Limit input lengths to prevent buffer overflows
 - **Use parameterized queries** to prevent SQL injection
 - **Hash passwords** with bcrypt before storing in database
 - **Verify JWT tokens** on all protected endpoints
@@ -173,15 +186,21 @@ ridewire-ai-hub/
 
 ## Dependencies & Versions
 
-Current major dependencies:
-- express: ^4.18.2
-- pg: ^8.11.0
-- jsonwebtoken: ^9.0.0
-- bcrypt: ^5.1.0
-- dotenv: ^16.0.3
-- sodium-native: ^4.0.0
+**Note**: Always check `package.json` for current versions as they may be updated over time.
 
-When updating dependencies, ensure compatibility with existing code and security requirements.
+Current major dependencies (as of last update):
+- express: ^4.18.2 - Web framework for Node.js
+- pg: ^8.11.0 - PostgreSQL client for Node.js
+- jsonwebtoken: ^9.0.0 - JWT authentication
+- bcrypt: ^5.1.0 - Password hashing
+- dotenv: ^16.0.3 - Environment variable management
+- sodium-native: ^4.0.0 - Cryptographic operations
+
+When updating dependencies:
+- Ensure compatibility with existing code and security requirements
+- Check for breaking changes in release notes
+- Test authentication, encryption, and database operations after updates
+- Review security advisories for known vulnerabilities
 
 ## Additional Resources
 
