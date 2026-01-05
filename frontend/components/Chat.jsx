@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import EncryptionModule from '../../encryption';
+import LegalDisclaimer from './LegalDisclaimer';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -8,6 +9,9 @@ const Chat = () => {
   const [responses, setResponses] = useState({});
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(null);
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [checkingDisclaimer, setCheckingDisclaimer] = useState(true);
   const messagesEndRef = useRef(null);
   const encryptionModule = useRef(new EncryptionModule());
 
@@ -16,7 +20,59 @@ const Chat = () => {
     encryptionModule.current.init().then(() => {
       setSessionId(Math.random().toString(36).substr(2, 9));
     });
+
+    // Check if user has accepted disclaimer
+    checkDisclaimerAcceptance();
   }, []);
+
+  const checkDisclaimerAcceptance = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+      
+      const response = await axios.get(`${apiUrl}/api/legal/check-disclaimer/diagnostic`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (response.data.accepted) {
+        setDisclaimerAccepted(true);
+        setShowDisclaimer(false);
+      } else {
+        setDisclaimerAccepted(false);
+        setShowDisclaimer(true);
+      }
+    } catch (error) {
+      console.error('Failed to check disclaimer:', error);
+      // Default to showing disclaimer on error (safe default)
+      setDisclaimerAccepted(false);
+      setShowDisclaimer(true);
+    } finally {
+      setCheckingDisclaimer(false);
+    }
+  };
+
+  const handleDisclaimerAccept = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+      
+      await axios.post(`${apiUrl}/api/legal/accept-disclaimer`, {
+        disclaimerType: 'diagnostic',
+        version: '1.0.0'
+      }, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      setDisclaimerAccepted(true);
+      setShowDisclaimer(false);
+    } catch (error) {
+      console.error('Failed to accept disclaimer:', error);
+      alert('Failed to accept disclaimer. Please try again.');
+    }
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -81,11 +137,31 @@ const Chat = () => {
     setLoading(false);
   };
 
+  // Show loading state while checking disclaimer
+  if (checkingDisclaimer) {
+    return (
+      <div className="chat-container">
+        <div className="chat-loading">
+          <p>Loading diagnostic tools...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show disclaimer modal if not accepted
+  if (showDisclaimer) {
+    return <LegalDisclaimer onAccept={handleDisclaimerAccept} />;
+  }
+
+  // Show chat interface only after disclaimer is accepted
   return (
     <div className="chat-container">
       <header className="chat-header">
         <h2>🔄 Multi-AI Consensus Chat</h2>
         <p>Session: {sessionId}</p>
+        <div className="disclaimer-notice">
+          ⚠️ Advisory only - Always consult qualified professionals
+        </div>
       </header>
 
       <div className="chat-main">
