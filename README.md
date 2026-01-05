@@ -352,10 +352,24 @@ This initiative is powered by specialized AI agents with distinct roles:
 
 ---
 
-## 📞 Support
+## 📞 Contact & Support
+
+### Professional Contact Emails
+
+- **General Inquiries:** hello@stepheniesgem.io
+- **Customer Support:** support@stepheniesgem.io
+- **AI Hub Technical:** aihub@stepheniesgem.io
+- **Investor Relations:** investors@stepheniesgem.io
+- **Press & Media:** press@stepheniesgem.io
+- **Founder (Stephanie):** coco@stepheniesgem.io
+- **Internal Team:** team@stepheniesgem.io
+
+### GitHub Support
 
 Have questions? Open an [Issue](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues) on GitHub or check our [Wiki](https://github.com/STEPHENIESGEM/ridewire-ai-hub/wiki).
 
 ---
 
 **Built with ❤️ for the future of AI-powered automotive diagnostics.**
+
+**RideWire AI Hub LLC** | New Mexico, USA | 2025-2026
