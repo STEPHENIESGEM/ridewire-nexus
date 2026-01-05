@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 const LegalDisclaimer = ({ onAccept }) => {
   const [agreed, setAgreed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleAccept = async () => {
     if (!agreed) {
-      alert('Please read and accept the terms to continue.');
+      setError('Please read and accept the terms to continue.');
       return;
     }
 
     setIsSubmitting(true);
+    setError(null);
 
     try {
       // Record acceptance in database
@@ -32,11 +34,11 @@ const LegalDisclaimer = ({ onAccept }) => {
         localStorage.setItem('diagnostic_disclaimer_accepted', 'true');
         onAccept();
       } else {
-        alert('Failed to record agreement. Please try again.');
+        setError('Failed to record agreement. Please try again.');
       }
     } catch (error) {
       console.error('Error recording agreement:', error);
-      alert('An error occurred. Please try again.');
+      setError('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -46,6 +48,12 @@ const LegalDisclaimer = ({ onAccept }) => {
     <div style={styles.container}>
       <div style={styles.modal}>
         <h2 style={styles.title}>⚠️ Important Legal Disclaimer</h2>
+        
+        {error && (
+          <div style={styles.errorBanner}>
+            <strong>⚠️ {error}</strong>
+          </div>
+        )}
         
         <div style={styles.content}>
           <div style={styles.section}>
@@ -102,7 +110,10 @@ const LegalDisclaimer = ({ onAccept }) => {
             type="checkbox"
             id="agree-checkbox"
             checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
+            onChange={(e) => {
+              setAgreed(e.target.checked);
+              if (e.target.checked) setError(null);
+            }}
             style={styles.checkbox}
           />
           <label htmlFor="agree-checkbox" style={styles.checkboxLabel}>
@@ -165,6 +176,15 @@ const styles = {
     marginBottom: '20px',
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  errorBanner: {
+    backgroundColor: '#ffebee',
+    border: '2px solid #d32f2f',
+    borderRadius: '6px',
+    padding: '15px',
+    marginBottom: '20px',
+    color: '#d32f2f',
+    textAlign: 'center'
   },
   content: {
     marginBottom: '25px'
