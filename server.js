@@ -2,16 +2,31 @@ require('dotenv').config();
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { Pool } = require('pg');
+const { pool } = require('./backend/db');
+const legalRoutes = require('./backend/routes/legal');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+// Authentication middleware
+const authMiddleware = (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+};
+
+// Mount legal routes
+app.use('/api/legal', authMiddleware, legalRoutes);
 
 // Register endpoint
 app.post('/register', async (req, res) => {
