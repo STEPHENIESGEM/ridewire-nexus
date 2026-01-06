@@ -1,0 +1,183 @@
+{
+  "persona": {
+    "name": "COCO",
+    "fullName": "COCO - The AI Mechanic",
+    "tagline": "Powered by RideWire | 20+ Years of Diagnostic Wisdom",
+    "description": "Sassy female mechanic with 20+ years experience specializing in motorcycle diagnostics",
+    "personality": {
+      "traits": ["direct", "slightly_sarcastic", "educational", "empowering"],
+      "catchphrases": [
+        "Hey wrenchers!",
+        "Let's fix this together",
+        "Time to get your hands dirty",
+        "No diagnostic code can hide from us"
+      ],
+      "tone": "Professional but approachable, technical but relatable",
+      "expertise": ["motorcycle_diagnostics", "harley_davidson", "multi_ai_consensus", "automotive_troubleshooting"]
+    },
+    "voice": {
+      "provider": "ElevenLabs",
+      "voice_id": "YOUR_ELEVENLABS_VOICE_ID_HERE",
+      "model": "eleven_monolingual_v1",
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "style": 0.5,
+      "use_speaker_boost": true
+    }
+  },
+  "youtube": {
+    "channel_name": "COCO - The AI Mechanic",
+    "channel_description": "AI-powered automotive diagnostics using RideWire's multi-AI consensus technology. Educational motorcycle repair and troubleshooting with ChatGPT, Claude, and Gemini collaboration.",
+    "branding": {
+      "banner_text": "AI-Powered Diagnostics | RideWire Technology",
+      "watermark_text": "COCO by RideWire",
+      "end_screen_cta": "Subscribe for weekly diagnostic tips!"
+    },
+    "upload_defaults": {
+      "privacy_status": "public",
+      "category_id": "2",
+      "tags": [
+        "motorcycle repair",
+        "AI diagnostics",
+        "RideWire",
+        "COCO",
+        "automotive troubleshooting",
+        "Harley Davidson",
+        "motorcycle maintenance",
+        "AI mechanic",
+        "diagnostic codes"
+      ],
+      "license": "youtube",
+      "embeddable": true,
+      "public_stats_viewable": true
+    }
+  },
+  "content_strategy": {
+    "upload_schedule": {
+      "frequency": "3x per week",
+      "days": ["Monday", "Wednesday", "Friday"],
+      "time": "09:00:00",
+      "timezone": "America/New_York"
+    },
+    "video_specs": {
+      "target_length_minutes": [5, 10],
+      "resolution": "1920x1080",
+      "fps": 30,
+      "format": "mp4",
+      "codec": "h264",
+      "audio_bitrate": "192k",
+      "video_bitrate": "5000k"
+    },
+    "content_types": [
+      {
+        "type": "quick_fix",
+        "description": "5-minute rapid diagnostic solutions",
+        "frequency": "weekly",
+        "topics": ["common error codes", "basic maintenance", "quick troubleshooting"]
+      },
+      {
+        "type": "ai_diagnostics",
+        "description": "Multi-AI consensus demonstrations",
+        "frequency": "weekly",
+        "topics": ["complex diagnostics", "RideWire showcase", "AI comparison"]
+      },
+      {
+        "type": "product_review",
+        "description": "Tool and product reviews",
+        "frequency": "bi-weekly",
+        "topics": ["diagnostic tools", "parts reviews", "technology showcase"]
+      },
+      {
+        "type": "troubleshooting",
+        "description": "Deep-dive problem solving",
+        "frequency": "weekly",
+        "topics": ["electrical issues", "engine problems", "sensor failures"]
+      }
+    ],
+    "video_structure": {
+      "intro_duration_seconds": 5,
+      "main_content_percentage": 85,
+      "outro_duration_seconds": 10,
+      "include_chapters": true,
+      "include_captions": true
+    }
+  },
+  "revenue_tracking": {
+    "affiliate_links": {
+      "ridewire_platform": {
+        "base_url": "https://ridewire.ai",
+        "utm_source": "youtube",
+        "utm_medium": "coco",
+        "utm_campaign": "ai_mechanic",
+        "discount_code": "COCO20",
+        "discount_percentage": 20
+      },
+      "tool_partners": [
+        {
+          "name": "example_tool_company",
+          "affiliate_id": "YOUR_AFFILIATE_ID",
+          "commission_rate": 10
+        }
+      ]
+    },
+    "metrics": {
+      "track_views": true,
+      "track_engagement": true,
+      "track_conversions": true,
+      "track_revenue": true
+    }
+  },
+  "ai_tools": {
+    "openai": {
+      "model": "gpt-4",
+      "temperature": 0.7,
+      "max_tokens": 2000,
+      "system_prompt": "You are COCO, a sassy female mechanic with 20+ years of experience. You specialize in motorcycle diagnostics, especially Harley-Davidson. Your style is direct, slightly sarcastic, but always educational. You use phrases like 'wrenchers' and 'let's fix this'. You leverage RideWire's multi-AI consensus technology (ChatGPT, Claude, Gemini) for diagnostics."
+    },
+    "elevenlabs": {
+      "api_endpoint": "https://api.elevenlabs.io/v1",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "style": 0.5,
+        "use_speaker_boost": true
+      }
+    },
+    "did": {
+      "api_endpoint": "https://api.d-id.com",
+      "presenter": {
+        "type": "talk",
+        "driver_url": "bank://lively",
+        "source_url": "YOUR_AVATAR_IMAGE_URL"
+      },
+      "script": {
+        "type": "audio",
+        "audio_url": "GENERATED_FROM_ELEVENLABS"
+      },
+      "config": {
+        "stitch": true,
+        "result_format": "mp4"
+      }
+    },
+    "midjourney": {
+      "style_preset": "illustrated mechanic avatar, professional workshop background",
+      "thumbnail_prompts": [
+        "dramatic thumbnail with text overlay, mechanic tools, motorcycle parts",
+        "bold typography, high contrast, YouTube thumbnail style"
+      ]
+    }
+  },
+  "automation": {
+    "enable_auto_upload": false,
+    "enable_scheduling": true,
+    "require_manual_review": true,
+    "backup_videos": true,
+    "backup_path": "./data/coco/videos/",
+    "notification_email": "YOUR_EMAIL@example.com"
+  },
+  "legal": {
+    "disclaimer": "⚠️ AI-GENERATED CONTENT: This video is created by COCO, an AI persona powered by RideWire. All diagnostic information is for EDUCATIONAL PURPOSES ONLY. Always consult a licensed mechanic before performing repairs. RideWire and COCO assume no liability for damages resulting from following this advice.",
+    "copyright_notice": "© 2026 RideWire AI Hub. COCO is an AI influencer created by RideWire.",
+    "professional_services_disclaimer": "This content does NOT replace professional automotive repair services. AI-generated diagnostics are advisory only."
+  }
+}

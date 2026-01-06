@@ -74,3 +74,14 @@ coverage/
 *_API_KEY*
 *_SECRET*
 credentials.json
+
+# COCO AI Influencer - Generated Content
+data/coco/audio/*.mp3
+data/coco/videos/*.mp4
+data/coco/thumbnails/*.jpg
+data/coco/thumbnails/*.png
+data/coco/analytics.json
+data/coco/analytics-summary.json
+data/coco/content-calendar.json
+# Keep video-history.json template in repo
+!data/coco/video-history.json
