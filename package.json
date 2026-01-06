@@ -12,7 +12,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "openai": "^4.0.0",
+    "elevenlabs-node": "^1.0.0",
+    "googleapis": "^118.0.0",
+    "fluent-ffmpeg": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -30,6 +34,10 @@
     "start": "node server.js",
     "dev": "webpack serve --mode development --open",
     "build": "webpack --mode production",
-    "test-links": "node scripts/test-links.js"
+    "test-links": "node scripts/test-links.js",
+    "coco:generate": "node scripts/coco/generate-content.js",
+    "coco:calendar": "node -e \"require('./scripts/coco/content-calendar').generateCalendar(require('./config/coco-config.json'), 4).then(() => console.log('Calendar generated'))\"",
+    "coco:analytics": "node -e \"require('./scripts/coco/analytics-tracker').getSummary().then(s => console.log(JSON.stringify(s, null, 2)))\"",
+    "coco:help": "node scripts/coco/generate-content.js --help"
   }
 }
