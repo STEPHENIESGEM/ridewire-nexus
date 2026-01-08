@@ -74,3 +74,14 @@ coverage/
 *_API_KEY*
 *_SECRET*
 credentials.json
+
+# Generated content
+output/
+data/
+assets/gumroad/
+
+# Analytics exports
+*.csv
+analytics-export-*.csv
+revenue-export-*.csv
+daily-analytics-*.csv
