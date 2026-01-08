@@ -1,0 +1,436 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RideWire Game Engine Configuration",
+  "description": "Configuration file for Unity game engine and AR diagnostic system",
+  "version": "1.0",
+
+  "environment": {
+    "current": "development",
+    "profiles": {
+      "development": {
+        "backend_url": "http://localhost:3000",
+        "websocket_url": "ws://localhost:3000/ws/game",
+        "debug_mode": true,
+        "log_level": "verbose",
+        "mock_ai_responses": false
+      },
+      "staging": {
+        "backend_url": "https://staging.ridewire-ai-hub.com",
+        "websocket_url": "wss://staging.ridewire-ai-hub.com/ws/game",
+        "debug_mode": true,
+        "log_level": "info",
+        "mock_ai_responses": false
+      },
+      "production": {
+        "backend_url": "https://api.ridewire-ai-hub.com",
+        "websocket_url": "wss://api.ridewire-ai-hub.com/ws/game",
+        "debug_mode": false,
+        "log_level": "error",
+        "mock_ai_responses": false
+      }
+    }
+  },
+
+  "game_engine": {
+    "unity_version": "2022.3 LTS",
+    "target_platforms": ["WebGL", "iOS", "Android"],
+    "build_settings": {
+      "webgl": {
+        "compression_format": "Brotli",
+        "optimization": "Size",
+        "enable_exceptions": false,
+        "data_caching": true,
+        "memory_size": 256
+      },
+      "mobile": {
+        "graphics_api": ["Metal", "Vulkan", "OpenGLES3"],
+        "minimum_api_level_android": 24,
+        "minimum_ios_version": "12.0",
+        "target_architecture": ["ARM64", "ARMv7"]
+      }
+    },
+    "performance": {
+      "target_fps": 60,
+      "max_frame_latency": 16.67,
+      "vsync": true,
+      "anti_aliasing": "MSAA 4x"
+    }
+  },
+
+  "ar_framework": {
+    "provider": "Unity AR Foundation",
+    "version": "5.0+",
+    "supported_platforms": ["iOS ARKit", "Android ARCore"],
+    "settings": {
+      "plane_detection": true,
+      "image_tracking": true,
+      "face_tracking": false,
+      "environment_probes": true,
+      "light_estimation": true,
+      "occlusion": false
+    },
+    "marker_detection": {
+      "enabled": true,
+      "marker_library": "/assets/ar-markers/",
+      "min_confidence": 0.7,
+      "max_tracking_distance": 5.0
+    },
+    "fallback": {
+      "enabled": true,
+      "mode": "manual_selection",
+      "message": "AR not available. Please select vehicle model manually."
+    }
+  },
+
+  "visual_style": {
+    "theme": "dark",
+    "colors": {
+      "primary": "#00C7BE",
+      "secondary": "#1C1C1E",
+      "background": "#000000",
+      "text": "#FFFFFF",
+      "text_secondary": "#8E8E93",
+      "success": "#34C759",
+      "warning": "#FFCC00",
+      "error": "#FF3B30",
+      "info": "#007AFF",
+      "safety_zones": {
+        "red": "#FF3B30",
+        "yellow": "#FFCC00",
+        "green": "#34C759",
+        "teal": "#00C7BE"
+      }
+    },
+    "fonts": {
+      "primary": "Roboto",
+      "secondary": "Roboto Mono",
+      "heading_size": 24,
+      "body_size": 16,
+      "caption_size": 12
+    },
+    "ui_elements": {
+      "border_radius": 12,
+      "shadow_opacity": 0.3,
+      "button_padding": 16,
+      "panel_opacity": 0.9
+    },
+    "animations": {
+      "transition_duration": 0.3,
+      "easing": "ease-in-out",
+      "enable_particle_effects": true
+    }
+  },
+
+  "vehicles": {
+    "library_path": "/public/models/vehicles/",
+    "supported_formats": ["glTF", "GLB", "FBX"],
+    "models": [
+      {
+        "id": "toyota_camry_2020",
+        "make": "Toyota",
+        "model": "Camry",
+        "year": 2020,
+        "glb_path": "/models/vehicles/toyota_camry_2020.glb",
+        "thumbnail": "/assets/thumbnails/toyota_camry_2020.png",
+        "components": {
+          "engine_block": { "x": 0.0, "y": 0.5, "z": 1.2 },
+          "spark_plug_1": { "x": -0.2, "y": 0.6, "z": 1.0 },
+          "spark_plug_2": { "x": -0.1, "y": 0.6, "z": 1.0 },
+          "spark_plug_3": { "x": 0.1, "y": 0.6, "z": 1.0 },
+          "spark_plug_4": { "x": 0.2, "y": 0.6, "z": 1.0 },
+          "air_filter": { "x": 0.3, "y": 0.6, "z": 0.8 },
+          "battery": { "x": -0.5, "y": 0.4, "z": 0.5 },
+          "alternator": { "x": 0.4, "y": 0.5, "z": 1.0 },
+          "oil_filter": { "x": -0.3, "y": 0.4, "z": 0.9 },
+          "radiator": { "x": 0.0, "y": 0.5, "z": 1.5 },
+          "transmission": { "x": 0.0, "y": 0.4, "z": 0.0 }
+        },
+        "ar_marker_id": "toyota_camry_marker_01"
+      },
+      {
+        "id": "ford_f150_2019",
+        "make": "Ford",
+        "model": "F-150",
+        "year": 2019,
+        "glb_path": "/models/vehicles/ford_f150_2019.glb",
+        "thumbnail": "/assets/thumbnails/ford_f150_2019.png",
+        "components": {
+          "engine_block": { "x": 0.0, "y": 0.6, "z": 1.3 },
+          "spark_plug_1": { "x": -0.3, "y": 0.7, "z": 1.1 },
+          "spark_plug_2": { "x": -0.2, "y": 0.7, "z": 1.1 },
+          "spark_plug_3": { "x": -0.1, "y": 0.7, "z": 1.1 },
+          "spark_plug_4": { "x": 0.1, "y": 0.7, "z": 1.1 },
+          "spark_plug_5": { "x": 0.2, "y": 0.7, "z": 1.1 },
+          "spark_plug_6": { "x": 0.3, "y": 0.7, "z": 1.1 },
+          "air_filter": { "x": 0.4, "y": 0.7, "z": 0.9 },
+          "battery": { "x": -0.6, "y": 0.5, "z": 0.6 },
+          "alternator": { "x": 0.5, "y": 0.6, "z": 1.1 },
+          "oil_filter": { "x": -0.4, "y": 0.5, "z": 1.0 },
+          "radiator": { "x": 0.0, "y": 0.6, "z": 1.6 },
+          "transmission": { "x": 0.0, "y": 0.5, "z": 0.1 }
+        },
+        "ar_marker_id": "ford_f150_marker_01"
+      },
+      {
+        "id": "honda_civic_2021",
+        "make": "Honda",
+        "model": "Civic",
+        "year": 2021,
+        "glb_path": "/models/vehicles/honda_civic_2021.glb",
+        "thumbnail": "/assets/thumbnails/honda_civic_2021.png",
+        "components": {
+          "engine_block": { "x": 0.0, "y": 0.5, "z": 1.1 },
+          "spark_plug_1": { "x": -0.15, "y": 0.6, "z": 0.95 },
+          "spark_plug_2": { "x": -0.05, "y": 0.6, "z": 0.95 },
+          "spark_plug_3": { "x": 0.05, "y": 0.6, "z": 0.95 },
+          "spark_plug_4": { "x": 0.15, "y": 0.6, "z": 0.95 },
+          "air_filter": { "x": 0.25, "y": 0.6, "z": 0.75 },
+          "battery": { "x": -0.45, "y": 0.4, "z": 0.45 },
+          "alternator": { "x": 0.35, "y": 0.5, "z": 0.95 },
+          "oil_filter": { "x": -0.25, "y": 0.4, "z": 0.85 },
+          "radiator": { "x": 0.0, "y": 0.5, "z": 1.4 },
+          "transmission": { "x": 0.0, "y": 0.4, "z": -0.05 }
+        },
+        "ar_marker_id": "honda_civic_marker_01"
+      }
+    ],
+    "generic_fallback": {
+      "id": "generic_vehicle",
+      "glb_path": "/models/vehicles/generic_vehicle.glb",
+      "components": {
+        "engine_block": { "x": 0.0, "y": 0.5, "z": 1.0 },
+        "battery": { "x": -0.5, "y": 0.4, "z": 0.5 },
+        "radiator": { "x": 0.0, "y": 0.5, "z": 1.3 }
+      }
+    }
+  },
+
+  "diagnostic_codes": {
+    "library_path": "/data/fault_codes.json",
+    "sources": ["OBD-II", "CAN-BUS", "Manufacturer-Specific"],
+    "categories": {
+      "powertrain": { "prefix": "P", "color": "#FF3B30" },
+      "body": { "prefix": "B", "color": "#FFCC00" },
+      "chassis": { "prefix": "C", "color": "#34C759" },
+      "network": { "prefix": "U", "color": "#007AFF" }
+    },
+    "common_codes": {
+      "P0300": {
+        "description": "Random/Multiple Cylinder Misfire Detected",
+        "severity": "high",
+        "components": ["spark_plug", "ignition_coil", "fuel_injector"],
+        "estimated_cost": { "min": 100, "max": 500 }
+      },
+      "P0420": {
+        "description": "Catalyst System Efficiency Below Threshold",
+        "severity": "medium",
+        "components": ["catalytic_converter", "oxygen_sensor"],
+        "estimated_cost": { "min": 400, "max": 2000 }
+      },
+      "P0171": {
+        "description": "System Too Lean (Bank 1)",
+        "severity": "medium",
+        "components": ["air_filter", "maf_sensor", "fuel_pump"],
+        "estimated_cost": { "min": 50, "max": 300 }
+      }
+    }
+  },
+
+  "ai_providers": {
+    "enabled": ["ChatGPT", "Claude", "Gemini"],
+    "settings": {
+      "ChatGPT": {
+        "model": "gpt-4",
+        "temperature": 0.7,
+        "max_tokens": 1000,
+        "timeout": 30000,
+        "weight": 0.35
+      },
+      "Claude": {
+        "model": "claude-3-opus-20240229",
+        "temperature": 0.7,
+        "max_tokens": 1000,
+        "timeout": 30000,
+        "weight": 0.35
+      },
+      "Gemini": {
+        "model": "gemini-pro",
+        "temperature": 0.7,
+        "max_tokens": 1000,
+        "timeout": 30000,
+        "weight": 0.30
+      }
+    },
+    "consensus": {
+      "algorithm": "weighted_voting",
+      "confidence_threshold": 70,
+      "max_variance": 30,
+      "veto_threshold": 40
+    }
+  },
+
+  "safety_rules": {
+    "critical_action_threshold": 90,
+    "standard_action_threshold": 70,
+    "max_confidence_variance": 30,
+    "single_ai_veto_threshold": 40,
+    "critical_actions": [
+      "engine_disable",
+      "fuel_cutoff",
+      "brake_override",
+      "airbag_disable",
+      "transmission_override"
+    ],
+    "standard_actions": [
+      "component_replace",
+      "system_reset",
+      "diagnostic_clear",
+      "calibration_adjust"
+    ],
+    "audit_logging": {
+      "enabled": true,
+      "log_path": "/logs/safety_audit.log",
+      "retention_days": 90
+    }
+  },
+
+  "gamification": {
+    "enabled": true,
+    "progression": {
+      "xp_per_level": [100, 250, 500, 1000, 2000, 3500, 5000, 7500, 10000],
+      "level_titles": [
+        "Apprentice Mechanic",
+        "Junior Technician",
+        "Technician",
+        "Senior Technician",
+        "Lead Technician",
+        "Master Mechanic",
+        "Senior Master Mechanic",
+        "Diagnostic Expert",
+        "Grand Master"
+      ]
+    },
+    "xp_rewards": {
+      "base_query": 10,
+      "confidence_bonus_multiplier": 0.5,
+      "complexity_bonus": 5,
+      "perfect_consensus_bonus": 50,
+      "first_diagnosis_bonus": 100
+    },
+    "achievements": [
+      {
+        "id": "first_diagnosis",
+        "name": "First Diagnosis",
+        "description": "Complete your first vehicle diagnostic",
+        "xp_reward": 50,
+        "icon": "badge_first.png"
+      },
+      {
+        "id": "perfect_consensus",
+        "name": "Perfect Consensus",
+        "description": "Get 100% AI agreement on a diagnosis",
+        "xp_reward": 100,
+        "icon": "badge_perfect.png"
+      },
+      {
+        "id": "teal_zone",
+        "name": "Expert Diagnosis",
+        "description": "Achieve teal zone (85%+) confidence",
+        "xp_reward": 75,
+        "icon": "badge_expert.png"
+      },
+      {
+        "id": "diagnose_10",
+        "name": "Diagnostic Pro",
+        "description": "Complete 10 vehicle diagnostics",
+        "xp_reward": 200,
+        "icon": "badge_pro.png"
+      },
+      {
+        "id": "diagnose_50",
+        "name": "Master Technician",
+        "description": "Complete 50 vehicle diagnostics",
+        "xp_reward": 500,
+        "icon": "badge_master.png"
+      }
+    ],
+    "missions": [
+      {
+        "id": "diagnose_5_vehicles",
+        "name": "Diagnostic Apprentice",
+        "description": "Complete 5 vehicle diagnostics",
+        "objective_type": "count",
+        "objective_max": 5,
+        "reward_xp": 200,
+        "expires": null
+      },
+      {
+        "id": "perfect_streak",
+        "name": "Perfect Streak",
+        "description": "Get 5 consecutive teal zone diagnoses",
+        "objective_type": "streak",
+        "objective_max": 5,
+        "reward_xp": 300,
+        "expires": null
+      }
+    ]
+  },
+
+  "communication": {
+    "websocket": {
+      "enabled": true,
+      "reconnect_attempts": 5,
+      "reconnect_delay": 3000,
+      "ping_interval": 30000,
+      "timeout": 60000
+    },
+    "rest_api": {
+      "enabled": true,
+      "timeout": 30000,
+      "retry_attempts": 3,
+      "retry_delay": 1000
+    },
+    "data_format": "JSON",
+    "compression": "gzip"
+  },
+
+  "assets": {
+    "models_path": "/public/models/",
+    "textures_path": "/public/textures/",
+    "sounds_path": "/public/sounds/",
+    "fonts_path": "/public/fonts/",
+    "icons_path": "/public/icons/",
+    "ar_markers_path": "/public/ar-markers/",
+    "cdn_url": "https://cdn.ridewire-ai-hub.com"
+  },
+
+  "localization": {
+    "default_language": "en-US",
+    "supported_languages": ["en-US", "es-ES", "fr-FR", "de-DE", "ja-JP"],
+    "translations_path": "/locales/"
+  },
+
+  "analytics": {
+    "enabled": true,
+    "provider": "Google Analytics",
+    "tracking_id": "${GOOGLE_ANALYTICS_ID}",
+    "events": {
+      "query_submitted": true,
+      "consensus_reached": true,
+      "action_validated": true,
+      "level_up": true,
+      "achievement_unlocked": true
+    }
+  },
+
+  "debugging": {
+    "enable_debug_ui": true,
+    "show_fps_counter": true,
+    "show_network_stats": true,
+    "log_ai_responses": true,
+    "mock_data": {
+      "enabled": false,
+      "mock_consensus_file": "/test/mock_consensus.json"
+    }
+  }
+}
