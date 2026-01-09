@@ -1,22 +1,42 @@
 /**
  * Multi-AI Orchestrator Module
- * Coordinates interactions between multiple AI agents (ChatGPT, Claude, Gemini)
- * Implements consensus mechanism and decision logging
+ * Coordinates interactions between multiple Azure OpenAI agents
+ * Implements flip-flop adversarial system and consensus mechanism
+ * 
+ * Built on Azure OpenAI Service and Microsoft infrastructure
+ * Company: RIDEWIRE LLC
+ * Founder: Stephenie N. Lacy
+ * Contact: hello@stepheniesgem.io
  */
 
-const axios = require('axios');
+const { OpenAIClient, AzureKeyCredential } = require('@azure/openai');
 
 class MultiAIOrchestrator {
   constructor() {
-    this.openaiKey = process.env.OPENAI_API_KEY;
-    this.anthropicKey = process.env.ANTHROPIC_API_KEY;
-    this.googleKey = process.env.GOOGLE_API_KEY;
-    this.agents = ['ChatGPT', 'Claude', 'Gemini'];
+    // Azure OpenAI Service configuration
+    this.azureEndpoint = process.env.AZURE_OPENAI_ENDPOINT;
+    this.azureKey = process.env.AZURE_OPENAI_KEY;
+    this.apiVersion = process.env.AZURE_OPENAI_API_VERSION || '2024-02-15-preview';
+    
+    // Azure OpenAI deployment names
+    this.deploymentGPT4 = process.env.AZURE_OPENAI_DEPLOYMENT_GPT4 || 'gpt-4';
+    this.deploymentGPT4o = process.env.AZURE_OPENAI_DEPLOYMENT_GPT4O || 'gpt-4o';
+    this.deploymentGPT4Turbo = process.env.AZURE_OPENAI_DEPLOYMENT_GPT4_TURBO || 'gpt-4-turbo';
+    
+    // Initialize Azure OpenAI client
+    this.client = new OpenAIClient(
+      this.azureEndpoint,
+      new AzureKeyCredential(this.azureKey)
+    );
+    
+    // Agent names (all powered by Azure OpenAI)
+    this.agents = ['GPT-4 Strategist', 'GPT-4o Analyst', 'GPT-4 Turbo Validator'];
     this.decisionLog = [];
   }
 
   /**
-   * Query all AI agents and gather responses
+   * Query all Azure OpenAI agents and gather responses
+   * Uses flip-flop adversarial system with different model configurations
    * @param {string} query - User query to send to all agents
    * @param {string} sessionId - Session ID for tracking
    * @returns {Promise<Object>} Responses from all agents
@@ -29,28 +49,40 @@ class MultiAIOrchestrator {
       errors: {}
     };
 
-    // Query ChatGPT/OpenAI
+    // Query GPT-4 Strategist (Strategic analysis role)
     try {
-      results.responses.ChatGPT = await this.queryChatGPT(query);
-      results.responses.ChatGPT.confidence = 0.85;
+      results.responses['GPT-4 Strategist'] = await this.queryAzureAgent(
+        query, 
+        this.deploymentGPT4,
+        'You are a strategic AI analyst providing thoughtful, detailed analysis with focus on long-term implications.'
+      );
+      results.responses['GPT-4 Strategist'].confidence = 0.88;
     } catch (err) {
-      results.errors.ChatGPT = err.message;
+      results.errors['GPT-4 Strategist'] = err.message;
     }
 
-    // Query Claude/Anthropic
+    // Query GPT-4o Analyst (Deep reasoning role)
     try {
-      results.responses.Claude = await this.queryClaude(query);
-      results.responses.Claude.confidence = 0.88;
+      results.responses['GPT-4o Analyst'] = await this.queryAzureAgent(
+        query,
+        this.deploymentGPT4o,
+        'You are a deep reasoning AI expert focused on comprehensive analysis and identifying potential issues.'
+      );
+      results.responses['GPT-4o Analyst'].confidence = 0.90;
     } catch (err) {
-      results.errors.Claude = err.message;
+      results.errors['GPT-4o Analyst'] = err.message;
     }
 
-    // Query Gemini/Google
+    // Query GPT-4 Turbo Validator (Validation/adversarial role)
     try {
-      results.responses.Gemini = await this.queryGemini(query);
-      results.responses.Gemini.confidence = 0.82;
+      results.responses['GPT-4 Turbo Validator'] = await this.queryAzureAgent(
+        query,
+        this.deploymentGPT4Turbo,
+        'You are a critical validator AI tasked with challenging assumptions and identifying weaknesses in analysis.'
+      );
+      results.responses['GPT-4 Turbo Validator'].confidence = 0.85;
     } catch (err) {
-      results.errors.Gemini = err.message;
+      results.errors['GPT-4 Turbo Validator'] = err.message;
     }
 
     // Log decision process
@@ -60,75 +92,80 @@ class MultiAIOrchestrator {
   }
 
   /**
-   * Query ChatGPT API
+   * Query Azure OpenAI API with specific deployment
    * @param {string} query - Query to send
-   * @returns {Promise<string>} Response from ChatGPT
+   * @param {string} deployment - Azure OpenAI deployment name
+   * @param {string} systemPrompt - System prompt for agent role
+   * @returns {Promise<string>} Response from Azure OpenAI
    */
-  async queryChatGPT(query) {
-    const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
-      {
-        model: 'gpt-4',
-        messages: [
-          { role: 'system', content: 'You are an AI expert providing detailed analysis.' },
-          { role: 'user', content: query }
-        ],
-        temperature: 0.7,
-        max_tokens: 1000
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${this.openaiKey}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
+  async queryAzureAgent(query, deployment, systemPrompt) {
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: query }
+    ];
 
-    return response.data.choices[0].message.content;
+    const response = await this.client.getChatCompletions(deployment, messages, {
+      temperature: 0.7,
+      maxTokens: 1000,
+      topP: 0.95,
+      frequencyPenalty: 0,
+      presencePenalty: 0
+    });
+
+    return response.choices[0].message.content;
   }
 
   /**
-   * Query Claude API
-   * @param {string} query - Query to send
-   * @returns {Promise<string>} Response from Claude
+   * Flip-flop adversarial query - Villain agent challenges builder
+   * @param {string} builderResponse - Initial response to challenge
+   * @param {string} originalQuery - Original user query
+   * @returns {Promise<Object>} Adversarial analysis
    */
-  async queryClaude(query) {
-    const response = await axios.post(
-      'https://api.anthropic.com/v1/messages',
-      {
-        model: 'claude-3-opus-20240229',
-        max_tokens: 1000,
-        messages: [
-          { role: 'user', content: query }
-        ]
-      },
-      {
-        headers: {
-          'x-api-key': this.anthropicKey,
-          'anthropic-version': '2023-06-01'
-        }
-      }
+  async flipFlopAdversarial(builderResponse, originalQuery) {
+    const villainPrompt = `You are a critical adversarial AI. Your job is to identify weaknesses, 
+    errors, and potential issues in the following analysis. Be thorough and ruthless in your critique.
+    
+    Original Query: ${originalQuery}
+    Analysis to Critique: ${builderResponse}
+    
+    Provide a detailed critique identifying all weaknesses.`;
+
+    const villainCritique = await this.queryAzureAgent(
+      villainPrompt,
+      this.deploymentGPT4Turbo,
+      'You are an adversarial validator tasked with finding flaws in analysis.'
     );
 
-    return response.data.content[0].text;
-  }
-
-  /**
-   * Query Gemini API
-   * @param {string} query - Query to send
-   * @returns {Promise<string>} Response from Gemini
-   */
-  async queryGemini(query) {
-    const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.googleKey}`,
-      {
-        contents: [
-          { parts: [{ text: query }] }
-        ]
-      }
+    // Builder responds to criticism
+    const builderRevision = await this.queryAzureAgent(
+      `Address these critiques and improve your analysis:\n\nCritiques: ${villainCritique}\n\nOriginal Analysis: ${builderResponse}`,
+      this.deploymentGPT4,
+      'You are a strategic analyst revising your work based on critical feedback.'
     );
 
-    return response.data.candidates[0].content.parts[0].text;
+    // Judge synthesizes
+    const judgePrompt = `Review the following exchange and provide a balanced, final conclusion:
+    
+    Original Query: ${originalQuery}
+    Initial Analysis: ${builderResponse}
+    Critical Review: ${villainCritique}
+    Revised Analysis: ${builderRevision}
+    
+    Synthesize these perspectives into a final, validated conclusion.`;
+
+    const finalSynthesis = await this.queryAzureAgent(
+      judgePrompt,
+      this.deploymentGPT4o,
+      'You are a balanced judge synthesizing multiple perspectives into a validated conclusion.'
+    );
+
+    return {
+      builderResponse,
+      villainCritique,
+      builderRevision,
+      finalSynthesis,
+      confidence: 0.95 // High confidence after adversarial validation
+    };
   }
 
   /**

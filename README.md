@@ -1,45 +1,61 @@
 # RideWire AI Hub
 
-> **Multi-AI Agent Collaboration Platform with AR Auto Diagnostic Tool Foundation**
+> **Multi-AI Agent Collaboration Platform - Built on Azure OpenAI Service and Microsoft Infrastructure**
 
-[![Platform](https://img.shields.io/badge/Platform-Web%2FMobile-blue)](https://github.com/STEPHENIESGEM/ridewire-ai-hub) [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE) [![Status](https://img.shields.io/badge/Status-Active%20Development-orange)](https://github.com/STEPHENIESGEM/ridewire-ai-hub)
+[![Platform](https://img.shields.io/badge/Platform-Microsoft%20Azure-blue)](https://github.com/STEPHENIESGEM/ridewire-ai-hub) [![Azure OpenAI](https://img.shields.io/badge/AI-Azure%20OpenAI-green)](https://azure.microsoft.com/en-us/products/ai-services/openai-service) [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE) [![Status](https://img.shields.io/badge/Status-Active%20Development-orange)](https://github.com/STEPHENIESGEM/ridewire-ai-hub)
+
+**Company:** RIDEWIRE LLC  
+**Founder:** Stephenie N. Lacy  
+**Contact:** hello@stepheniesgem.io
 
 ---
 
-## 🎯 Finished Product: Launch-Ready SaaS
+## 🎯 Production-Ready Enterprise Platform
 
-**RideWire AI Hub** is a production-ready multi-AI orchestration platform designed for enterprise auto diagnostics. This finished product combines:
+**RideWire AI Hub** is a production-ready multi-AI orchestration platform powered entirely by **Azure OpenAI Service** and Microsoft infrastructure. Built for enterprise intelligence and business automation, the platform features:
 
-- **Multi-AI Consensus Engine**: ChatGPT, Claude, and Gemini collaborate in real-time
-- **AR Auto Diagnostic Foundation**: Ready for AR.js integration with vehicle overlays
+- **Azure OpenAI Multi-Agent System**: GPT-4, GPT-4o, and GPT-4 Turbo working in concert
+- **Flip-Flop Adversarial Validation**: AI agents challenge and validate each other's conclusions
+- **COCO Email Automation**: AI-powered email outreach and relationship management
 - **Enterprise-Grade Security**: Client-side AES-256 encryption + bcrypt password hashing
 - **Polished Dashboard UI**: Modern React interface with responsive design
-- **Scalable Backend**: Node.js + PostgreSQL with indexed schemas
+- **Scalable Backend**: Node.js + PostgreSQL on Azure infrastructure
+
+### Technology Foundation
+
+🔷 **Built on Microsoft Stack:**
+- Azure OpenAI Service (GPT-4, GPT-4o, GPT-4 Turbo)
+- Azure App Service / Azure Functions
+- Azure SQL Database / Azure Storage
+- GitHub for version control
+- VS Code for development
 
 ### Hero Section
 
-Imagine a mechanic pointing a tablet at an engine bay. The screen shows:
-- **Live AR overlays**: Wiring diagrams, fault codes, sensor data
-- **Multi-AI panel**: ChatGPT, Claude, and Gemini analyzing the same diagnostic question
-- **Consensus result**: "P0300 Random Misfire → Check spark plugs → Estimated cost: $150"
-- **RideWire branding**: Central AI hub node connecting all agents
+Imagine a business leader leveraging AI-powered intelligence:
+- **Live Azure OpenAI panel**: GPT-4 Strategist, GPT-4o Analyst, GPT-4 Turbo Validator analyzing queries simultaneously
+- **Flip-flop adversarial validation**: AI agents challenge and validate each other's conclusions
+- **Consensus result**: "Market analysis validated → Confidence score: 95% → Recommended action: Invest"
+- **COCO Email Agent**: Automated outreach powered by Azure OpenAI
+- **RideWire branding**: Central AI hub orchestrating Microsoft's most powerful models
 
-[Hero Image Placeholder: Vehicle + Mechanic + AR Overlays + Multi-AI Consensus Panel]
+[Hero Image Placeholder: Business Intelligence Dashboard + Multi-AI Consensus Panel + Email Automation Interface]
 
 ---
 
 ## 🚀 What is RideWire AI Hub?
 
-RideWire AI Hub is a cutting-edge platform that orchestrates multiple AI agents (ChatGPT, Claude, Gemini, and more) to collaborate, debate, and reach **consensus** on user queries. Built as a foundation for AR auto diagnostic tools, it enables real-time multi-AI analysis with encrypted message storage, user authentication, and a polished dashboard UI.
+RideWire AI Hub is a cutting-edge platform that orchestrates multiple Azure OpenAI agents (GPT-4, GPT-4o, GPT-4 Turbo) to collaborate, debate, and reach **validated consensus** on complex business queries. The platform includes COCO, an AI-powered email automation system for intelligent business outreach.
 
 ### Core Features
 
-- **Multi-AI Collaboration**: Three independent AI agents analyze queries simultaneously and reach consensus
-- **AR Auto Diagnostic Foundation**: Ready for integration with AR overlays for vehicle diagnostics
+- **Multi-AI Collaboration**: Three Azure OpenAI agents analyze queries simultaneously using flip-flop adversarial validation
+- **COCO Email Automation**: AI-powered email outreach, reply detection, and draft generation
 - **Secure Message Storage**: Client-side encryption for all communications
 - **User Authentication**: Session-based login with secure credential handling
 - **Real-Time Consensus**: Dynamic resolution of conflicting AI recommendations
-- **Responsive Dashboard**: Modern UI for chat, diagnostics, and pricing tiers
+- **Responsive Dashboard**: Modern UI for chat, email management, and analytics
+- **CRM Integration**: Track all interactions and pipeline progress
 - **Encryption Module**: End-to-end encrypted message storage with secure keys
 
 ---
@@ -48,12 +64,13 @@ RideWire AI Hub is a cutting-edge platform that orchestrates multiple AI agents 
 
 | Layer | Technology |
 |-------|----|
-| **Frontend** | React.js, CSS3, AR.js (foundation) |
+| **Frontend** | React.js, CSS3 |
 | **Backend** | Node.js, Express.js |
-| **Database** | PostgreSQL with indexed schemas |
-| **AI Integration** | OpenAI (ChatGPT), Anthropic (Claude), Google (Gemini) |
+| **Database** | PostgreSQL (Azure SQL compatible) |
+| **AI Integration** | Azure OpenAI Service (GPT-4, GPT-4o, GPT-4 Turbo) |
 | **Security** | Client-side AES-256 encryption, bcrypt password hashing |
 | **Authentication** | JWT tokens, session management |
+| **Cloud Platform** | Microsoft Azure (App Service, Azure SQL, Azure Storage) |
 
 ---
 
@@ -98,26 +115,56 @@ Offer pre-built RideWire modules and diagnostic add-ons through Gumroad:
 ```
 User Query
     ↓
-[RideWire AI Hub]
+[RideWire AI Hub - Azure OpenAI]
     ↓
 ┌─────────────────────────────────────┐
 │  Multi-AI Orchestrator              │
-│  ├─ ChatGPT Agent                   │
-│  ├─ Claude Agent                    │
-│  └─ Gemini Agent                    │
+│  ├─ GPT-4 Strategist                │
+│  ├─ GPT-4o Analyst                  │
+│  └─ GPT-4 Turbo Validator           │
 └─────────────────────────────────────┘
+    ↓
+[Flip-Flop Adversarial System]
+├─ Builder Agent (GPT-4)
+├─ Villain Agent (GPT-4 Turbo) - Challenges
+├─ Revised Builder Response
+└─ Judge Synthesizer (GPT-4o)
     ↓
 [Consensus Engine]
 ├─ Compare Responses
 ├─ Resolve Conflicts
-└─ Generate Final Answer
+└─ Generate Final Answer (95%+ Confidence)
     ↓
-[Encrypted Storage]
+[Encrypted Storage - Azure SQL]
 ├─ User Messages
 ├─ AI Responses
 └─ Audit Log
     ↓
 Dashboard Display
+
+──────────────────────────────────────
+
+COCO Email Automation System
+    ↓
+[Target List Management]
+    ↓
+[Azure OpenAI Email Generation]
+├─ Personalized Outreach
+├─ Follow-up Sequences
+└─ Reply Detection
+    ↓
+[Approval Queue for Stephenie]
+├─ Review Drafts
+├─ Edit if Needed
+└─ Approve or Reject
+    ↓
+[Scheduled Sending]
+    ↓
+[CRM Tracking]
+├─ Emails Sent
+├─ Replies Received
+├─ Meetings Scheduled
+└─ Pipeline Management
 ```
 
 ---
@@ -127,8 +174,8 @@ Dashboard Display
 ### Prerequisites
 
 - Node.js 16+ and npm
-- PostgreSQL 12+
-- API keys for: OpenAI, Anthropic, Google Gemini
+- PostgreSQL 12+ (or Azure SQL Database)
+- Azure OpenAI Service access with deployments for GPT-4, GPT-4o, and GPT-4 Turbo
 
 ### Installation
 
@@ -146,22 +193,27 @@ Dashboard Display
 3. **Set up environment variables**
    ```bash
    cp .env.example .env
-   # Edit .env with your API keys and database URL
+   # Edit .env with your Azure OpenAI credentials and database URL
    ```
 
-4. **Initialize the database**
+4. **Configure Azure OpenAI**
+   - Set `AZURE_OPENAI_ENDPOINT` to your Azure OpenAI endpoint
+   - Set `AZURE_OPENAI_KEY` to your API key
+   - Set deployment names for GPT-4, GPT-4o, and GPT-4 Turbo
+
+5. **Initialize the database**
    ```bash
    npm run db:init
    # This runs schema.sql and creates users/messages tables
    ```
 
-5. **Start the server**
+6. **Start the server**
    ```bash
    npm start
    # Server runs on http://localhost:3000
    ```
 
-6. **Access the dashboard**
+7. **Access the dashboard**
    ```
    Open browser → http://localhost:3000/dashboard
    ```

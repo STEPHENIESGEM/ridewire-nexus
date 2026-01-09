@@ -55,10 +55,10 @@ const Chat = () => {
         const aiResponse = await apiClient.get(`/messages/${sessionId}`);
 
         setResponses({
-          chatgpt: 'ChatGPT analyzing your query...',
-          claude: 'Claude synthesizing perspective...',
-          gemini: 'Gemini generating insights...',
-          consensus: 'Consensus: Multiple AI perspectives loaded.',
+          gpt4strategist: 'GPT-4 Strategist analyzing your query...',
+          gpt4oanalyst: 'GPT-4o Analyst synthesizing perspective...',
+          gpt4turbovalidator: 'GPT-4 Turbo Validator generating insights...',
+          consensus: 'Consensus: Multiple Azure OpenAI perspectives loaded.',
         });
       }
     } catch (error) {
@@ -77,7 +77,7 @@ const Chat = () => {
   return (
     <div className="chat-container">
       <header className="chat-header">
-        <h2>🔄 Multi-AI Consensus Chat</h2>
+        <h2>🔄 Multi-AI Consensus Chat (Azure OpenAI)</h2>
         <p>Session: {sessionId}</p>
       </header>
 
@@ -98,23 +98,23 @@ const Chat = () => {
         </div>
 
         <div className="consensus-section">
-          <h3>🤖 AI Roundtable Responses</h3>
+          <h3>🤖 Azure OpenAI Roundtable Responses</h3>
           <div className="ai-responses">
             <div className="ai-response chatgpt">
-              <strong>ChatGPT:</strong>
-              <p>{responses.chatgpt || 'Waiting for response...'}</p>
+              <strong>GPT-4 Strategist:</strong>
+              <p>{responses.gpt4strategist || 'Waiting for response...'}</p>
             </div>
             <div className="ai-response claude">
-              <strong>Claude:</strong>
-              <p>{responses.claude || 'Waiting for response...'}</p>
+              <strong>GPT-4o Analyst:</strong>
+              <p>{responses.gpt4oanalyst || 'Waiting for response...'}</p>
             </div>
             <div className="ai-response gemini">
-              <strong>Gemini:</strong>
-              <p>{responses.gemini || 'Waiting for response...'}</p>
+              <strong>GPT-4 Turbo Validator:</strong>
+              <p>{responses.gpt4turbovalidator || 'Waiting for response...'}</p>
             </div>
             <div className="consensus">
               <strong>Consensus:</strong>
-              <p>{responses.consensus || 'Awaiting AI analysis...'}</p>
+              <p>{responses.consensus || 'Awaiting Azure OpenAI analysis...'}</p>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@ const Chat = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-          placeholder="Ask a question to the AI roundtable..."
+          placeholder="Ask a question to the Azure OpenAI roundtable..."
           disabled={loading}
         />
         <button onClick={handleSend} disabled={loading || !input.trim()}>

@@ -1,0 +1,25 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Example",
+      "lastName": "Contact",
+      "email": "example@example.com",
+      "companyName": "Example Climate Tech",
+      "personalizationDetail": "scaling direct air capture technology",
+      "relevantTopic": "carbon removal market analysis",
+      "personalizedHook": "DAC market insights",
+      "status": "new",
+      "lastContact": null,
+      "nextFollowUp": null,
+      "conversationHistory": [],
+      "tags": ["climate-tech", "dac", "series-b"]
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2026-01-08T00:00:00.000Z",
+    "totalContacts": 1,
+    "company": "RIDEWIRE LLC",
+    "owner": "Stephenie N. Lacy"
+  }
+}
