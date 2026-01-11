@@ -3,17 +3,30 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
-const MultiAIOrchestrator = require('./multiAIOrchestrator');
-const DemoOrchestrator = require('./demoOrchestrator');
+
+// Load demo orchestration modules with error handling
+let MultiAIOrchestrator, DemoOrchestrator;
+try {
+  MultiAIOrchestrator = require('./multiAIOrchestrator');
+  DemoOrchestrator = require('./demoOrchestrator');
+  console.log('✓ Demo orchestration modules loaded');
+} catch (err) {
+  console.warn('⚠️  Demo orchestration modules not available:', err.message);
+  console.warn('   Demo endpoints will be disabled');
+}
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Initialize orchestrators
-const multiAI = new MultiAIOrchestrator();
-const demoOrchestrator = new DemoOrchestrator(multiAI);
+// Initialize orchestrators only if modules loaded successfully
+let multiAI, demoOrchestrator;
+if (MultiAIOrchestrator && DemoOrchestrator) {
+  multiAI = new MultiAIOrchestrator();
+  demoOrchestrator = new DemoOrchestrator(multiAI);
+  console.log('✓ Demo orchestrators initialized');
+}
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -104,11 +117,22 @@ app.get('/messages/:session_id', async (req, res) => {
 
 // ==================== WAR ROOM DEMO ENDPOINTS ====================
 
+// Middleware to check if demo orchestrator is available
+function requireDemoOrchestrator(req, res, next) {
+  if (!demoOrchestrator) {
+    return res.status(503).json({ 
+      error: 'Demo orchestration system not available',
+      message: 'Demo modules failed to load. Check server logs.'
+    });
+  }
+  next();
+}
+
 /**
  * Initialize War Room demo
  * POST /api/demo/initialize
  */
-app.post('/api/demo/initialize', (req, res) => {
+app.post('/api/demo/initialize', requireDemoOrchestrator, (req, res) => {
   try {
     const result = demoOrchestrator.initializeDemo();
     res.json(result);
@@ -121,7 +145,7 @@ app.post('/api/demo/initialize', (req, res) => {
  * Execute complete War Room demo
  * POST /api/demo/execute
  */
-app.post('/api/demo/execute', async (req, res) => {
+app.post('/api/demo/execute', requireDemoOrchestrator, async (req, res) => {
   try {
     const result = await demoOrchestrator.executeCompleteDemo();
     res.json(result);
@@ -134,7 +158,7 @@ app.post('/api/demo/execute', async (req, res) => {
  * Execute individual demo scene
  * POST /api/demo/scene/:sceneNumber
  */
-app.post('/api/demo/scene/:sceneNumber', async (req, res) => {
+app.post('/api/demo/scene/:sceneNumber', requireDemoOrchestrator, async (req, res) => {
   try {
     const { sceneNumber } = req.params;
     let result;
@@ -166,7 +190,7 @@ app.post('/api/demo/scene/:sceneNumber', async (req, res) => {
  * Get live demo status
  * GET /api/demo/status
  */
-app.get('/api/demo/status', (req, res) => {
+app.get('/api/demo/status', requireDemoOrchestrator, (req, res) => {
   try {
     const status = demoOrchestrator.getLiveStatus();
     res.json(status);
@@ -180,7 +204,7 @@ app.get('/api/demo/status', (req, res) => {
  * POST /api/demo/inject-break
  * Body: { type: 'api_latency'|'partial_outage'|'corrupt_signal'|'network_timeout'|'rate_limit', agent: 'ChatGPT'|'Claude'|'Gemini', delayMs?: number, durationMs?: number }
  */
-app.post('/api/demo/inject-break', (req, res) => {
+app.post('/api/demo/inject-break', requireDemoOrchestrator, (req, res) => {
   try {
     const { type, agent, delayMs, durationMs } = req.body;
     
@@ -221,7 +245,7 @@ app.post('/api/demo/inject-break', (req, res) => {
  * Get system health
  * GET /api/demo/health
  */
-app.get('/api/demo/health', (req, res) => {
+app.get('/api/demo/health', requireDemoOrchestrator, (req, res) => {
   try {
     const health = demoOrchestrator.breakSimulator.getSystemHealth();
     res.json(health);
@@ -234,7 +258,7 @@ app.get('/api/demo/health', (req, res) => {
  * Get repair log
  * GET /api/demo/repair-log
  */
-app.get('/api/demo/repair-log', (req, res) => {
+app.get('/api/demo/repair-log', requireDemoOrchestrator, (req, res) => {
   try {
     const repairLog = demoOrchestrator.breakSimulator.getRepairLog();
     res.json({ repairLog });
@@ -247,7 +271,7 @@ app.get('/api/demo/repair-log', (req, res) => {
  * Get diagnostic report
  * GET /api/demo/diagnostics
  */
-app.get('/api/demo/diagnostics', (req, res) => {
+app.get('/api/demo/diagnostics', requireDemoOrchestrator, (req, res) => {
   try {
     const report = demoOrchestrator.selfDiagnostics.getLiveReport();
     res.json(report);
@@ -260,7 +284,7 @@ app.get('/api/demo/diagnostics', (req, res) => {
  * Reset demo
  * POST /api/demo/reset
  */
-app.post('/api/demo/reset', (req, res) => {
+app.post('/api/demo/reset', requireDemoOrchestrator, (req, res) => {
   try {
     demoOrchestrator.resetDemo();
     res.json({ status: 'reset', message: 'Demo reset successfully' });

@@ -189,7 +189,7 @@ class SelfDiagnostics {
         id: b.id,
         type: b.type,
         agent: b.agent,
-        since: b.injectedAt,
+        injectedAt: b.injectedAt,
         age: this.formatAge(this.calculateAge(b.injectedAt))
       }))
     };
@@ -300,7 +300,7 @@ class SelfDiagnostics {
     }
     
     const oldestIssue = insights.activeIssues.reduce((oldest, issue) => {
-      const age = this.calculateAge(issue.since);
+      const age = this.calculateAge(issue.injectedAt);
       return age > oldest.age ? { issue, age } : oldest;
     }, { age: 0 });
 

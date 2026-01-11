@@ -3,9 +3,17 @@
  * Validates system break injection, self-diagnosis, and demo flow
  */
 
-const SystemBreakSimulator = require('./systemBreakSimulator');
-const SelfDiagnostics = require('./selfDiagnostics');
-const DemoOrchestrator = require('./demoOrchestrator');
+// Load modules with error handling
+let SystemBreakSimulator, SelfDiagnostics, DemoOrchestrator;
+try {
+  SystemBreakSimulator = require('./systemBreakSimulator');
+  SelfDiagnostics = require('./selfDiagnostics');
+  DemoOrchestrator = require('./demoOrchestrator');
+} catch (err) {
+  console.error('❌ Failed to load required modules:', err.message);
+  console.error('   Make sure you are in the correct directory and all files exist.');
+  process.exit(1);
+}
 
 // Mock MultiAIOrchestrator for testing
 class MockMultiAIOrchestrator {

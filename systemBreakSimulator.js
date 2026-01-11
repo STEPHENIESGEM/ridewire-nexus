@@ -168,7 +168,7 @@ class SystemBreakSimulator {
 
         case this.breakagePatterns.CORRUPT_SIGNAL:
           // Return malformed response
-          return { error: 'malformed_response', data: 'CORRUPT_DATA_0x' + Math.random().toString(16).substr(2, 8) };
+          return { error: 'malformed_response', data: 'CORRUPT_DATA_0x' + Math.random().toString(16).substring(2, 10) };
       }
     }
 
