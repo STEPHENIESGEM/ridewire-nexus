@@ -3,11 +3,17 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
+const MultiAIOrchestrator = require('./multiAIOrchestrator');
+const DemoOrchestrator = require('./demoOrchestrator');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+// Initialize orchestrators
+const multiAI = new MultiAIOrchestrator();
+const demoOrchestrator = new DemoOrchestrator(multiAI);
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -91,6 +97,173 @@ app.get('/messages/:session_id', async (req, res) => {
       [decoded.id, req.params.session_id]
     );
     res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ==================== WAR ROOM DEMO ENDPOINTS ====================
+
+/**
+ * Initialize War Room demo
+ * POST /api/demo/initialize
+ */
+app.post('/api/demo/initialize', (req, res) => {
+  try {
+    const result = demoOrchestrator.initializeDemo();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Execute complete War Room demo
+ * POST /api/demo/execute
+ */
+app.post('/api/demo/execute', async (req, res) => {
+  try {
+    const result = await demoOrchestrator.executeCompleteDemo();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Execute individual demo scene
+ * POST /api/demo/scene/:sceneNumber
+ */
+app.post('/api/demo/scene/:sceneNumber', async (req, res) => {
+  try {
+    const { sceneNumber } = req.params;
+    let result;
+
+    switch (sceneNumber) {
+      case '1':
+        result = await demoOrchestrator.executeScene1_ProblemInjection();
+        break;
+      case '2':
+        result = await demoOrchestrator.executeScene2_AIAnalysis();
+        break;
+      case '3':
+        result = await demoOrchestrator.executeScene3_SelfHealing();
+        break;
+      case '4':
+        result = await demoOrchestrator.executeScene4_BusinessImpact();
+        break;
+      default:
+        return res.status(400).json({ error: 'Invalid scene number (1-4)' });
+    }
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Get live demo status
+ * GET /api/demo/status
+ */
+app.get('/api/demo/status', (req, res) => {
+  try {
+    const status = demoOrchestrator.getLiveStatus();
+    res.json(status);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Inject system break (for manual demo control)
+ * POST /api/demo/inject-break
+ * Body: { type: 'api_latency'|'partial_outage'|'corrupt_signal'|'network_timeout'|'rate_limit', agent: 'ChatGPT'|'Claude'|'Gemini', delayMs?: number, durationMs?: number }
+ */
+app.post('/api/demo/inject-break', (req, res) => {
+  try {
+    const { type, agent, delayMs, durationMs } = req.body;
+    
+    if (!type || !agent) {
+      return res.status(400).json({ error: 'Type and agent required' });
+    }
+
+    let result;
+    const simulator = demoOrchestrator.breakSimulator;
+
+    switch (type) {
+      case 'api_latency':
+        result = simulator.injectAPILatency(agent, delayMs || 2000);
+        break;
+      case 'partial_outage':
+        result = simulator.injectPartialOutage(agent, durationMs || 5000);
+        break;
+      case 'corrupt_signal':
+        result = simulator.injectCorruptSignal(agent);
+        break;
+      case 'network_timeout':
+        result = simulator.injectNetworkTimeout(agent);
+        break;
+      case 'rate_limit':
+        result = simulator.injectRateLimit(agent);
+        break;
+      default:
+        return res.status(400).json({ error: 'Invalid break type' });
+    }
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Get system health
+ * GET /api/demo/health
+ */
+app.get('/api/demo/health', (req, res) => {
+  try {
+    const health = demoOrchestrator.breakSimulator.getSystemHealth();
+    res.json(health);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Get repair log
+ * GET /api/demo/repair-log
+ */
+app.get('/api/demo/repair-log', (req, res) => {
+  try {
+    const repairLog = demoOrchestrator.breakSimulator.getRepairLog();
+    res.json({ repairLog });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Get diagnostic report
+ * GET /api/demo/diagnostics
+ */
+app.get('/api/demo/diagnostics', (req, res) => {
+  try {
+    const report = demoOrchestrator.selfDiagnostics.getLiveReport();
+    res.json(report);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * Reset demo
+ * POST /api/demo/reset
+ */
+app.post('/api/demo/reset', (req, res) => {
+  try {
+    demoOrchestrator.resetDemo();
+    res.json({ status: 'reset', message: 'Demo reset successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
