@@ -177,11 +177,18 @@ ridewire-ai-hub/
 │   ├── pages/
 │   ├── styles/
 │   └── index.html
+├── scripts/                     # Automation scripts
+│   ├── deploy-all.sh           # Complete deployment automation
+│   ├── coco-automation.sh      # YouTube content generation
+│   ├── gumroad-sync.sh         # Product catalog management
+│   ├── complete-all-issues.sh  # Project tracking
+│   └── test-links.js           # Route testing
 ├── server.js                    # Express backend & authentication
 ├── multiAIOrchestrator.js       # Multi-AI agent orchestration logic
 ├── encryption.js                # Client-side encryption module
 ├── schema.sql                   # PostgreSQL database schema
 ├── package.json                 # Dependencies & scripts
+├── AUTOMATION_GUIDE.md          # Complete automation documentation
 └── .env.example                 # Template for environment variables
 ```
 
@@ -280,6 +287,62 @@ Or manually visit each route:
 - http://localhost:3000/disclaimer
 - http://localhost:3000/terms
 - http://localhost:3000/nonexistent-page (tests 404)
+
+---
+
+## 🤖 Automation & Deployment
+
+RideWire AI Hub includes comprehensive automation scripts for streamlined deployment, content generation, and product management.
+
+### Available Automation Scripts
+
+1. **deploy-all.sh** - Complete deployment automation
+   - Environment validation and security checks
+   - Dependency installation and building
+   - Database initialization
+   - Automated testing and deployment
+   
+2. **coco-automation.sh** - YouTube content generation
+   - AI-powered video topic and script generation
+   - Scheduled uploads (Mon/Wed/Fri at 9am)
+   - Revenue tracking ($500/month target by week 4)
+   - Cost monitoring ($66-76/month)
+
+3. **gumroad-sync.sh** - Product catalog management
+   - 34-product catalog creation
+   - Pricing optimization
+   - Sales reporting
+   - Revenue projections ($27K-$161K Year 1)
+
+4. **complete-all-issues.sh** - Project tracking
+   - Issue and PR status reporting
+   - Completion checklist generation
+   - Progress monitoring
+
+### Quick Start with Automation
+
+```bash
+# Deploy application (dry run first)
+./scripts/deploy-all.sh --dry-run
+./scripts/deploy-all.sh
+
+# Generate marketing content
+./scripts/coco-automation.sh generate
+
+# Sync products to Gumroad
+./scripts/gumroad-sync.sh sync
+
+# Check project status
+./scripts/complete-all-issues.sh status
+```
+
+### Full Documentation
+
+For complete automation documentation, see **[AUTOMATION_GUIDE.md](AUTOMATION_GUIDE.md)** which includes:
+- Detailed usage instructions
+- Integration examples
+- Troubleshooting guide
+- Best practices
 
 ---
 
