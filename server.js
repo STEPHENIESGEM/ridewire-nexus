@@ -8,10 +8,29 @@ const SafetyGating = require('./safetyGating');
 const GameEngine = require('./gameEngine');
 const EcommerceAutomation = require('./ecommerceAutomation');
 
+// Load demo orchestration modules with error handling
+let MultiAIOrchestrator, DemoOrchestrator;
+try {
+  MultiAIOrchestrator = require('./multiAIOrchestrator');
+  DemoOrchestrator = require('./demoOrchestrator');
+  console.log('✓ Demo orchestration modules loaded');
+} catch (err) {
+  console.warn('⚠️  Demo orchestration modules not available:', err.message);
+  console.warn('   Demo endpoints will be disabled');
+}
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+// Initialize orchestrators only if modules loaded successfully
+let multiAI, demoOrchestrator;
+if (MultiAIOrchestrator && DemoOrchestrator) {
+  multiAI = new MultiAIOrchestrator();
+  demoOrchestrator = new DemoOrchestrator(multiAI);
+  console.log('✓ Demo orchestrators initialized');
+}
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -206,6 +225,28 @@ app.post('/api/diagnostic/query', async (req, res) => {
     
   } catch (err) {
     console.error('Diagnostic query error:', err);
+// ==================== WAR ROOM DEMO ENDPOINTS ====================
+
+// Middleware to check if demo orchestrator is available
+function requireDemoOrchestrator(req, res, next) {
+  if (!demoOrchestrator) {
+    return res.status(503).json({ 
+      error: 'Demo orchestration system not available',
+      message: 'Demo modules failed to load. Check server logs.'
+    });
+  }
+  next();
+}
+
+/**
+ * Initialize War Room demo
+ * POST /api/demo/initialize
+ */
+app.post('/api/demo/initialize', requireDemoOrchestrator, (req, res) => {
+  try {
+    const result = demoOrchestrator.initializeDemo();
+    res.json(result);
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -238,6 +279,14 @@ app.get('/api/diagnostic/history', async (req, res) => {
       total: result.rowCount
     });
     
+/**
+ * Execute complete War Room demo
+ * POST /api/demo/execute
+ */
+app.post('/api/demo/execute', requireDemoOrchestrator, async (req, res) => {
+  try {
+    const result = await demoOrchestrator.executeCompleteDemo();
+    res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -259,6 +308,33 @@ app.get('/api/game/state', async (req, res) => {
     const gameState = await gameEngine.getGameState(decoded.id);
     
     res.json(gameState);
+/**
+ * Execute individual demo scene
+ * POST /api/demo/scene/:sceneNumber
+ */
+app.post('/api/demo/scene/:sceneNumber', requireDemoOrchestrator, async (req, res) => {
+  try {
+    const { sceneNumber } = req.params;
+    let result;
+
+    switch (sceneNumber) {
+      case '1':
+        result = await demoOrchestrator.executeScene1_ProblemInjection();
+        break;
+      case '2':
+        result = await demoOrchestrator.executeScene2_AIAnalysis();
+        break;
+      case '3':
+        result = await demoOrchestrator.executeScene3_SelfHealing();
+        break;
+      case '4':
+        result = await demoOrchestrator.executeScene4_BusinessImpact();
+        break;
+      default:
+        return res.status(400).json({ error: 'Invalid scene number (1-4)' });
+    }
+
+    res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -275,6 +351,14 @@ app.get('/api/game/leaderboard', async (req, res) => {
       leaderboard,
       updated_at: new Date().toISOString()
     });
+/**
+ * Get live demo status
+ * GET /api/demo/status
+ */
+app.get('/api/demo/status', requireDemoOrchestrator, (req, res) => {
+  try {
+    const status = demoOrchestrator.getLiveStatus();
+    res.json(status);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -322,6 +406,43 @@ app.get('/api/marketplace/listings', async (req, res) => {
       page: parseInt(page),
       limit: parseInt(limit)
     });
+/**
+ * Inject system break (for manual demo control)
+ * POST /api/demo/inject-break
+ * Body: { type: 'api_latency'|'partial_outage'|'corrupt_signal'|'network_timeout'|'rate_limit', agent: 'ChatGPT'|'Claude'|'Gemini', delayMs?: number, durationMs?: number }
+ */
+app.post('/api/demo/inject-break', requireDemoOrchestrator, (req, res) => {
+  try {
+    const { type, agent, delayMs, durationMs } = req.body;
+    
+    if (!type || !agent) {
+      return res.status(400).json({ error: 'Type and agent required' });
+    }
+
+    let result;
+    const simulator = demoOrchestrator.breakSimulator;
+
+    switch (type) {
+      case 'api_latency':
+        result = simulator.injectAPILatency(agent, delayMs || 2000);
+        break;
+      case 'partial_outage':
+        result = simulator.injectPartialOutage(agent, durationMs || 5000);
+        break;
+      case 'corrupt_signal':
+        result = simulator.injectCorruptSignal(agent);
+        break;
+      case 'network_timeout':
+        result = simulator.injectNetworkTimeout(agent);
+        break;
+      case 'rate_limit':
+        result = simulator.injectRateLimit(agent);
+        break;
+      default:
+        return res.status(400).json({ error: 'Invalid break type' });
+    }
+
+    res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -347,6 +468,15 @@ app.post('/api/marketplace/purchase', async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error('Purchase error:', err);
+/**
+ * Get system health
+ * GET /api/demo/health
+ */
+app.get('/api/demo/health', requireDemoOrchestrator, (req, res) => {
+  try {
+    const health = demoOrchestrator.breakSimulator.getSystemHealth();
+    res.json(health);
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -363,6 +493,14 @@ app.get('/api/revenue/dashboard', async (req, res) => {
     const dashboard = await ecommerce.getSellerDashboard(decoded.id);
     
     res.json(dashboard);
+/**
+ * Get repair log
+ * GET /api/demo/repair-log
+ */
+app.get('/api/demo/repair-log', requireDemoOrchestrator, (req, res) => {
+  try {
+    const repairLog = demoOrchestrator.breakSimulator.getRepairLog();
+    res.json({ repairLog });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -408,6 +546,15 @@ app.post('/api/marketplace/list', async (req, res) => {
     res.json(listing);
   } catch (err) {
     console.error('Listing error:', err);
+/**
+ * Get diagnostic report
+ * GET /api/demo/diagnostics
+ */
+app.get('/api/demo/diagnostics', requireDemoOrchestrator, (req, res) => {
+  try {
+    const report = demoOrchestrator.selfDiagnostics.getLiveReport();
+    res.json(report);
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -423,6 +570,14 @@ app.post('/api/admin/process-payouts', async (req, res) => {
     
     const results = await ecommerce.processWeeklyPayouts();
     res.json(results);
+/**
+ * Reset demo
+ * POST /api/demo/reset
+ */
+app.post('/api/demo/reset', requireDemoOrchestrator, (req, res) => {
+  try {
+    demoOrchestrator.resetDemo();
+    res.json({ status: 'reset', message: 'Demo reset successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

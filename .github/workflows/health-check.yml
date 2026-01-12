@@ -1,0 +1,67 @@
+name: Hourly Health Check
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run COCO system monitor
+        id: health_check
+        continue-on-error: true
+        run: |
+          node scripts/automation/coco-monitor.js > health-check.log 2>&1
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+      
+      - name: Display health check results
+        run: |
+          cat health-check.log
+      
+      - name: Update status file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/coco-status.json || true
+          git commit -m "Auto: Hourly health check - $(date +%Y-%m-%d-%H:%M)" || echo "No changes"
+          git push || echo "Nothing to push"
+      
+      - name: Create health summary
+        run: |
+          echo "## System Health Check - $(date '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.health_check.outputs.exit_code }}" == "0" ]; then
+            echo "### ✅ System Status: HEALTHY" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ⚠️ System Status: NEEDS ATTENTION" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Health Check Log" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat health-check.log >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Alert on critical errors
+        if: steps.health_check.outputs.exit_code != '0'
+        run: |
+          echo "🚨 Critical error detected in COCO AI system!"
+          echo "Check the health check log for details"
+          # In production, send immediate alert here
+          # exit 1  # Uncomment to fail the workflow on errors

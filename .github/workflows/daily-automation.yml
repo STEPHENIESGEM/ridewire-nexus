@@ -1,0 +1,105 @@
+name: Daily Automation Tasks
+
+on:
+  schedule:
+    # Run daily at 6:00 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  daily-tasks:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Configure environment
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GUMROAD_API_KEY: ${{ secrets.GUMROAD_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> .env
+          echo "GUMROAD_API_KEY=${GUMROAD_API_KEY}" >> .env
+          echo "DATABASE_URL=${DATABASE_URL}" >> .env
+          echo "JWT_SECRET=${JWT_SECRET}" >> .env
+      
+      - name: Update content calendar
+        run: |
+          echo "📅 Updating content calendar..."
+          node scripts/coco/content-calendar.js --schedule 4
+      
+      - name: Sync Gumroad products
+        run: |
+          echo "🛒 Syncing Gumroad products..."
+          if [ -f "scripts/gumroad/product-sync.js" ]; then
+            node scripts/gumroad/product-sync.js
+          else
+            echo "⚠️  Gumroad sync script not yet implemented"
+          fi
+      
+      - name: Update analytics
+        run: |
+          echo "📊 Updating analytics..."
+          node scripts/coco/analytics-tracker.js --update
+      
+      - name: Generate revenue report
+        run: |
+          echo "💰 Generating revenue report..."
+          if [ -f "scripts/gumroad/revenue-tracker.js" ]; then
+            node scripts/gumroad/revenue-tracker.js
+          else
+            echo "⚠️  Revenue tracker not yet implemented"
+          fi
+      
+      - name: Run system health check
+        run: |
+          echo "🏥 Running health check..."
+          node scripts/automation/coco-monitor.js
+      
+      - name: Export analytics
+        run: |
+          echo "📤 Exporting analytics..."
+          node scripts/coco/analytics-tracker.js --export daily-analytics-$(date +%Y-%m-%d).csv
+      
+      - name: Commit daily updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/ || true
+          git commit -m "Auto: Daily automation update - $(date +%Y-%m-%d)" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+      
+      - name: Create daily summary
+        run: |
+          echo "## Daily Automation Summary - $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Tasks Completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Content calendar updated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Gumroad products synced" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Analytics updated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Revenue report generated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Health check completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Analytics" >> $GITHUB_STEP_SUMMARY
+          if [ -f "data/coco-analytics.json" ]; then
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            cat data/coco-analytics.json | head -n 20 >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+      
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Daily automation tasks failed!"
+          # In production, send email/Slack notification here

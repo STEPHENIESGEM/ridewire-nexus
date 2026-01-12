@@ -1,0 +1,10 @@
+Platform,Tier,Name,Handle_URL,Followers,Engagement_Rate_%,Email,Category,Status,Date_Contacted,Response_Date,Partnership_Status,Content_Posted,Reach,Engagement_Count,Commission_Rate_%,Revenue_Generated,Notes
+YouTube,Tier 1,Example Creator 1,https://youtube.com/@example,1500000,8.5,creator@example.com,AI Explainers,Not Contacted,,,Prospect,No,0,0,20,0,"500k-5M followers, AI-focused content"
+YouTube,Tier 2,Example Creator 2,https://youtube.com/@example2,250000,6.2,creator2@example.com,Tech Reviewers,Not Contacted,,,Prospect,No,0,0,15,0,"100k-500k followers, tech reviews"
+YouTube,Tier 3,Example Creator 3,https://youtube.com/@example3,45000,12.1,creator3@example.com,Emerging Creators,Not Contacted,,,Prospect,No,0,0,10,0,"10k-100k followers, rising star"
+TikTok,Tier 1,Example TikToker 1,@exampletiktok,2500000,15.3,tiktoker@example.com,AI Trends,Not Contacted,,,Prospect,No,0,0,20,0,"1M+ followers, trending AI content"
+TikTok,Tier 2,Example TikToker 2,@exampletiktok2,450000,10.8,tiktoker2@example.com,Tech Content,Not Contacted,,,Prospect,No,0,0,15,0,"100k-1M followers, tech demos"
+TikTok,Tier 3,Example TikToker 3,@exampletiktok3,65000,18.5,tiktoker3@example.com,Rising Stars,Not Contacted,,,Prospect,No,0,0,10,0,"10k-100k followers, high engagement"
+Twitter,Tier 1,Example Influencer 1,@exampletwitter,350000,7.2,twitter@example.com,AI Thought Leaders,Not Contacted,,,Prospect,No,0,0,20,0,"100k+ followers, AI researcher"
+Twitter,Tier 2,Example Influencer 2,@exampletwitter2,55000,9.5,twitter2@example.com,Tech Commentators,Not Contacted,,,Prospect,No,0,0,15,0,"10k-100k followers, tech analysis"
+Twitter,Tier 3,Example Influencer 3,@exampletwitter3,4500,14.2,twitter3@example.com,Community Builders,Not Contacted,,,Prospect,No,0,0,10,0,"1k-10k followers, engaged community"

@@ -57,6 +57,42 @@ RideWire AI Hub is a cutting-edge platform that orchestrates multiple AI agents 
 
 ---
 
+## 💰 Monetization Strategy
+
+### 1. **Gumroad Product Marketplace**
+
+Offer pre-built RideWire modules and diagnostic add-ons through Gumroad:
+
+- **Premium Diagnostic Packs**: Vehicle-specific diagnostic modules ($15-50 each)
+- - **AR Overlay Templates**: Pre-designed AR overlays for popular vehicle models ($10-25 each)
+  - - **API Keys & Webhooks**: Developer access for custom integrations ($29-99/month)
+    - - **Training Materials**: Tutorials for mechanics and technicians ($5-10 per course)
+     
+      - ### 2. **Stripe Payment Integration**
+     
+      - Implement Stripe for subscription management and one-time purchases:
+     
+      - - **Tiered Pricing Plans**:
+        -   - Free: Basic single-AI diagnostics (ChatGPT only)
+            -   - Pro ($29/month): Multi-AI consensus + basic AR overlays
+                -   - Enterprise ($99/month): Full AR diagnostic suite + custom integrations + API access
+                 
+                    - - **Stripe Integration Points**:
+                      -   - Subscription billing in dashboard
+                          -   - Webhook handling for payment events
+                              -   - License key generation on purchase
+                               
+                                  - ### 3. **Auto-Email System**
+                               
+                                  - Automated email campaigns for customer acquisition and retention:
+                               
+                                  - - **Welcome Series**: 5-email onboarding sequence after signup
+                                    - - **Weekly Diagnostic Tips**: Auto-email with vehicle tips and diagnostic best practices
+                                      - - **Upsell Campaigns**: Targeted emails for feature upgrades
+                                        - - **Email Service Integration**: Ready for Mailchimp, SendGrid, or AWS SES
+                                         
+                                          - ---
+
 ## 🎯 Architecture Overview
 
 ```
@@ -141,11 +177,18 @@ ridewire-ai-hub/
 │   ├── pages/
 │   ├── styles/
 │   └── index.html
+├── scripts/                     # Automation scripts
+│   ├── deploy-all.sh           # Complete deployment automation
+│   ├── coco-automation.sh      # YouTube content generation
+│   ├── gumroad-sync.sh         # Product catalog management
+│   ├── complete-all-issues.sh  # Project tracking
+│   └── test-links.js           # Route testing
 ├── server.js                    # Express backend & authentication
 ├── multiAIOrchestrator.js       # Multi-AI agent orchestration logic
 ├── encryption.js                # Client-side encryption module
 ├── schema.sql                   # PostgreSQL database schema
 ├── package.json                 # Dependencies & scripts
+├── AUTOMATION_GUIDE.md          # Complete automation documentation
 └── .env.example                 # Template for environment variables
 ```
 
@@ -169,6 +212,137 @@ ridewire-ai-hub/
 
 - `GET /api/dashboard/stats` - User statistics & query count
 - `GET /api/dashboard/pricing` - Pricing tier information
+
+---
+
+## 🌐 Frontend Routes
+
+The RideWire AI Hub uses React Router for client-side navigation. All routes are defined in `frontend/App.jsx`:
+
+### Public Routes (No Authentication Required)
+
+- **`/`** - Landing page with hero section and feature overview
+  - Displays Multi-AI platform introduction
+  - Call-to-action buttons for login and registration
+  - Redirects to `/dashboard` if user is already authenticated
+
+- **`/login`** - User login page
+  - Email and password authentication
+  - Redirects to `/dashboard` on successful login
+
+- **`/register`** - New user registration
+  - Create account with email and password
+  - Auto-login and redirect to `/dashboard` after registration
+
+- **`/pricing`** - Pricing tiers and subscription plans
+  - Free, Pro ($9.99/month), and Enterprise ($99/month) plans
+  - Feature comparison and FAQ section
+
+- **`/disclaimer`** - Legal disclaimer and warnings
+  - AI-generated content disclaimer
+  - Automotive diagnostic warnings
+  - No professional advice disclaimer
+
+- **`/terms`** - Terms of service
+  - User agreement and acceptable use policy
+  - Subscription terms and payment information
+  - Intellectual property and liability disclaimers
+
+### Protected Routes (Authentication Required)
+
+- **`/dashboard`** - Main user dashboard
+  - Usage statistics and account overview
+  - Quick access to chat and pricing
+  - Protected: Redirects to `/login` if not authenticated
+
+- **`/chat`** - Multi-AI consensus chat interface
+  - Real-time chat with ChatGPT, Claude, and Gemini
+  - Encrypted message storage
+  - Consensus results display
+  - Protected: Redirects to `/login` if not authenticated
+
+### Error Handling
+
+- **`*`** (404 Catch-all) - Page not found
+  - User-friendly 404 error page
+  - Navigation options to return home or start chatting
+  - Matches any undefined route
+
+### Testing Routes
+
+To test all routes are working correctly:
+
+```bash
+# Run the automated link testing script
+npm run test-links
+```
+
+Or manually visit each route:
+- http://localhost:3000/
+- http://localhost:3000/login
+- http://localhost:3000/register
+- http://localhost:3000/dashboard
+- http://localhost:3000/chat
+- http://localhost:3000/pricing
+- http://localhost:3000/disclaimer
+- http://localhost:3000/terms
+- http://localhost:3000/nonexistent-page (tests 404)
+
+---
+
+## 🤖 Automation & Deployment
+
+RideWire AI Hub includes comprehensive automation scripts for streamlined deployment, content generation, and product management.
+
+### Available Automation Scripts
+
+1. **deploy-all.sh** - Complete deployment automation
+   - Environment validation and security checks
+   - Dependency installation and building
+   - Database initialization
+   - Automated testing and deployment
+   
+2. **coco-automation.sh** - YouTube content generation
+   - AI-powered video topic and script generation
+   - Scheduled uploads (Mon/Wed/Fri at 9am)
+   - Revenue tracking ($500/month target by week 4)
+   - Cost monitoring ($66-76/month)
+
+3. **gumroad-sync.sh** - Product catalog management
+   - 34-product catalog creation
+   - Pricing optimization
+   - Sales reporting
+   - Revenue projections ($27K-$161K Year 1)
+
+4. **complete-all-issues.sh** - Project tracking
+   - Issue and PR status reporting
+   - Completion checklist generation
+   - Progress monitoring
+
+### Quick Start with Automation
+
+```bash
+# Deploy application (dry run first)
+./scripts/deploy-all.sh --dry-run
+./scripts/deploy-all.sh
+
+# Generate marketing content
+./scripts/coco-automation.sh generate
+
+# Sync products to Gumroad
+./scripts/gumroad-sync.sh sync
+
+# Check project status
+./scripts/complete-all-issues.sh status
+```
+
+### Full Documentation
+
+For complete automation documentation, see **[AUTOMATION_GUIDE.md](AUTOMATION_GUIDE.md)** which includes:
+- Detailed usage instructions
+- Integration examples
+- Troubleshooting guide
+- Best practices
 
 ---
 

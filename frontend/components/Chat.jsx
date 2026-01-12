@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import apiClient from '../utils/apiClient';
 import EncryptionModule from '../../encryption';
 
 const Chat = () => {
@@ -41,25 +41,18 @@ const Chat = () => {
     setInput('');
 
     try {
-      const token = localStorage.getItem('token');
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
-
       // Encrypt the message
       const encrypted = encryptionModule.current.encryptMessage(input, sessionId);
 
       // Send to backend for multi-AI processing
-      const response = await axios.post(`${apiUrl}/messages`, {
+      const response = await apiClient.post('/messages', {
         ...encrypted,
         session_id: sessionId,
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.status === 201) {
         // Fetch responses from all AI agents
-        const aiResponse = await axios.get(`${apiUrl}/messages/${sessionId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const aiResponse = await apiClient.get(`/messages/${sessionId}`);
 
         setResponses({
           chatgpt: 'ChatGPT analyzing your query...',
