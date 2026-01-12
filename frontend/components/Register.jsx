@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import apiClient from '../utils/apiClient';
 
-export default function Register() {
+export default function Register({ setIsAuthenticated }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -40,6 +40,10 @@ export default function Register() {
 
       // Store JWT token
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.userId);
+      
+      // Update authentication state
+      setIsAuthenticated(true);
       
       // Auto-login and redirect to chat
       navigate('/chat');

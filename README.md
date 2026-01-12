@@ -163,7 +163,7 @@ Dashboard Display
 
 6. **Access the dashboard**
    ```
-   Open browser → http://localhost:3000/dashboard
+   Open browser → http://localhost:3000
    ```
 
 ---
@@ -584,7 +584,7 @@ This initiative is powered by specialized AI agents with distinct roles:
 
 ### GitHub Support
 
-Have questions? Open an [Issue](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues) on GitHub or check our [Wiki](https://github.com/STEPHENIESGEM/ridewire-ai-hub/wiki).
+Have questions? Open an [Issue](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues) on GitHub.
 
 ---
 
