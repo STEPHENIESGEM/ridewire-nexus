@@ -1,0 +1,337 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ridewire.ai/schemas/diagnostic-event.json",
+  "title": "Diagnostic Event Schema",
+  "description": "Structure for diagnostic queries, AI responses, and consensus results",
+  "type": "object",
+  "required": ["event_id", "user_id", "timestamp", "query", "vehicle", "agents", "consensus", "decision"],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique diagnostic event identifier",
+      "pattern": "^DIAG-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]+$",
+      "example": "DIAG-2025-12-20-10234"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "User who initiated the diagnostic",
+      "pattern": "^USER-[0-9]+$",
+      "example": "USER-5892"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the diagnostic was initiated",
+      "example": "2025-12-20T14:32:18Z"
+    },
+    "query": {
+      "type": "object",
+      "description": "User's diagnostic query",
+      "required": ["text", "p_code"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Natural language query from user",
+          "example": "Check engine light on, rough idle, code P0300"
+        },
+        "p_code": {
+          "type": "string",
+          "description": "OBDII diagnostic trouble code",
+          "pattern": "^P[0-3][0-9A-F]{3}$",
+          "example": "P0300"
+        },
+        "symptoms": {
+          "type": "array",
+          "description": "Additional symptoms reported by user",
+          "items": {
+            "type": "string",
+            "enum": ["rough_idle", "stalling", "poor_acceleration", "check_engine_light", "strange_noise", "vibration", "smoke", "smell", "other"]
+          },
+          "example": ["rough_idle", "check_engine_light"]
+        }
+      }
+    },
+    "vehicle": {
+      "type": "object",
+      "description": "Vehicle information",
+      "required": ["make", "model", "year"],
+      "properties": {
+        "make": {
+          "type": "string",
+          "description": "Vehicle manufacturer",
+          "example": "Harley-Davidson"
+        },
+        "model": {
+          "type": "string",
+          "description": "Vehicle model",
+          "example": "Street 750"
+        },
+        "year": {
+          "type": "integer",
+          "description": "Model year",
+          "minimum": 1980,
+          "maximum": 2030,
+          "example": 2022
+        },
+        "vin": {
+          "type": "string",
+          "description": "Vehicle Identification Number (last 6 digits for privacy)",
+          "pattern": "^[A-HJ-NPR-Z0-9]{6}$",
+          "example": "KB4567"
+        },
+        "mileage": {
+          "type": "integer",
+          "description": "Current odometer reading",
+          "minimum": 0,
+          "example": 12450
+        }
+      }
+    },
+    "agents": {
+      "type": "array",
+      "description": "AI agent responses",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["name", "model", "response", "confidence", "latency_ms"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["ChatGPT", "Claude", "Gemini"],
+            "description": "AI agent name",
+            "example": "ChatGPT"
+          },
+          "model": {
+            "type": "string",
+            "description": "Specific model version used",
+            "example": "gpt-4-turbo"
+          },
+          "response": {
+            "type": "string",
+            "description": "Full diagnostic response from agent",
+            "example": "P0300 indicates a random misfire detected across multiple cylinders. Common causes include worn spark plugs (70% probability), faulty ignition coils (20%), or fuel delivery issues (10%). Recommend inspecting spark plugs first."
+          },
+          "diagnosis": {
+            "type": "string",
+            "description": "Short diagnosis summary",
+            "example": "Random Misfire - Check spark plugs"
+          },
+          "recommended_action": {
+            "type": "string",
+            "description": "Suggested repair or next step",
+            "example": "Inspect spark plugs for wear, fouling, or incorrect gap. Replace if necessary."
+          },
+          "confidence": {
+            "type": "number",
+            "description": "Agent's confidence in diagnosis (0.0 to 1.0)",
+            "minimum": 0,
+            "maximum": 1,
+            "example": 0.85
+          },
+          "safety_concerns": {
+            "type": "array",
+            "description": "Any safety-related flags raised by agent",
+            "items": {
+              "type": "string"
+            },
+            "example": []
+          },
+          "estimated_cost": {
+            "type": "object",
+            "description": "Estimated repair cost range",
+            "properties": {
+              "diy_min": {
+                "type": "number",
+                "description": "Minimum DIY cost (USD)",
+                "example": 80
+              },
+              "diy_max": {
+                "type": "number",
+                "description": "Maximum DIY cost (USD)",
+                "example": 200
+              },
+              "shop_min": {
+                "type": "number",
+                "description": "Minimum shop cost (USD)",
+                "example": 150
+              },
+              "shop_max": {
+                "type": "number",
+                "description": "Maximum shop cost (USD)",
+                "example": 350
+              }
+            }
+          },
+          "latency_ms": {
+            "type": "integer",
+            "description": "Time taken for agent to respond (milliseconds)",
+            "minimum": 0,
+            "example": 1240
+          }
+        }
+      }
+    },
+    "consensus": {
+      "type": "object",
+      "description": "Aggregated consensus result",
+      "required": ["score", "average_confidence", "diagnosis", "recommended_action"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "description": "Consensus agreement score (0.0 to 1.0)",
+          "minimum": 0,
+          "maximum": 1,
+          "example": 0.83
+        },
+        "average_confidence": {
+          "type": "number",
+          "description": "Average confidence across all agents",
+          "minimum": 0,
+          "maximum": 1,
+          "example": 0.81
+        },
+        "diagnosis": {
+          "type": "string",
+          "description": "Final consensus diagnosis",
+          "example": "P0300 Random Misfire - Likely worn spark plugs"
+        },
+        "recommended_action": {
+          "type": "string",
+          "description": "Final recommended action",
+          "example": "Inspect and replace spark plugs. Check ignition coils if issue persists."
+        },
+        "safety_level": {
+          "type": "string",
+          "enum": ["critical", "important", "moderate", "minor", "informational"],
+          "description": "Safety urgency level",
+          "example": "moderate"
+        },
+        "drivability": {
+          "type": "string",
+          "enum": ["do_not_drive", "drive_to_shop_only", "safe_short_distances", "safe_to_drive", "normal"],
+          "description": "Vehicle drivability assessment",
+          "example": "safe_short_distances"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "description": "Safety gating decision",
+      "required": ["status", "reason"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["approved", "escalated", "rejected"],
+          "description": "Diagnostic decision status",
+          "example": "approved"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Explanation for decision",
+          "example": "High consensus and confidence - auto-approved"
+        },
+        "safety_flags": {
+          "type": "array",
+          "description": "Any safety flags that were triggered",
+          "items": {
+            "type": "string"
+          },
+          "example": []
+        },
+        "escalation_id": {
+          "type": "string",
+          "description": "Escalation ID if sent for human review",
+          "pattern": "^ESC-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]+$",
+          "example": "ESC-2025-12-20-0042"
+        },
+        "human_reviewer": {
+          "type": "string",
+          "description": "ID of human who reviewed (if escalated)",
+          "example": "MECH-192"
+        }
+      }
+    },
+    "user_feedback": {
+      "type": "object",
+      "description": "User feedback on diagnostic accuracy",
+      "properties": {
+        "rating": {
+          "type": "integer",
+          "description": "User rating (1-5 stars)",
+          "minimum": 1,
+          "maximum": 5,
+          "example": 5
+        },
+        "comment": {
+          "type": "string",
+          "description": "Optional user comment",
+          "example": "Spot-on diagnosis! Fixed the issue right away."
+        },
+        "issue_resolved": {
+          "type": "boolean",
+          "description": "Did the recommended fix solve the problem?",
+          "example": true
+        },
+        "actual_cause": {
+          "type": "string",
+          "description": "What was the actual root cause (if different from diagnosis)",
+          "example": null
+        }
+      }
+    },
+    "diagram": {
+      "type": "object",
+      "description": "Generated wire diagram metadata",
+      "properties": {
+        "diagram_id": {
+          "type": "string",
+          "description": "Unique diagram identifier",
+          "pattern": "^DIAG-IMG-[0-9]+$",
+          "example": "DIAG-IMG-4521"
+        },
+        "generated": {
+          "type": "boolean",
+          "description": "Was a diagram generated?",
+          "example": true
+        },
+        "image_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to diagram image",
+          "example": "https://cdn.ridewire.ai/diagrams/DIAG-IMG-4521.png"
+        },
+        "listed_on_marketplace": {
+          "type": "boolean",
+          "description": "Is diagram listed for sale?",
+          "example": true
+        },
+        "price": {
+          "type": "number",
+          "description": "Listing price (USD)",
+          "example": 9.99
+        },
+        "sales_count": {
+          "type": "integer",
+          "description": "Number of times diagram was sold",
+          "example": 12
+        }
+      }
+    },
+    "xp_earned": {
+      "type": "integer",
+      "description": "XP awarded for completing this diagnostic",
+      "minimum": 0,
+      "example": 10
+    },
+    "achievements_unlocked": {
+      "type": "array",
+      "description": "Achievements unlocked by this diagnostic",
+      "items": {
+        "type": "string",
+        "pattern": "^ACH-[A-Z0-9]+$"
+      },
+      "example": ["ACH-FIRST-DIAG"]
+    }
+  }
+}

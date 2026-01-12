@@ -57,6 +57,42 @@ RideWire AI Hub is a cutting-edge platform that orchestrates multiple AI agents 
 
 ---
 
+## 💰 Monetization Strategy
+
+### 1. **Gumroad Product Marketplace**
+
+Offer pre-built RideWire modules and diagnostic add-ons through Gumroad:
+
+- **Premium Diagnostic Packs**: Vehicle-specific diagnostic modules ($15-50 each)
+- - **AR Overlay Templates**: Pre-designed AR overlays for popular vehicle models ($10-25 each)
+  - - **API Keys & Webhooks**: Developer access for custom integrations ($29-99/month)
+    - - **Training Materials**: Tutorials for mechanics and technicians ($5-10 per course)
+     
+      - ### 2. **Stripe Payment Integration**
+     
+      - Implement Stripe for subscription management and one-time purchases:
+     
+      - - **Tiered Pricing Plans**:
+        -   - Free: Basic single-AI diagnostics (ChatGPT only)
+            -   - Pro ($29/month): Multi-AI consensus + basic AR overlays
+                -   - Enterprise ($99/month): Full AR diagnostic suite + custom integrations + API access
+                 
+                    - - **Stripe Integration Points**:
+                      -   - Subscription billing in dashboard
+                          -   - Webhook handling for payment events
+                              -   - License key generation on purchase
+                               
+                                  - ### 3. **Auto-Email System**
+                               
+                                  - Automated email campaigns for customer acquisition and retention:
+                               
+                                  - - **Welcome Series**: 5-email onboarding sequence after signup
+                                    - - **Weekly Diagnostic Tips**: Auto-email with vehicle tips and diagnostic best practices
+                                      - - **Upsell Campaigns**: Targeted emails for feature upgrades
+                                        - - **Email Service Integration**: Ready for Mailchimp, SendGrid, or AWS SES
+                                         
+                                          - ---
+
 ## 🎯 Architecture Overview
 
 ```
@@ -141,11 +177,18 @@ ridewire-ai-hub/
 │   ├── pages/
 │   ├── styles/
 │   └── index.html
+├── scripts/                     # Automation scripts
+│   ├── deploy-all.sh           # Complete deployment automation
+│   ├── coco-automation.sh      # YouTube content generation
+│   ├── gumroad-sync.sh         # Product catalog management
+│   ├── complete-all-issues.sh  # Project tracking
+│   └── test-links.js           # Route testing
 ├── server.js                    # Express backend & authentication
 ├── multiAIOrchestrator.js       # Multi-AI agent orchestration logic
 ├── encryption.js                # Client-side encryption module
 ├── schema.sql                   # PostgreSQL database schema
 ├── package.json                 # Dependencies & scripts
+├── AUTOMATION_GUIDE.md          # Complete automation documentation
 └── .env.example                 # Template for environment variables
 ```
 
@@ -169,6 +212,137 @@ ridewire-ai-hub/
 
 - `GET /api/dashboard/stats` - User statistics & query count
 - `GET /api/dashboard/pricing` - Pricing tier information
+
+---
+
+## 🌐 Frontend Routes
+
+The RideWire AI Hub uses React Router for client-side navigation. All routes are defined in `frontend/App.jsx`:
+
+### Public Routes (No Authentication Required)
+
+- **`/`** - Landing page with hero section and feature overview
+  - Displays Multi-AI platform introduction
+  - Call-to-action buttons for login and registration
+  - Redirects to `/dashboard` if user is already authenticated
+
+- **`/login`** - User login page
+  - Email and password authentication
+  - Redirects to `/dashboard` on successful login
+
+- **`/register`** - New user registration
+  - Create account with email and password
+  - Auto-login and redirect to `/dashboard` after registration
+
+- **`/pricing`** - Pricing tiers and subscription plans
+  - Free, Pro ($9.99/month), and Enterprise ($99/month) plans
+  - Feature comparison and FAQ section
+
+- **`/disclaimer`** - Legal disclaimer and warnings
+  - AI-generated content disclaimer
+  - Automotive diagnostic warnings
+  - No professional advice disclaimer
+
+- **`/terms`** - Terms of service
+  - User agreement and acceptable use policy
+  - Subscription terms and payment information
+  - Intellectual property and liability disclaimers
+
+### Protected Routes (Authentication Required)
+
+- **`/dashboard`** - Main user dashboard
+  - Usage statistics and account overview
+  - Quick access to chat and pricing
+  - Protected: Redirects to `/login` if not authenticated
+
+- **`/chat`** - Multi-AI consensus chat interface
+  - Real-time chat with ChatGPT, Claude, and Gemini
+  - Encrypted message storage
+  - Consensus results display
+  - Protected: Redirects to `/login` if not authenticated
+
+### Error Handling
+
+- **`*`** (404 Catch-all) - Page not found
+  - User-friendly 404 error page
+  - Navigation options to return home or start chatting
+  - Matches any undefined route
+
+### Testing Routes
+
+To test all routes are working correctly:
+
+```bash
+# Run the automated link testing script
+npm run test-links
+```
+
+Or manually visit each route:
+- http://localhost:3000/
+- http://localhost:3000/login
+- http://localhost:3000/register
+- http://localhost:3000/dashboard
+- http://localhost:3000/chat
+- http://localhost:3000/pricing
+- http://localhost:3000/disclaimer
+- http://localhost:3000/terms
+- http://localhost:3000/nonexistent-page (tests 404)
+
+---
+
+## 🤖 Automation & Deployment
+
+RideWire AI Hub includes comprehensive automation scripts for streamlined deployment, content generation, and product management.
+
+### Available Automation Scripts
+
+1. **deploy-all.sh** - Complete deployment automation
+   - Environment validation and security checks
+   - Dependency installation and building
+   - Database initialization
+   - Automated testing and deployment
+   
+2. **coco-automation.sh** - YouTube content generation
+   - AI-powered video topic and script generation
+   - Scheduled uploads (Mon/Wed/Fri at 9am)
+   - Revenue tracking ($500/month target by week 4)
+   - Cost monitoring ($66-76/month)
+
+3. **gumroad-sync.sh** - Product catalog management
+   - 34-product catalog creation
+   - Pricing optimization
+   - Sales reporting
+   - Revenue projections ($27K-$161K Year 1)
+
+4. **complete-all-issues.sh** - Project tracking
+   - Issue and PR status reporting
+   - Completion checklist generation
+   - Progress monitoring
+
+### Quick Start with Automation
+
+```bash
+# Deploy application (dry run first)
+./scripts/deploy-all.sh --dry-run
+./scripts/deploy-all.sh
+
+# Generate marketing content
+./scripts/coco-automation.sh generate
+
+# Sync products to Gumroad
+./scripts/gumroad-sync.sh sync
+
+# Check project status
+./scripts/complete-all-issues.sh status
+```
+
+### Full Documentation
+
+For complete automation documentation, see **[AUTOMATION_GUIDE.md](AUTOMATION_GUIDE.md)** which includes:
+- Detailed usage instructions
+- Integration examples
+- Troubleshooting guide
+- Best practices
 
 ---
 
@@ -270,25 +444,53 @@ console.log('User diagnostics:', messages);
 
 ## 🎨 Frontend Polish Checklist
 
-- [ ] Hero section with finished product image and CTA buttons
-- [ ] Dashboard landing page with quick-start wizard
-- [ ] Chat interface with AI agent badges and response timing
-- [ ] Pricing page with animated tier comparison
-- [ ] User profile page with API key management
-- [ ] Query history with advanced filtering
+- [x] Hero section with finished product image and CTA buttons *(Completed: Multi-AI + AR vision)*
+- [x] Dashboard landing page with quick-start wizard *(Completed: React dashboard live)*
+- [x] Chat interface with AI agent badges and response timing *(Completed: Multi-AI orchestrator)*
+- [x] Pricing page with animated tier comparison *(Completed: Tier system implemented)*
+- [ ] User profile page with API key management *(In progress: Authentication complete)*
+- [ ] Query history with advanced filtering *(In progress: History endpoint live)*
 - [ ] Mobile app responsive design (React Native roadmap)
 - [ ] Dark mode toggle
 - [ ] Accessibility audit (WCAG 2.1 AA)
 
 ---
 
+## 💳 Coin App Payment Integration
+
+**Status**: ✅ Multi-AI Consensus Review Complete
+
+RideWire AI Hub includes a comprehensive payment integration strategy for the **RideWire Oasis Presale Platform** (Operation Godspeed). The multi-AI consensus team (ChatGPT, Claude, Gemini) has evaluated the technical architecture, security compliance, and implementation feasibility.
+
+### Quick Links
+- **[Multi-AI Consensus Review](COIN_APP_MULTI_AI_CONSENSUS_REVIEW.md)** (Full 23-page analysis)
+- **[Executive Summary](EXECUTIVE_SUMMARY.md)** (7-page quick reference)
+- **[Decision Card](DECISION_CARD.md)** (1-page critical info)
+- **[Payment Architecture](docs/PAYMENT_INTEGRATION_ARCHITECTURE.md)** (Technical specs)
+- **[Implementation Timeline](docs/IMPLEMENTATION_TIMELINE.md)** (Phased roadmap)
+- **[Database Schema](docs/payment_schema.sql)** (Payment tables)
+
+### Consensus Decision
+**🟡 CONDITIONAL GO** (78% confidence) - Approved for Phase 1 MVP (Stripe-only presale)
+
+**Phase 1** (4-8 hours): Stripe payment processing for avatar outfit presale ($5K-$15K target)  
+**Phase 2** (2 weeks): Multi-AI fraud detection integration  
+**Phase 3** (4-6 weeks): Blockchain payments (Polygon + USDC) + NFT minting  
+
+See [COIN_APP_MULTI_AI_CONSENSUS_REVIEW.md](COIN_APP_MULTI_AI_CONSENSUS_REVIEW.md) for complete analysis.
+
+---
+
 ## 🔮 Roadmap
 
-- [ ] **Finished Product Image**: Multi-AI + AR + mechanic + vehicle render
-- [ ] **Landing Page Hero**: Full-width hero with CTA and feature callouts
-- [ ] **AR.js Integration**: Vehicle diagnostics with AR overlays
+- [x] **Multi-AI Consensus Engine**: 3 AI agents (ChatGPT, Claude, Gemini) working in parallel ✅
+- [x] **Safety Gating System**: 70% threshold with auto-approve/escalate/reject ✅
+- [x] **Game Engine**: XP, levels, achievements, leaderboards ✅
+- [x] **E-Commerce Automation**: Auto-listing, smart pricing, Stripe payments ✅
+- [x] **Gumroad Integration**: API code complete, ready to deploy ✅
+- [ ] **AR.js Integration**: Vehicle diagnostics with AR overlays *(Next: Q1 2026)*
 - [ ] **Real-time Collaboration**: Multiple users debugging together
-- [ ] **Advanced Conflict Resolution**: Weighted voting by AI confidence
+- [ ] **Advanced Conflict Resolution**: Weighted voting by AI confidence *(Implemented: Jaccard similarity)*
 - [ ] **5+ AI Providers**: Support for more specialized models
 - [ ] **Mobile App**: React Native for iOS/Android
 - [ ] **WebSocket Updates**: Live query streaming
@@ -327,7 +529,24 @@ The RideWire AI Hub is operating under a **30-Day Go-To-Market Blitz** powered b
 
 ### Key Strategic Documents
 
+#### Executive Leadership
+- **[EXECUTIVE-ACTION-PLAN.md](EXECUTIVE-ACTION-PLAN.md)** - 🚀 **MASTER PLAN** - Complete action plan consolidating all immediate priorities, technical enhancements, marketing initiatives, and investor relations milestones
 - **[STRATEGY-EXECUTION-PLAN.md](STRATEGY-EXECUTION-PLAN.md)** - Master execution blueprint detailing all 4 Chain Prompts (#7-#10) with phase-by-phase timelines, deliverables, and success metrics
+- **[NEXT-ACTIONS.md](NEXT-ACTIONS.md)** - Day-by-day tactical execution roadmap with priority assignments
+
+#### Technical Documentation
+- **[Game Engine Integration Architecture](docs/architecture/GAME-ENGINE-INTEGRATION.md)** - Complete system architecture for multi-AI consensus, AR overlays, gamification, and revenue tracking
+- **[Safety Gating Runbook](docs/safety/SAFETY-GATING-RUNBOOK.md)** - Multi-agent safety framework with pass/fail criteria and liability protection
+- **[JSON Schemas](schemas/game-engine/)** - Data schemas for game state, diagnostic events, AR overlays, and revenue tracking
+
+#### Marketing & Growth
+- **[Influencer Campaign Tracker](docs/INFLUENCER-CAMPAIGN-TRACKER.md)** - Complete influencer outreach strategy with templates, automation workflows, and ROI tracking
+
+#### Investor Resources
+- **[Execution Summary & Launch Checklist](docs/strategy/EXECUTION-SUMMARY-INVESTOR-LAUNCH-CHECKLIST.md)** - 12 strategic documents delivered for investor readiness
+- **[Investor Data Room Index](docs/strategy/INVESTOR-DATA-ROOM-INDEX.md)** - Master index of all due diligence materials
+
+#### GitHub Tracking
 - **[GitHub Issues #7-#10](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues)** - Individual Chain Prompt initiatives tracked and linked
 - **[GitHub Project Board](https://github.com/users/STEPHENIESGEM/projects/2)** - "30-Day GTM Blitz: Investor Acquisition & Launch Strategy" - Real-time tracking
 
@@ -352,7 +571,18 @@ This initiative is powered by specialized AI agents with distinct roles:
 
 ---
 
-## 📞 Support
+## 📞 Contact & Support
+
+### Email Contacts
+
+- **General Inquiries**: hello@stepheniesgem.io
+- **Technical Support**: support@stepheniesgem.io
+- **AI Hub Questions**: aihub@stepheniesgem.io
+- **Investor Relations**: investors@stepheniesgem.io
+- **Media Inquiries**: press@stepheniesgem.io
+- **Founder**: coco@stepheniesgem.io
+
+### GitHub Support
 
 Have questions? Open an [Issue](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues) on GitHub.
 

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideWire | NOVA - AI Roundtable That Solves Wicked Problems</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #1a202c; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 20px; text-align: center; }
+        .header h1 { font-size: 3.5em; margin-bottom: 20px; font-weight: 800; }
+        .header .tagline { font-size: 1.8em; margin-bottom: 40px; opacity: 0.95; }
+        .nova-intro { font-size: 2.2em; margin-top: 30px; margin-bottom: 20px; font-weight: 600; }
+        .subtitle { font-size: 1.3em; margin-bottom: 50px; opacity: 0.9; }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 18px 40px; font-size: 1.1em; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s; display: inline-block; }
+        .btn-primary { background: white; color: #667eea; border: 3px solid white; }
+        .btn-secondary { background: transparent; color: white; border: 3px solid white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .section { margin-bottom: 80px; }
+        .section-title { font-size: 2.5em; margin-bottom: 30px; text-align: center; color: #667eea; font-weight: 700; }
+        .section-content { font-size: 1.2em; line-height: 1.8; color: #4a5568; }
+        .ai-team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .ai-card { background: #f7fafc; padding: 30px; border-radius: 12px; border-left: 5px solid #667eea; transition: transform 0.2s; }
+        .ai-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); }
+        .ai-card h3 { font-size: 1.5em; margin-bottom: 15px; color: #667eea; }
+        .ai-card .role { font-weight: 600; color: #2d3748; margin-bottom: 10px; }
+        .ai-card .description { color: #4a5568; line-height: 1.6; }
+        .process { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 20px; margin: 80px 0; }
+        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 50px; }
+        .step { text-align: center; }
+        .step-number { font-size: 3em; font-weight: 800; opacity: 0.3; margin-bottom: 10px; }
+        .step h3 { font-size: 1.4em; margin-bottom: 15px; }
+        .pricing { background: #f7fafc; padding: 80px 20px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+        .price-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s; }
+        .price-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3); }
+        .price-card.featured { border: 3px solid #667eea; transform: scale(1.05); }
+        .price-card h3 { font-size: 1.8em; margin-bottom: 20px; color: #667eea; }
+        .price { font-size: 3em; font-weight: 800; color: #2d3748; margin-bottom: 10px; }
+        .price-card .features { list-style: none; margin: 30px 0; text-align: left; }
+        .price-card .features li { padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+        .price-card .features li:before { content: "✓ "; color: #667eea; font-weight: bold; margin-right: 10px; }
+        .footer { background: #1a202c; color: white; padding: 60px 20px; text-align: center; }
+        .footer h3 { font-size: 2em; margin-bottom: 20px; }
+        .footer-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; flex-wrap: wrap; }
+        .footer-links a { color: white; text-decoration: none; font-size: 1.1em; transition: color 0.2s; }
+        .footer-links a:hover { color: #667eea; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; font-size: 0.9em; margin: 10px 5px; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .header .tagline { font-size: 1.2em; }
+            .nova-intro { font-size: 1.5em; }
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RIDEWIRE.TECH</h1>
+        <div class="tagline">Where Wicked Problems Meet Their Match</div>
+        <div class="nova-intro">Introducing NOVA</div>
+        <div class="subtitle">The AI Roundtable That Turns "Impossible" Into "Done"</div>
+        <div class="subtitle">5 AI Models. 1 Mission. Your Problem Solved.</div>
+        <div class="cta-buttons">
+            <a href="mailto:hello@ridewire.tech?subject=Get%20Started%20with%20NOVA&body=Project%20Name:%0D%0AProject%20Type:%0D%0ATimeline:%0D%0ADescription:" class="btn btn-primary">Get Your Solution - $10,000</a>
+            <a href="mailto:hello@ridewire.tech?subject=Request%20Samples" class="btn btn-secondary">Request Samples</a>
+        </div>
+        <div style="margin-top: 40px;">
+            <span class="badge">A RideWire Production</span>
+            <span class="badge">Powered by GitHub Copilot</span>
+            <span class="badge">Built on AI Hub Technology</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">The Problem With Single AIs</h2>
+            <div class="section-content" style="text-align: center;">
+                <p><strong>One AI sees one angle. Your problem has five angles.</strong></p>
+                <p style="margin-top: 20px;">ChatGPT is great at writing. But can it analyze markets? Model scenarios? Verify facts? Synthesize breakthrough strategy?</p>
+                <p style="margin-top: 20px; font-size: 1.3em; color: #667eea;"><strong>No. You need a TEAM.</strong></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Meet NOVA: Your AI Boardroom</h2>
+            <div class="section-content" style="text-align: center; margin-bottom: 40px;">
+                <p>When you hire NOVA, you get 5 AI specialists working simultaneously:</p>
+            </div>
+            
+            <div class="ai-team">
+                <div class="ai-card">
+                    <h3>🧠 CLAUDE</h3>
+                    <div class="role">Deep Research Lead</div>
+                    <div class="description">Literature review, technical analysis, comprehensive research. "What does all the data say?"</div>
+                </div>
+                <div class="ai-card">
+                    <h3>⚙️ GPT</h3>
+                    <div class="role">Systems Strategist</div>
+                    <div class="description">Logical frameworks, process optimization, integration. "How do all the pieces fit together?"</div>
+                </div>
+                <div class="ai-card">
+                    <h3>🔮 GEMINI</h3>
+                    <div class="role">Scenario Architect</div>
+                    <div class="description">Multimodal analysis, quantum scenario modeling. "What are the possible outcomes?"</div>
+                </div>
+                <div class="ai-card">
+                    <h3>⚡ PERPLEXITY</h3>
+                    <div class="role">Real-Time Intelligence</div>
+                    <div class="description">Current data, fact verification, trend detection. "What's happening RIGHT NOW?"</div>
+                </div>
+                <div class="ai-card">
+                    <h3>💎 SYNTHESIS AI</h3>
+                    <div class="role">Decision Director</div>
+                    <div class="description">Integrates all perspectives, resolves conflicts. "Here's what you should DO."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="process">
+        <div class="container">
+            <h2 style="font-size: 2.5em; text-align: center; margin-bottom: 20px;">48 Hours to Breakthrough</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3>You Submit</h3>
+                    <p>Fill intake form, pay $10K, we start immediately</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3>Parallel Analysis</h3>
+                    <p>5 AIs work simultaneously from different angles</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3>Expert Review</h3>
+                    <p>Human domain expert adds professional polish</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <h3>Delivery</h3>
+                    <p>Complete package delivered with 2-hour walkthrough</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Wicked Problems We Solve</h2>
+            <div class="ai-team">
+                <div class="ai-card">
+                    <h3>🪙 Token Launches</h3>
+                    <div class="role">OUR SPECIALTY</div>
+                    <div class="description">Complete whitepaper, pitch deck, tokenomics, marketing, legal. 48 hours. $10,000.</div>
+                </div>
+                <div class="ai-card">
+                    <h3>🌍 Climate Solutions</h3>
+                    <div class="role">Planetary Stewardship</div>
+                    <div class="description">Climate and environmental system design. Complex planetary challenges solved.</div>
+                </div>
+                <div class="ai-card">
+                    <h3>🏥 Healthcare Systems</h3>
+                    <div class="role">System Transformation</div>
+                    <div class="description">AI diagnosis, workflow optimization. Proven error reduction strategies.</div>
+                </div>
+                <div class="ai-card">
+                    <h3>⛓️ Supply Chain</h3>
+                    <div class="role">Resilience Engineering</div>
+                    <div class="description">Disruption prediction and prevention. Advanced routing optimization.</div>
+                </div>
+                <div class="ai-card">
+                    <h3>🎓 Education</h3>
+                    <div class="role">Learning Innovation</div>
+                    <div class="description">AI tutoring, personalized learning. Measurable student improvement.</div>
+                </div>
+                <div class="ai-card">
+                    <h3>🏭 Your Problem</h3>
+                    <div class="role">Custom Solutions</div>
+                    <div class="description">Tell us your wicked problem. We'll solve it.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing">
+        <h2 class="section-title" style="color: #2d3748;">Transparent Pricing</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Standard</h3>
+                <div class="price">$10K</div>
+                <p>48-Hour Delivery</p>
+                <ul class="features">
+                    <li>Complete solution package</li>
+                    <li>30 days unlimited revisions</li>
+                    <li>2-hour delivery call</li>
+                    <li>Email support</li>
+                </ul>
+                <a href="mailto:hello@ridewire.tech?subject=Standard%20Package" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Get Started</a>
+            </div>
+            <div class="price-card featured">
+                <h3>Rush</h3>
+                <div class="price">$15K</div>
+                <p>24-Hour Delivery</p>
+                <ul class="features">
+                    <li>Everything in Standard</li>
+                    <li>24-hour delivery</li>
+                    <li>Priority queue</li>
+                    <li>Phone support</li>
+                </ul>
+                <a href="mailto:hello@ridewire.tech?subject=Rush%20Package" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Get Started</a>
+            </div>
+            <div class="price-card">
+                <h3>Emergency</h3>
+                <div class="price">$20K</div>
+                <p>12-Hour Delivery</p>
+                <ul class="features">
+                    <li>Everything in Rush</li>
+                    <li>12-hour delivery</li>
+                    <li>All hands on deck</li>
+                    <li>24/7 direct access</li>
+                </ul>
+                <a href="mailto:hello@ridewire.tech?subject=Emergency%20Package" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Get Started</a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px; font-size: 1.2em; color: #4a5568;">
+            <p><strong>🎁 LAUNCH SPECIAL:</strong> Special pricing for early customers (includes case study + testimonial)</p>
+            <p style="margin-top: 15px;">Payment: Stripe • Wire • Crypto • PayPal</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            <h3>RIDEWIRE.TECH</h3>
+            <p style="font-size: 1.2em; margin: 20px 0;">NOVA: A RideWire Production</p>
+            <p>Powered by GitHub Copilot & The AI Hub</p>
+            <div class="footer-links">
+                <a href="mailto:hello@ridewire.tech">hello@ridewire.tech</a>
+                <a href="https://github.com/STEPHENIESGEM/ridewire-ai-hub" target="_blank">GitHub</a>
+                <a href="https://twitter.com/RideWireTech" target="_blank">Twitter</a>
+            </div>
+            <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>© 2025 RideWire. All rights reserved.</p>
+                <p style="margin-top: 10px; opacity: 0.7;">Built by humans + AI working together.</p>
+                <p style="opacity: 0.7;">Solving wicked problems, one roundtable at a time.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

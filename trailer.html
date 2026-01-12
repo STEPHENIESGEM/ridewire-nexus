@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideWire AI Hub - The Revolution Starts Now</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .trailer-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .scene.active {
+            opacity: 1;
+        }
+
+        .title-text {
+            font-size: 6rem;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle-text {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .body-text {
+            font-size: 1.8rem;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        /* Color themes */
+        .electric-blue { color: #00D9FF; }
+        .neon-purple { color: #9D00FF; }
+        .gold { color: #FFD700; }
+        .warning-red { color: #FF3366; }
+
+        /* Background effects */
+        .bg-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(157, 0, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            animation: gridScroll 20s linear infinite;
+        }
+
+        /* AI Logos */
+        .ai-logos {
+            display: flex;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .ai-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            border: 3px solid currentColor;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .ai-logo:nth-child(1) { 
+            color: #00D9FF; 
+            animation-delay: 0s;
+        }
+        .ai-logo:nth-child(2) { 
+            color: #9D00FF; 
+            animation-delay: 0.5s;
+        }
+        .ai-logo:nth-child(3) { 
+            color: #FFD700; 
+            animation-delay: 1s;
+        }
+
+        /* Consensus meter */
+        .consensus-meter {
+            width: 600px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #00D9FF;
+        }
+
+        .consensus-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00D9FF, #9D00FF, #FFD700);
+            width: 0%;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 2rem;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        /* Stats cards */
+        .stats-container {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid currentColor;
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            padding: 1.5rem 4rem;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00D9FF, #9D00FF);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 3rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes gridScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        /* Network visualization */
+        .network-canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        /* Logo */
+        .ridewire-logo {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            background: linear-gradient(135deg, #00D9FF, #9D00FF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #00D9FF, #9D00FF, #FFD700);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Skip button */
+        .skip-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #fff;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skip-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title-text { font-size: 3rem; }
+            .subtitle-text { font-size: 1.5rem; }
+            .body-text { font-size: 1.2rem; }
+            .ai-logos { gap: 2rem; }
+            .ai-logo { width: 80px; height: 80px; font-size: 1.5rem; }
+            .consensus-meter { width: 90%; }
+            .stats-container { flex-direction: column; gap: 1.5rem; }
+            .cta-button { padding: 1rem 2rem; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="trailer-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar" id="progressBar"></div>
+
+        <!-- Skip Button -->
+        <button class="skip-button" onclick="skipToEnd()">SKIP TO END →</button>
+
+        <!-- Scene 1: Problem -->
+        <div class="scene active" id="scene1">
+            <div class="bg-particles"></div>
+            <div class="grid-overlay"></div>
+            <div class="title-text">EVERY DAY</div>
+            <div class="body-text">Mechanics waste 2 hours searching for answers</div>
+        </div>
+
+        <!-- Scene 2: Solution Intro -->
+        <div class="scene" id="scene2">
+            <div class="bg-particles"></div>
+            <div class="title-text electric-blue">UNTIL NOW</div>
+        </div>
+
+        <!-- Scene 3: RideWire Reveal -->
+        <div class="scene" id="scene3">
+            <canvas class="network-canvas" id="networkCanvas"></canvas>
+            <div class="ridewire-logo">RIDEWIRE</div>
+            <div class="subtitle-text">AI HUB</div>
+            <div class="body-text">Where three AI minds become one answer</div>
+        </div>
+
+        <!-- Scene 4: Multi-AI -->
+        <div class="scene" id="scene4">
+            <div class="bg-particles"></div>
+            <div class="title-text">3 AI ENGINES</div>
+            <div class="ai-logos">
+                <div class="ai-logo">GPT</div>
+                <div class="ai-logo">CLAUDE</div>
+                <div class="ai-logo">GEMINI</div>
+            </div>
+            <div class="subtitle-text electric-blue">ONE CONSENSUS</div>
+        </div>
+
+        <!-- Scene 5: Consensus -->
+        <div class="scene" id="scene5">
+            <div class="bg-particles"></div>
+            <div class="title-text neon-purple">CONSENSUS</div>
+            <div class="consensus-meter">
+                <div class="consensus-fill" id="consensusFill">0%</div>
+            </div>
+            <div class="subtitle-text">Reaching 95% agreement in 2 seconds</div>
+        </div>
+
+        <!-- Scene 6: Features -->
+        <div class="scene" id="scene6">
+            <div class="bg-particles"></div>
+            <div class="title-text gold">REVOLUTIONARY</div>
+            <div class="stats-container">
+                <div class="stat-card electric-blue">
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat-card neon-purple">
+                    <div class="stat-value">&lt;2s</div>
+                    <div class="stat-label">Response</div>
+                </div>
+                <div class="stat-card gold">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Available</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 7: Marketplace -->
+        <div class="scene" id="scene7">
+            <div class="bg-particles"></div>
+            <div class="title-text electric-blue">MARKETPLACE</div>
+            <div class="subtitle-text">Turn expertise into passive income</div>
+            <div class="stats-container">
+                <div class="stat-card gold">
+                    <div class="stat-value">70%</div>
+                    <div class="stat-label">Creator Earnings</div>
+                </div>
+                <div class="stat-card electric-blue">
+                    <div class="stat-value">$1M+</div>
+                    <div class="stat-label">Potential</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 8: Scale -->
+        <div class="scene" id="scene8">
+            <canvas class="network-canvas" id="scaleCanvas"></canvas>
+            <div class="title-text warning-red">$180M ARR</div>
+            <div class="subtitle-text">Target: 3 Years</div>
+            <div class="body-text">$12.5B Total Addressable Market</div>
+        </div>
+
+        <!-- Scene 9: CTA -->
+        <div class="scene" id="scene9">
+            <div class="bg-particles"></div>
+            <div class="ridewire-logo">RIDEWIRE</div>
+            <div class="title-text" style="font-size: 3rem; margin-top: 2rem;">THE REVOLUTION STARTS NOW</div>
+            <button class="cta-button" onclick="window.location.href='https://ridewire.ai'">JOIN THE REVOLUTION</button>
+            <div class="body-text" style="margin-top: 2rem; opacity: 0.6;">
+                RIDEWIRE.AI | Powered by Multi-AI Consensus
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scene management
+        const scenes = document.querySelectorAll('.scene');
+        const progressBar = document.getElementById('progressBar');
+        let currentScene = 0;
+        const sceneDuration = 5000; // 5 seconds per scene
+        const totalDuration = scenes.length * sceneDuration;
+        let startTime = Date.now();
+        let animationId;
+
+        // Switch scenes
+        function showScene(index) {
+            scenes.forEach((scene, i) => {
+                scene.classList.toggle('active', i === index);
+            });
+            
+            // Special animations for specific scenes
+            if (index === 4) {
+                // Animate consensus meter
+                setTimeout(() => {
+                    const fill = document.getElementById('consensusFill');
+                    fill.style.width = '95%';
+                    let percent = 0;
+                    const interval = setInterval(() => {
+                        percent += 5;
+                        if (percent <= 95) {
+                            fill.textContent = percent + '%';
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, 40);
+                }, 500);
+            }
+        }
+
+        // Progress animation
+        function updateProgress() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min((elapsed / totalDuration) * 100, 100);
+            progressBar.style.width = progress + '%';
+
+            // Check if should advance scene
+            const newScene = Math.floor(elapsed / sceneDuration);
+            if (newScene !== currentScene && newScene < scenes.length) {
+                currentScene = newScene;
+                showScene(currentScene);
+            }
+
+            // Continue or end
+            if (progress < 100) {
+                animationId = requestAnimationFrame(updateProgress);
+            }
+        }
+
+        // Skip to end
+        function skipToEnd() {
+            cancelAnimationFrame(animationId);
+            currentScene = scenes.length - 1;
+            showScene(currentScene);
+            progressBar.style.width = '100%';
+        }
+
+        // Network visualization
+        function drawNetwork(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const ctx = canvas.getContext('2d');
+            
+            const nodes = [];
+            const numNodes = 50;
+            
+            // Create nodes
+            for (let i = 0; i < numNodes; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Update and draw nodes
+                nodes.forEach((node, i) => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    
+                    // Bounce off edges
+                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                    
+                    // Draw node
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#00D9FF';
+                    ctx.fill();
+                    
+                    // Draw connections
+                    nodes.forEach((other, j) => {
+                        if (i === j) return;
+                        const dist = Math.hypot(node.x - other.x, node.y - other.y);
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.strokeStyle = `rgba(0, 217, 255, ${1 - dist / 150})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            showScene(0);
+            updateProgress();
+            drawNetwork('networkCanvas');
+            drawNetwork('scaleCanvas');
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            drawNetwork('networkCanvas');
+            drawNetwork('scaleCanvas');
+        });
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                // Next scene
+                if (currentScene < scenes.length - 1) {
+                    currentScene++;
+                    showScene(currentScene);
+                    startTime = Date.now() - (currentScene * sceneDuration);
+                }
+            } else if (e.key === 'ArrowLeft') {
+                // Previous scene
+                if (currentScene > 0) {
+                    currentScene--;
+                    showScene(currentScene);
+                    startTime = Date.now() - (currentScene * sceneDuration);
+                }
+            } else if (e.key === 'Escape') {
+                skipToEnd();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+name: COCO Daily Content Generation
+
+on:
+  schedule:
+    # Monday at 9:00 AM UTC (adjust timezone as needed)
+    - cron: '0 9 * * 1'
+    # Wednesday at 9:00 AM UTC
+    - cron: '0 9 * * 3'
+    # Friday at 9:00 AM UTC
+    - cron: '0 9 * * 5'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Configure environment
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          DID_API_KEY: ${{ secrets.DID_API_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
+        run: |
+          echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> .env
+          echo "ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}" >> .env
+          echo "DID_API_KEY=${DID_API_KEY}" >> .env
+          echo "YOUTUBE_CLIENT_ID=${YOUTUBE_CLIENT_ID}" >> .env
+          echo "YOUTUBE_CLIENT_SECRET=${YOUTUBE_CLIENT_SECRET}" >> .env
+          echo "YOUTUBE_CHANNEL_ID=${YOUTUBE_CHANNEL_ID}" >> .env
+      
+      - name: Get next topic from calendar
+        id: get_topic
+        run: |
+          TOPIC=$(node -e "
+          const ContentCalendar = require('./scripts/coco/content-calendar.js');
+          const calendar = new ContentCalendar();
+          calendar.getNextTopic().then(topic => {
+            if (topic) {
+              console.log(topic.title);
+              process.exit(0);
+            } else {
+              console.error('No topics available');
+              process.exit(1);
+            }
+          }).catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          ")
+          echo "topic=${TOPIC}" >> $GITHUB_OUTPUT
+      
+      - name: Generate video content
+        run: |
+          node scripts/coco/generate-content.js "${{ steps.get_topic.outputs.topic }}"
+      
+      - name: Find generated metadata file
+        id: find_metadata
+        run: |
+          # Find the most recently created metadata file
+          METADATA_FILE=$(ls -t output/coco-videos/*-metadata.json 2>/dev/null | head -n1)
+          if [ -z "$METADATA_FILE" ]; then
+            echo "Error: No metadata file found"
+            exit 1
+          fi
+          echo "metadata_file=${METADATA_FILE}" >> $GITHUB_OUTPUT
+      
+      - name: Upload to YouTube
+        run: |
+          node scripts/coco/youtube-uploader.js "${{ steps.find_metadata.outputs.metadata_file }}"
+      
+      - name: Update analytics
+        run: |
+          node scripts/coco/analytics-tracker.js --update
+      
+      - name: Commit generated content metadata
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git commit -m "Auto: COCO content generated - ${{ steps.get_topic.outputs.topic }}" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+      
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ COCO content generation failed!"
+          echo "Topic: ${{ steps.get_topic.outputs.topic }}"
+          # In production, send email/Slack notification here
+
+  health-check:
+    runs-on: ubuntu-latest
+    needs: generate-and-upload
+    if: always()
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run health check
+        run: |
+          node scripts/automation/coco-monitor.js

@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ridewire.ai/schemas/game-state.json",
+  "title": "Game State Schema",
+  "description": "Player progression, achievements, and gamification state for RideWire AI Hub",
+  "type": "object",
+  "required": ["user_id", "level", "xp", "total_xp", "achievements", "statistics", "created_at", "updated_at"],
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Unique identifier for the user",
+      "pattern": "^USER-[0-9]+$",
+      "example": "USER-5892"
+    },
+    "level": {
+      "type": "integer",
+      "description": "Current player level (1-100)",
+      "minimum": 1,
+      "maximum": 100,
+      "example": 12
+    },
+    "xp": {
+      "type": "integer",
+      "description": "Current XP progress toward next level",
+      "minimum": 0,
+      "example": 2340
+    },
+    "total_xp": {
+      "type": "integer",
+      "description": "Lifetime total XP earned",
+      "minimum": 0,
+      "example": 145820
+    },
+    "xp_to_next_level": {
+      "type": "integer",
+      "description": "XP required to reach next level",
+      "minimum": 0,
+      "example": 3000
+    },
+    "achievements": {
+      "type": "array",
+      "description": "List of unlocked achievements",
+      "items": {
+        "type": "object",
+        "required": ["achievement_id", "name", "unlocked_at"],
+        "properties": {
+          "achievement_id": {
+            "type": "string",
+            "description": "Unique achievement identifier",
+            "pattern": "^ACH-[A-Z0-9]+$",
+            "example": "ACH-FIRST-DIAG"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable achievement name",
+            "example": "First Diagnosis"
+          },
+          "description": {
+            "type": "string",
+            "description": "Achievement description",
+            "example": "Complete your first diagnostic query"
+          },
+          "rarity": {
+            "type": "string",
+            "enum": ["common", "uncommon", "rare", "epic", "legendary"],
+            "description": "Achievement rarity tier",
+            "example": "common"
+          },
+          "xp_reward": {
+            "type": "integer",
+            "description": "XP awarded for unlocking this achievement",
+            "minimum": 0,
+            "example": 100
+          },
+          "unlocked_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when achievement was unlocked",
+            "example": "2025-12-20T14:32:18Z"
+          }
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Player gameplay statistics",
+      "required": ["diagnostics_run", "diagrams_generated", "diagrams_sold", "total_revenue", "consensus_score_avg"],
+      "properties": {
+        "diagnostics_run": {
+          "type": "integer",
+          "description": "Total number of diagnostic queries completed",
+          "minimum": 0,
+          "example": 347
+        },
+        "diagrams_generated": {
+          "type": "integer",
+          "description": "Total wire diagrams generated",
+          "minimum": 0,
+          "example": 89
+        },
+        "diagrams_sold": {
+          "type": "integer",
+          "description": "Total diagrams sold through marketplace",
+          "minimum": 0,
+          "example": 42
+        },
+        "total_revenue": {
+          "type": "number",
+          "description": "Lifetime revenue earned (USD)",
+          "minimum": 0,
+          "example": 987.65
+        },
+        "ar_scans": {
+          "type": "integer",
+          "description": "Number of AR overlay scans performed",
+          "minimum": 0,
+          "example": 156
+        },
+        "consensus_score_avg": {
+          "type": "number",
+          "description": "Average AI consensus score across all diagnostics",
+          "minimum": 0,
+          "maximum": 1,
+          "example": 0.83
+        },
+        "accuracy_rate": {
+          "type": "number",
+          "description": "Percentage of diagnostics confirmed accurate by users",
+          "minimum": 0,
+          "maximum": 1,
+          "example": 0.92
+        },
+        "streak_days": {
+          "type": "integer",
+          "description": "Current daily login streak",
+          "minimum": 0,
+          "example": 7
+        },
+        "longest_streak": {
+          "type": "integer",
+          "description": "Longest daily login streak ever",
+          "minimum": 0,
+          "example": 23
+        }
+      }
+    },
+    "leaderboard_rank": {
+      "type": "object",
+      "description": "User's ranking on various leaderboards",
+      "properties": {
+        "global_rank": {
+          "type": "integer",
+          "description": "Overall global ranking",
+          "minimum": 1,
+          "example": 142
+        },
+        "revenue_rank": {
+          "type": "integer",
+          "description": "Ranking by total revenue earned",
+          "minimum": 1,
+          "example": 89
+        },
+        "diagnostics_rank": {
+          "type": "integer",
+          "description": "Ranking by diagnostics completed",
+          "minimum": 1,
+          "example": 203
+        }
+      }
+    },
+    "badges": {
+      "type": "array",
+      "description": "Special badges earned by the user",
+      "items": {
+        "type": "string",
+        "enum": ["early_adopter", "beta_tester", "founding_member", "power_user", "top_earner", "community_champion"],
+        "example": "early_adopter"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when game state was created",
+      "example": "2025-11-15T08:12:00Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when game state was last updated",
+      "example": "2025-12-20T14:32:18Z"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import apiClient from '../utils/apiClient';
 import EncryptionModule from '../../encryption';
+import LegalDisclaimer from './LegalDisclaimer';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -8,6 +9,8 @@ const Chat = () => {
   const [responses, setResponses] = useState({});
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(null);
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
+  const [checkingDisclaimer, setCheckingDisclaimer] = useState(true);
   const messagesEndRef = useRef(null);
   const encryptionModule = useRef(new EncryptionModule());
 
@@ -16,7 +19,34 @@ const Chat = () => {
     encryptionModule.current.init().then(() => {
       setSessionId(Math.random().toString(36).substr(2, 9));
     });
+    
+    // Check if user has already accepted disclaimer
+    checkDisclaimerStatus();
   }, []);
+
+  const checkDisclaimerStatus = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+      
+      const response = await axios.get(
+        `${apiUrl}/api/legal/check-disclaimer/diagnostic_disclaimer`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      if (response.data.accepted) {
+        setDisclaimerAccepted(true);
+      }
+    } catch (error) {
+      console.error('Error checking disclaimer status:', error);
+    } finally {
+      setCheckingDisclaimer(false);
+    }
+  };
+
+  const handleDisclaimerAccept = () => {
+    setDisclaimerAccepted(true);
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -41,25 +71,18 @@ const Chat = () => {
     setInput('');
 
     try {
-      const token = localStorage.getItem('token');
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
-
       // Encrypt the message
       const encrypted = encryptionModule.current.encryptMessage(input, sessionId);
 
       // Send to backend for multi-AI processing
-      const response = await axios.post(`${apiUrl}/messages`, {
+      const response = await apiClient.post('/messages', {
         ...encrypted,
         session_id: sessionId,
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (response.status === 201) {
         // Fetch responses from all AI agents
-        const aiResponse = await axios.get(`${apiUrl}/messages/${sessionId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const aiResponse = await apiClient.get(`/messages/${sessionId}`);
 
         setResponses({
           chatgpt: 'ChatGPT analyzing your query...',
@@ -81,11 +104,31 @@ const Chat = () => {
     setLoading(false);
   };
 
+  // Show loading state while checking disclaimer
+  if (checkingDisclaimer) {
+    return (
+      <div className="chat-container">
+        <div style={{ textAlign: 'center', padding: '50px' }}>
+          <h2>Loading...</h2>
+          <p>Checking requirements...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show legal disclaimer if not accepted
+  if (!disclaimerAccepted) {
+    return <LegalDisclaimer onAccept={handleDisclaimerAccept} />;
+  }
+
   return (
     <div className="chat-container">
       <header className="chat-header">
         <h2>🔄 Multi-AI Consensus Chat</h2>
         <p>Session: {sessionId}</p>
+        <p style={{ fontSize: '12px', color: '#ff9800', marginTop: '5px' }}>
+          ⚠️ AI guidance only - Always consult licensed professionals
+        </p>
       </header>
 
       <div className="chat-main">

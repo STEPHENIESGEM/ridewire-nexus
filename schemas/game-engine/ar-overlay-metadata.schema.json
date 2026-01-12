@@ -1,0 +1,346 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ridewire.ai/schemas/ar-overlay-metadata.json",
+  "title": "AR Overlay Metadata Schema",
+  "description": "3D component positioning and AR rendering instructions for vehicle diagnostic overlays",
+  "type": "object",
+  "required": ["overlay_id", "vehicle", "components", "diagnostic_context", "created_at"],
+  "properties": {
+    "overlay_id": {
+      "type": "string",
+      "description": "Unique AR overlay identifier",
+      "pattern": "^AR-OVR-[0-9]+$",
+      "example": "AR-OVR-8234"
+    },
+    "vehicle": {
+      "type": "object",
+      "description": "Vehicle this overlay is for",
+      "required": ["make", "model", "year"],
+      "properties": {
+        "make": {
+          "type": "string",
+          "example": "Harley-Davidson"
+        },
+        "model": {
+          "type": "string",
+          "example": "Street 750"
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1980,
+          "maximum": 2030,
+          "example": 2022
+        },
+        "engine_type": {
+          "type": "string",
+          "description": "Engine configuration",
+          "example": "Revolution X V-Twin 750cc"
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "description": "List of vehicle components with AR positioning",
+      "items": {
+        "type": "object",
+        "required": ["component_id", "name", "position", "model_url"],
+        "properties": {
+          "component_id": {
+            "type": "string",
+            "description": "Unique component identifier",
+            "pattern": "^COMP-[A-Z0-9]+$",
+            "example": "COMP-SPARK-PLUG-1"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable component name",
+            "example": "Front Spark Plug"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["ignition", "fuel", "exhaust", "cooling", "electrical", "transmission", "brakes", "suspension", "other"],
+            "example": "ignition"
+          },
+          "position": {
+            "type": "object",
+            "description": "3D position in vehicle coordinate system",
+            "required": ["x", "y", "z"],
+            "properties": {
+              "x": {
+                "type": "number",
+                "description": "X coordinate (meters, vehicle center origin)",
+                "example": 0.15
+              },
+              "y": {
+                "type": "number",
+                "description": "Y coordinate (meters, vertical)",
+                "example": 0.42
+              },
+              "z": {
+                "type": "number",
+                "description": "Z coordinate (meters, front/back)",
+                "example": -0.08
+              }
+            }
+          },
+          "rotation": {
+            "type": "object",
+            "description": "3D rotation (Euler angles in degrees)",
+            "properties": {
+              "pitch": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "example": 15
+              },
+              "yaw": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "example": -5
+              },
+              "roll": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "example": 0
+              }
+            }
+          },
+          "bounding_box": {
+            "type": "object",
+            "description": "Component bounding box for collision detection",
+            "properties": {
+              "width": {
+                "type": "number",
+                "description": "Width in meters",
+                "example": 0.03
+              },
+              "height": {
+                "type": "number",
+                "description": "Height in meters",
+                "example": 0.08
+              },
+              "depth": {
+                "type": "number",
+                "description": "Depth in meters",
+                "example": 0.03
+              }
+            }
+          },
+          "model_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to 3D model file (GLTF/GLB format)",
+            "example": "https://cdn.ridewire.ai/models/spark-plug-ngk-v1.glb"
+          },
+          "texture_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Optional texture file URL",
+            "example": "https://cdn.ridewire.ai/textures/spark-plug-diffuse.png"
+          },
+          "label": {
+            "type": "object",
+            "description": "AR label display settings",
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Label text",
+                "example": "Spark Plug (Cylinder 1)"
+              },
+              "offset_y": {
+                "type": "number",
+                "description": "Vertical offset from component (meters)",
+                "example": 0.1
+              },
+              "font_size": {
+                "type": "integer",
+                "description": "Font size in pixels",
+                "example": 18
+              },
+              "color": {
+                "type": "string",
+                "description": "Label color (hex)",
+                "pattern": "^#[0-9A-Fa-f]{6}$",
+                "example": "#00FFFF"
+              }
+            }
+          },
+          "highlight": {
+            "type": "object",
+            "description": "Component highlight settings for diagnostics",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "description": "Is this component highlighted?",
+                "example": true
+              },
+              "color": {
+                "type": "string",
+                "description": "Highlight color (hex)",
+                "pattern": "^#[0-9A-Fa-f]{6}$",
+                "example": "#FF0000"
+              },
+              "intensity": {
+                "type": "number",
+                "description": "Highlight intensity (0.0 to 1.0)",
+                "minimum": 0,
+                "maximum": 1,
+                "example": 0.8
+              },
+              "animation": {
+                "type": "string",
+                "enum": ["none", "pulse", "glow", "blink"],
+                "description": "Highlight animation type",
+                "example": "pulse"
+              }
+            }
+          },
+          "annotations": {
+            "type": "array",
+            "description": "Additional annotations for this component",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["info", "warning", "error", "success"],
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Replace immediately - worn electrode detected"
+                },
+                "icon": {
+                  "type": "string",
+                  "description": "Icon identifier",
+                  "example": "warning-triangle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "diagnostic_context": {
+      "type": "object",
+      "description": "Associated diagnostic information",
+      "properties": {
+        "diagnostic_id": {
+          "type": "string",
+          "description": "Related diagnostic event ID",
+          "pattern": "^DIAG-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]+$",
+          "example": "DIAG-2025-12-20-10234"
+        },
+        "p_code": {
+          "type": "string",
+          "description": "OBDII code this overlay is for",
+          "pattern": "^P[0-3][0-9A-F]{3}$",
+          "example": "P0300"
+        },
+        "diagnosis": {
+          "type": "string",
+          "description": "Short diagnosis summary",
+          "example": "Random Misfire - Check spark plugs"
+        },
+        "highlighted_components": {
+          "type": "array",
+          "description": "Component IDs that should be highlighted",
+          "items": {
+            "type": "string",
+            "pattern": "^COMP-[A-Z0-9]+$"
+          },
+          "example": ["COMP-SPARK-PLUG-1", "COMP-SPARK-PLUG-2"]
+        }
+      }
+    },
+    "camera_tracking": {
+      "type": "object",
+      "description": "AR tracking and calibration settings",
+      "properties": {
+        "tracking_mode": {
+          "type": "string",
+          "enum": ["marker_based", "markerless", "slam"],
+          "description": "AR tracking method",
+          "example": "markerless"
+        },
+        "marker_id": {
+          "type": "string",
+          "description": "Marker ID if using marker-based tracking",
+          "example": "QR-HD-STREET-750"
+        },
+        "reference_points": {
+          "type": "array",
+          "description": "Reference points for SLAM/markerless tracking",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Engine block corner"
+              },
+              "position": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number",
+                    "example": 0.0
+                  },
+                  "y": {
+                    "type": "number",
+                    "example": 0.0
+                  },
+                  "z": {
+                    "type": "number",
+                    "example": 0.0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rendering": {
+      "type": "object",
+      "description": "AR rendering settings",
+      "properties": {
+        "occlusion": {
+          "type": "boolean",
+          "description": "Enable depth-based occlusion?",
+          "example": true
+        },
+        "shadows": {
+          "type": "boolean",
+          "description": "Render shadows?",
+          "example": false
+        },
+        "lighting": {
+          "type": "string",
+          "enum": ["ambient", "directional", "mixed"],
+          "description": "Lighting mode",
+          "example": "mixed"
+        },
+        "quality": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "ultra"],
+          "description": "Rendering quality preset",
+          "example": "high"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When overlay was created",
+      "example": "2025-12-20T14:32:18Z"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When overlay was last updated",
+      "example": "2025-12-20T15:10:42Z"
+    }
+  }
+}
