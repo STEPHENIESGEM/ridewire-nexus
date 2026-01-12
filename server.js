@@ -106,6 +106,63 @@ app.post('/messages', async (req, res) => {
   }
 });
 
+// Legal disclaimer acceptance endpoint
+// TODO: Add rate limiting to prevent abuse (e.g., using express-rate-limit)
+app.post('/api/legal/accept-disclaimer', async (req, res) => {
+  try {
+    const { agreementType, timestamp } = req.body;
+    const token = req.headers.authorization?.split(' ')[1];
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const ipAddress = req.ip || req.connection.remoteAddress;
+    const userAgent = req.headers['user-agent'];
+    
+    // Check if user has already accepted this disclaimer
+    const { rows: existing } = await pool.query(
+      'SELECT * FROM user_agreements WHERE user_id = $1 AND agreement_type = $2',
+      [decoded.id, agreementType]
+    );
+    
+    if (existing.length === 0) {
+      // Record new acceptance
+      await pool.query(
+        'INSERT INTO user_agreements (user_id, agreement_type, accepted_at, ip_address, user_agent) VALUES ($1, $2, NOW(), $3, $4)',
+        [decoded.id, agreementType, ipAddress, userAgent]
+      );
+    }
+    
+    res.status(201).json({ success: true, message: 'Disclaimer accepted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Check if user has accepted disclaimer
+// TODO: Add rate limiting to prevent abuse (e.g., using express-rate-limit)
+app.get('/api/legal/check-disclaimer/:agreementType', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const { rows } = await pool.query(
+      'SELECT * FROM user_agreements WHERE user_id = $1 AND agreement_type = $2',
+      [decoded.id, req.params.agreementType]
+    );
+    
+    res.json({ accepted: rows.length > 0, acceptance: rows[0] || null });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Retrieve encrypted messages
 app.get('/messages/:session_id', async (req, res) => {
   try {

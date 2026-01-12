@@ -546,7 +546,18 @@ This initiative is powered by specialized AI agents with distinct roles:
 
 ---
 
-## 📞 Support
+## 📞 Contact & Support
+
+### Email Contacts
+
+- **General Inquiries**: hello@stepheniesgem.io
+- **Technical Support**: support@stepheniesgem.io
+- **AI Hub Questions**: aihub@stepheniesgem.io
+- **Investor Relations**: investors@stepheniesgem.io
+- **Media Inquiries**: press@stepheniesgem.io
+- **Founder**: coco@stepheniesgem.io
+
+### GitHub Support
 
 Have questions? Open an [Issue](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues) on GitHub or check our [Wiki](https://github.com/STEPHENIESGEM/ridewire-ai-hub/wiki).
 
