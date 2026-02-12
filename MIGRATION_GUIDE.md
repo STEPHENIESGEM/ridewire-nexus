@@ -577,11 +577,16 @@ If you want to change when the tiebreaker is called:
 ```javascript
 // In server.js, after multiAI initialization:
 if (useOpenSourceLLMs) {
-  multiAI.consensusAnalyzer.setAgreementThreshold(0.80); // Stricter (80%)
+  multiAI.setConsensusThreshold(0.80); // Stricter (80% agreement needed)
   // or
-  multiAI.consensusAnalyzer.setAgreementThreshold(0.70); // More lenient (70%)
+  multiAI.setConsensusThreshold(0.70); // More lenient (70% agreement needed)
 }
 ```
+
+**Effect:**
+- **Higher threshold (0.80-0.90):** More tiebreaker calls, higher accuracy, higher cost
+- **Lower threshold (0.60-0.70):** Fewer tiebreaker calls, lower cost, slightly lower accuracy
+- **Default (0.75):** Balanced - 90% consensus, 10% tiebreaker
 
 ### Adding More Providers
 

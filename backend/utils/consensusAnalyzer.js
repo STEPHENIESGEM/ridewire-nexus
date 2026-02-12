@@ -119,13 +119,15 @@ class ConsensusAnalyzer {
   calculateKeywordOverlap(elements) {
     if (elements.length < 2) return 1;
     
+    const DEFAULT_KEYWORD_SCORE = 0.5; // Neutral score when no keywords found
+    
     // Collect all keywords from all responses
     const allKeywords = new Set();
     elements.forEach(e => {
       [...e.components, ...e.symptoms, ...e.actions, ...e.obdCodes].forEach(k => allKeywords.add(k));
     });
     
-    if (allKeywords.size === 0) return 0.5; // No keywords found
+    if (allKeywords.size === 0) return DEFAULT_KEYWORD_SCORE; // No keywords found
     
     // Count how many keywords appear in multiple responses
     let sharedCount = 0;
@@ -257,8 +259,8 @@ class ConsensusAnalyzer {
     
     // Return items that appear in at least 2 responses
     return Object.entries(itemCounts)
-      .filter(([_, count]) => count >= 2)
-      .map(([item, _]) => item);
+      .filter(([itemName, count]) => count >= 2)
+      .map(([itemName, count]) => itemName);
   }
 
   /**

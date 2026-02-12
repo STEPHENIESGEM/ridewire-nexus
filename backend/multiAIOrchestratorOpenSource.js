@@ -13,8 +13,8 @@ const {
   getTiebreakerProvider, 
   calculateCost,
   getProviderStats 
-} = require('../config/modelProviders');
-const ConsensusAnalyzer = require('../utils/consensusAnalyzer');
+} = require('./config/modelProviders');
+const ConsensusAnalyzer = require('./utils/consensusAnalyzer');
 
 class MultiAIOrchestratorOpenSource {
   constructor() {
@@ -301,6 +301,26 @@ class MultiAIOrchestratorOpenSource {
       totalCost: 0,
       averageResponseTime: 0
     };
+  }
+
+  /**
+   * Set the consensus agreement threshold
+   * @param {number} threshold - Agreement threshold (0-1), default 0.75
+   */
+  setConsensusThreshold(threshold) {
+    if (threshold < 0 || threshold > 1) {
+      throw new Error('Threshold must be between 0 and 1');
+    }
+    this.consensusAnalyzer.setAgreementThreshold(threshold);
+    console.log(`✓ Consensus threshold updated to ${threshold * 100}%`);
+  }
+
+  /**
+   * Get current consensus threshold
+   * @returns {number} Current threshold
+   */
+  getConsensusThreshold() {
+    return this.consensusAnalyzer.agreementThreshold;
   }
 
   /**

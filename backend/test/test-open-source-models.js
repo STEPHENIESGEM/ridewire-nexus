@@ -7,6 +7,10 @@
 require('dotenv').config();
 const MultiAIOrchestratorOpenSource = require('../multiAIOrchestratorOpenSource');
 
+// Test configuration constants
+const KEYWORD_MATCH_THRESHOLD = 0.5; // 50% of keywords must match to pass
+const OLD_SYSTEM_COST_PER_QUERY = 0.02; // $0.02 per query with proprietary APIs
+
 // Automotive diagnostic test scenarios
 const testScenarios = [
   {
@@ -250,8 +254,8 @@ class TestRunner {
       }
     });
     
-    // Pass if at least 50% of keywords are found
-    const passed = keywordsFound.length >= Math.ceil(expectedKeywords.length * 0.5);
+    // Pass if at least KEYWORD_MATCH_THRESHOLD of keywords are found
+    const passed = keywordsFound.length >= Math.ceil(expectedKeywords.length * KEYWORD_MATCH_THRESHOLD);
     
     return {
       passed,
@@ -275,8 +279,8 @@ class TestRunner {
     console.log('\n💰 COST ANALYSIS:');
     console.log(`   Total Cost: $${this.results.totalCost.toFixed(6)}`);
     console.log(`   Average Cost Per Query: $${(this.results.totalCost / this.results.totalTests).toFixed(6)}`);
-    console.log(`   Old System Cost (estimate): $${(this.results.totalTests * 0.02).toFixed(6)}`);
-    console.log(`   Savings: $${((this.results.totalTests * 0.02) - this.results.totalCost).toFixed(6)} (${Math.round((1 - this.results.totalCost / (this.results.totalTests * 0.02)) * 100)}%)`);
+    console.log(`   Old System Cost (estimate): $${(this.results.totalTests * OLD_SYSTEM_COST_PER_QUERY).toFixed(6)}`);
+    console.log(`   Savings: $${((this.results.totalTests * OLD_SYSTEM_COST_PER_QUERY) - this.results.totalCost).toFixed(6)} (${Math.round((1 - this.results.totalCost / (this.results.totalTests * OLD_SYSTEM_COST_PER_QUERY)) * 100)}%)`);
     
     console.log('\n⏱️  PERFORMANCE:');
     console.log(`   Total Time: ${Math.round(this.results.totalTime / 1000)}s`);
