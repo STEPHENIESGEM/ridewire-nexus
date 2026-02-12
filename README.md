@@ -44,6 +44,23 @@ RideWire AI Hub is a cutting-edge platform that orchestrates multiple AI agents 
 
 ---
 
+## 📚 Documentation
+
+Comprehensive documentation for developers, contributors, and stakeholders:
+
+| Document | Description | Audience |
+|----------|-------------|----------|
+| **[README.md](README.md)** | Project overview, quick start, features | Everyone |
+| **[API_DOCUMENTATION.md](API_DOCUMENTATION.md)** | Complete API reference with examples | Developers |
+| **[ARCHITECTURE.md](ARCHITECTURE.md)** | System design, algorithms, data flows | Technical teams, Grant reviewers |
+| **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** | Deployment instructions for all platforms | DevOps, System administrators |
+| **[CONTRIBUTING.md](CONTRIBUTING.md)** | How to contribute to the project | Contributors, Developers |
+| **[SETUP.md](SETUP.md)** | Quick setup guide | New developers |
+
+**For NSF SBIR Grant Reviewers**: Start with [ARCHITECTURE.md](ARCHITECTURE.md) for system design details, then review [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for technical implementation.
+
+---
+
 ## 📋 Tech Stack
 
 | Layer | Technology |
@@ -94,6 +111,8 @@ Offer pre-built RideWire modules and diagnostic add-ons through Gumroad:
                                           - ---
 
 ## 🎯 Architecture Overview
+
+> **📘 Deep Dive**: See [ARCHITECTURE.md](ARCHITECTURE.md) for complete system design, multi-AI consensus algorithm, encryption architecture, database schemas, and scalability considerations.
 
 ```
 User Query
@@ -166,6 +185,8 @@ Dashboard Display
    Open browser → http://localhost:3000
    ```
 
+> **📘 Need more details?** See the complete [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for step-by-step deployment instructions, troubleshooting, and production setup options.
+
 ---
 
 ## 📦 Project Structure
@@ -195,6 +216,8 @@ ridewire-ai-hub/
 ---
 
 ## 🔌 API Endpoints
+
+> **📘 Complete API Reference**: See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for detailed endpoint documentation, request/response examples, error codes, and code samples in multiple languages.
 
 ### Authentication
 
@@ -513,13 +536,28 @@ MIT License - See LICENSE file for details
 
 ## 🤝 Contributing
 
-Contributions welcome! Please:
+Contributions are welcome! We have comprehensive guidelines to help you get started.
+
+**Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:**
+- Code of conduct
+- Development setup instructions
+- Coding standards and style guide
+- Branch naming conventions
+- Commit message format
+- Pull request process
+- Issue reporting guidelines
+- Testing requirements
+
+**Quick Start for Contributors:**
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+3. Follow coding standards in [CONTRIBUTING.md](CONTRIBUTING.md)
+4. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
+
+For questions, open an [Issue](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues) or email: **hello@stepheniesgem.io**
 
 ---
 
