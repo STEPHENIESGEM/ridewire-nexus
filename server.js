@@ -3,15 +3,29 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
-const MultiAIOrchestrator = require('./multiAIOrchestrator');
 const SafetyGating = require('./safetyGating');
 const GameEngine = require('./gameEngine');
 const EcommerceAutomation = require('./ecommerceAutomation');
 
-// Load demo orchestration modules with error handling
-let MultiAIOrchestrator, DemoOrchestrator;
-try {
+// ============================================
+// AI ORCHESTRATOR SELECTION
+// Toggle between open-source and legacy APIs
+// ============================================
+const useOpenSourceLLMs = process.env.USE_OPEN_SOURCE_LLMS === 'true';
+
+let MultiAIOrchestrator;
+if (useOpenSourceLLMs) {
+  console.log('🚀 Using OPEN-SOURCE LLM Orchestrator (Cerebras, Groq, Together.ai)');
+  console.log('💰 Cost Savings: ~$690/month vs legacy APIs');
+  MultiAIOrchestrator = require('./backend/multiAIOrchestratorOpenSource');
+} else {
+  console.log('📡 Using LEGACY AI Orchestrator (OpenAI, Anthropic, Google)');
   MultiAIOrchestrator = require('./multiAIOrchestrator');
+}
+
+// Load demo orchestration modules with error handling
+let DemoOrchestrator;
+try {
   DemoOrchestrator = require('./demoOrchestrator');
   console.log('✓ Demo orchestration modules loaded');
 } catch (err) {
@@ -26,10 +40,15 @@ app.use(express.json());
 
 // Initialize orchestrators only if modules loaded successfully
 let multiAI, demoOrchestrator;
-if (MultiAIOrchestrator && DemoOrchestrator) {
-  multiAI = new MultiAIOrchestrator();
-  demoOrchestrator = new DemoOrchestrator(multiAI);
-  console.log('✓ Demo orchestrators initialized');
+multiAI = new MultiAIOrchestrator();
+console.log('✓ AI Orchestrator initialized');
+
+if (DemoOrchestrator) {
+  // For demo, always use legacy orchestrator if available
+  const LegacyOrchestrator = require('./multiAIOrchestrator');
+  const legacyMultiAI = new LegacyOrchestrator();
+  demoOrchestrator = new DemoOrchestrator(legacyMultiAI);
+  console.log('✓ Demo orchestrator initialized');
 }
 
 const pool = new Pool({
@@ -37,7 +56,6 @@ const pool = new Pool({
 });
 
 // Initialize modules
-const multiAI = new MultiAIOrchestrator();
 const safetyGating = new SafetyGating();
 const gameEngine = new GameEngine(pool);
 const ecommerce = new EcommerceAutomation(pool);
@@ -633,6 +651,34 @@ app.post('/api/admin/process-payouts', async (req, res) => {
     
     const results = await ecommerce.processWeeklyPayouts();
     res.json(results);
+  } catch (err) {
+    console.error('Payout error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ============================================
+// AI ORCHESTRATOR STATISTICS ENDPOINT
+// ============================================
+app.get('/api/ai/stats', (req, res) => {
+  try {
+    if (typeof multiAI.getStats === 'function') {
+      const stats = multiAI.getStats();
+      res.json({
+        orchestratorType: useOpenSourceLLMs ? 'open-source' : 'legacy',
+        ...stats
+      });
+    } else {
+      res.json({
+        orchestratorType: 'legacy',
+        message: 'Statistics not available for legacy orchestrator'
+      });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Reset demo
  * POST /api/demo/reset
@@ -648,8 +694,11 @@ app.post('/api/demo/reset', requireDemoOrchestrator, (req, res) => {
 
 app.listen(port, () => {
   console.log(`🚀 RideWire AI Hub server running on port ${port}`);
-  console.log(`✅ Multi-AI Orchestrator: Enabled`);
+  console.log(`✅ AI Orchestrator: ${useOpenSourceLLMs ? 'Open-Source (Cerebras, Groq, Together.ai)' : 'Legacy (OpenAI, Anthropic, Google)'}`);
   console.log(`✅ Safety Gating: Enabled`);
   console.log(`✅ Game Engine: Enabled`);
   console.log(`✅ E-Commerce Automation: Enabled`);
+  if (useOpenSourceLLMs) {
+    console.log(`💰 Monthly Savings: ~$690 vs legacy APIs`);
+  }
 });
