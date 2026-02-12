@@ -306,6 +306,10 @@ app.post('/api/diagnostic/query', async (req, res) => {
     
   } catch (err) {
     console.error('Diagnostic query error:', err);
+    res.status(500).json({ error: 'Failed to process diagnostic query' });
+  }
+});
+
 // ==================== WAR ROOM DEMO ENDPOINTS ====================
 
 // Middleware to check if demo orchestrator is available
@@ -359,7 +363,12 @@ app.get('/api/diagnostic/history', async (req, res) => {
       limit: parseInt(limit),
       total: result.rowCount
     });
-    
+  } catch (err) {
+    console.error('History retrieval error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Execute complete War Room demo
  * POST /api/demo/execute
@@ -389,6 +398,12 @@ app.get('/api/game/state', async (req, res) => {
     const gameState = await gameEngine.getGameState(decoded.id);
     
     res.json(gameState);
+  } catch (err) {
+    console.error('Game state error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Execute individual demo scene
  * POST /api/demo/scene/:sceneNumber
@@ -432,6 +447,12 @@ app.get('/api/game/leaderboard', async (req, res) => {
       leaderboard,
       updated_at: new Date().toISOString()
     });
+  } catch (err) {
+    console.error('Leaderboard error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Get live demo status
  * GET /api/demo/status
@@ -487,6 +508,12 @@ app.get('/api/marketplace/listings', async (req, res) => {
       page: parseInt(page),
       limit: parseInt(limit)
     });
+  } catch (err) {
+    console.error('Marketplace listings error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Inject system break (for manual demo control)
  * POST /api/demo/inject-break
@@ -549,6 +576,10 @@ app.post('/api/marketplace/purchase', async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error('Purchase error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Get system health
  * GET /api/demo/health
@@ -574,6 +605,12 @@ app.get('/api/revenue/dashboard', async (req, res) => {
     const dashboard = await ecommerce.getSellerDashboard(decoded.id);
     
     res.json(dashboard);
+  } catch (err) {
+    console.error('Revenue dashboard error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Get repair log
  * GET /api/demo/repair-log
@@ -627,6 +664,10 @@ app.post('/api/marketplace/list', async (req, res) => {
     res.json(listing);
   } catch (err) {
     console.error('Listing error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * Get diagnostic report
  * GET /api/demo/diagnostics
