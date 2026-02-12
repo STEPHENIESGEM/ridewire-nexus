@@ -44,7 +44,8 @@
     "dev": "webpack serve --mode development --open",
     "build": "webpack --mode production",
     "db:init": "psql $DATABASE_URL -f schema.sql",
-    "test": "echo \"No tests specified\" && exit 0",
+    "test": "node backend/test/mock-test.js",
+    "test:live": "node backend/test/test-open-source-models.js",
     "test-links": "node scripts/test-links.js"
   },
   "engines": {
