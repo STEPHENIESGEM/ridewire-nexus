@@ -2,15 +2,15 @@
   "name": "ridewire-ai-hub",
   "version": "1.1.0",
   "main": "server.js",
-  "author": "Stephanie <coco@stepheniesgem.io>",
-  "description": "Multi-AI Agent Collaboration Platform with AR Auto Diagnostic Tool Foundation",
+  "author": "RideWire AI Team <hello@ridewireai.com>",
+  "description": "Revolutionary Multi-AI Diagnostic Platform for Enterprise Automotive Intelligence",
   "repository": {
     "type": "git",
     "url": "https://github.com/STEPHENIESGEM/ridewire-ai-hub.git"
   },
   "bugs": {
     "url": "https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues",
-    "email": "support@stepheniesgem.io"
+    "email": "support@ridewireai.com"
   },
   "homepage": "https://github.com/STEPHENIESGEM/ridewire-ai-hub#readme",
   "license": "MIT",

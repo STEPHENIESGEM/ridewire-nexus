@@ -506,12 +506,11 @@ psql -U ridewire -d ridewire_test < /backups/ridewire_YYYYMMDD.sql
 
 ### Community
 - GitHub Issues: https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues
-- Email: hello@stepheniesgem.io
+- Email: support@ridewireai.com
 
 ### Emergency Contacts
-- Technical Lead: (contact information)
-- DevOps: (contact information)
-- Security: (contact information)
+- Technical Support: support@ridewireai.com
+- Security Issues: security@ridewireai.com
 
 ---
 
