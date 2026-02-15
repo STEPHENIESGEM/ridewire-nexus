@@ -149,6 +149,8 @@ Founder, RideWire
 ```
 Thank you for your interest in RideWire. We'll respond to your press inquiry within 24 hours.
 
+For urgent media inquiries, please call us at [phone number] or indicate "URGENT" in your subject line.
+
 Best regards,
 RideWire Media Relations
 ```

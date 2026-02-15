@@ -307,10 +307,9 @@ All detailed documentation is available in the `/docs/strategy/` directory:
 
 ## 📞 CONTACT
 
-For questions or to discuss implementation details:
-- **Strategy Team**: hello@ridewireai.com
-- **Product Team**: hello@ridewireai.com
-- **Finance Team**: hello@ridewireai.com
+For questions or to discuss implementation details, contact: hello@ridewireai.com
+
+Your inquiry will be routed to the appropriate team (Strategy, Product, or Finance).
 
 ---
 
