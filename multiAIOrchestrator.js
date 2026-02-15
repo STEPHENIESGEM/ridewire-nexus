@@ -200,7 +200,11 @@ class MultiAIOrchestrator {
           responses[j].text
         );
         
-        // If similarity is very low, might be a conflict
+        // Similarity threshold explanation:
+        // < 0.30 = Different approaches/perspectives (potential conflict)
+        // < 0.15 = Fundamental disagreement (high severity)
+        // The 0.30 threshold catches meaningful differences while avoiding
+        // false positives from natural language variation
         if (similarity < 0.3) {
           conflicts.push({
             agents: [responses[i].agent, responses[j].agent],

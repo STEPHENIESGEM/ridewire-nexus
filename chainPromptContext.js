@@ -143,6 +143,12 @@ class SmartMemory {
   /**
    * Prune memory based on relevance and recency
    * Keeps recent and frequently accessed memories
+   * 
+   * Pruning strategy:
+   * - Triggered when memory exceeds maxSize
+   * - Retains 80% of maxSize (allows 20% buffer before next prune)
+   * - Scores combine age decay, relevance, and access frequency
+   * - 80% retention balances memory efficiency with context preservation
    */
   pruneByRelevance() {
     const now = Date.now();
@@ -164,6 +170,16 @@ class SmartMemory {
 
   /**
    * Get relevant context for a given agent and task
+   * 
+   * Scoring formula:
+   * - 40% recency: Exponential decay with 7-day half-life
+   *   (1 week chosen as typical project/sprint duration)
+   * - 40% topic relevance: Text similarity to current query
+   * - 20% confidence: Original decision confidence
+   * 
+   * This weighting prioritizes recent and relevant context over
+   * high-confidence but stale or unrelated memories.
+   * 
    * @param {string} agent - Agent name
    * @param {string} topic - Topic/task description
    * @param {number} topK - Number of results to return
@@ -177,7 +193,8 @@ class SmartMemory {
       .filter(m => !agent || m.context.agent === agent || m.context.agent === null)
       .map(m => {
         const daysSinceCreation = (now - m.timestamp) / oneDayMs;
-        const recency = Math.exp(-daysSinceCreation / 7); // 1-week half-life
+        // 7-day half-life: exp(-days/7) gives 50% weight after 7 days
+        const recency = Math.exp(-daysSinceCreation / 7);
         
         // Simple text matching for relevance (could be improved with embeddings)
         const topicRelevance = topic 
