@@ -308,9 +308,9 @@ All detailed documentation is available in the `/docs/strategy/` directory:
 ## 📞 CONTACT
 
 For questions or to discuss implementation details:
-- **Strategy Team**: strategy@ridewire.ai
-- **Product Team**: product@ridewire.ai
-- **Finance Team**: finance@ridewire.ai
+- **Strategy Team**: hello@ridewireai.com
+- **Product Team**: hello@ridewireai.com
+- **Finance Team**: hello@ridewireai.com
 
 ---
 

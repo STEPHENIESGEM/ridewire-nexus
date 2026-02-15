@@ -16,7 +16,7 @@ This document details all automation workflows for the 1000+ influencer outreach
    - To: {{Email}}
    - Subject: Template based on {{Platform}} and {{Tier}}
    - Body: Personalized template with merge tags
-   - From: partnerships@ridewire.ai
+   - From: hello@ridewireai.com
 
 2. **Google Sheets: Update Row**
    - Status: "Sent"
@@ -221,7 +221,7 @@ This document details all automation workflows for the 1000+ influencer outreach
    - Content: Similar to tweet but professional tone
    
 3. **Email: Request Retweet from Team**
-   - To: team@ridewire.ai
+   - To: team@ridewireai.com
    - Subject: "New influencer content - please amplify!"
    - Body: "{{Name}} posted content. Please RT/like: {{Content_URL}}"
 
@@ -303,7 +303,7 @@ This document details all automation workflows for the 1000+ influencer outreach
    - Revenue generated vs. commissions paid
    
 2. **Email: Send Report to Team**
-   - To: team@ridewire.ai
+   - To: team@ridewireai.com
    - Subject: "Monthly Influencer Campaign Report - {{Month}}"
    - Attachment: PDF report
    
