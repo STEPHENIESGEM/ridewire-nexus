@@ -2,16 +2,28 @@
 
 ## 🔒 Security Overview
 
-RideWire AI Hub takes security seriously as a high-tech diagnostic platform handling sensitive automotive data and user information. This document outlines our security practices and how to report vulnerabilities.
+RideWire AI Hub maintains the highest security standards as an enterprise diagnostic platform handling sensitive automotive data and user information. This document outlines our security practices and the process for reporting vulnerabilities.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please:
+If you discover a security vulnerability, please follow responsible disclosure practices:
 
-1. **DO NOT** open a public GitHub issue
-2. Email security concerns to: security@ridewire.ai (Configure this email before deployment)
-3. Include detailed steps to reproduce the vulnerability
-4. Allow up to 48 hours for initial response
+1. **DO NOT** open a public GitHub issue for security vulnerabilities
+2. **Email security concerns to**: security@ridewireai.com
+3. **Include detailed information**:
+   - Description of the vulnerability
+   - Steps to reproduce the issue
+   - Potential impact assessment
+   - Suggested remediation (if available)
+4. **Response time**: We will acknowledge receipt within 48 hours and provide a detailed response within 5 business days
+
+### What to Expect
+
+- Confirmation of receipt within 48 hours
+- Initial assessment within 5 business days
+- Regular updates on remediation progress
+- Credit for responsible disclosure (if desired)
+- Notification when the issue is resolved
 
 ## Security Best Practices
 
@@ -120,11 +132,14 @@ Each provider's security and privacy policies apply to data sent to their APIs.
 - Data retention policies should be established
 
 ### Legal Disclaimers
+
 ⚠️ **IMPORTANT**: This platform provides diagnostic assistance tools ONLY
+
 - Does NOT replace certified mechanics or automotive professionals
-- AI outputs are advisory and educational only
-- No liability for damages from following recommendations
-- Users responsible for verifying all information
+- AI-generated outputs are advisory and educational only
+- No liability for damages resulting from following AI recommendations
+- Users are responsible for verifying all diagnostic information with qualified professionals
+- Platform operators are not liable for third-party AI service responses
 
 ## Security Update Policy
 
@@ -146,12 +161,13 @@ Update dependencies regularly but test thoroughly before deploying.
 ## Contact
 
 For security concerns or questions:
-- GitHub Security Advisories: [Enable in repository settings]
-- Email: security@ridewire.ai (Configure this email before deployment)
-- Response time: 48 hours for initial acknowledgment
+
+- **Security Email**: security@ridewireai.com
+- **GitHub Security Advisories**: [Repository Security Tab](https://github.com/STEPHENIESGEM/ridewire-ai-hub/security)
+- **Response Time**: 48 hours for initial acknowledgment, 5 business days for detailed assessment
 
 ---
 
-**Last Updated**: December 2025
+**Last Updated**: February 2026
 
-**Version**: 1.0.0
+**Version**: 1.1.0

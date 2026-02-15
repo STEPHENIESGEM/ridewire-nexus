@@ -2,15 +2,15 @@
   "name": "ridewire-ai-hub",
   "version": "1.1.0",
   "main": "server.js",
-  "author": "Stephanie <coco@stepheniesgem.io>",
-  "description": "Multi-AI Agent Collaboration Platform with AR Auto Diagnostic Tool Foundation",
+  "author": "Stephenie's Gem <business@ridewireai.com>",
+  "description": "Enterprise-grade multi-AI collaboration platform with consensus-driven decision intelligence for automotive diagnostics. Combines ChatGPT, Claude, and Gemini with zero-knowledge encryption and AR-ready architecture.",
   "repository": {
     "type": "git",
     "url": "https://github.com/STEPHENIESGEM/ridewire-ai-hub.git"
   },
   "bugs": {
     "url": "https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues",
-    "email": "support@stepheniesgem.io"
+    "email": "support@ridewireai.com"
   },
   "homepage": "https://github.com/STEPHENIESGEM/ridewire-ai-hub#readme",
   "license": "MIT",
@@ -50,5 +50,5 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["ai", "diagnostics", "ecommerce", "automation", "multi-agent"]
+  "keywords": ["ai", "multi-agent", "automotive", "diagnostics", "consensus-intelligence", "enterprise", "ar-ready", "chatgpt", "claude", "gemini"]
 }
