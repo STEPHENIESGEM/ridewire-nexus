@@ -783,5 +783,6 @@ Consistency beats perfection. Authenticity beats polish.
 
 ---
 
-*Created for RideWire C-Suite by AI Strategy Team*
-*Questions? Email: strategy@ridewire.ai*
+*Created for RideWire C-Suite by AI Strategy Team*  
+**Questions? Contact**: business@ridewireai.com  
+**Documentation**: See [AUTOMATION_GUIDE.md](AUTOMATION_GUIDE.md) for implementation details

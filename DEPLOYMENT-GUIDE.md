@@ -500,23 +500,22 @@ psql -U ridewire -d ridewire_test < /backups/ridewire_YYYYMMDD.sql
 ## Support & Resources
 
 ### Documentation
-- Main README: `README.md`
-- API Documentation: `docs/API.md`
-- Security Policy: `SECURITY.md`
+- Main README: [README.md](README.md)
+- Automation Guide: [AUTOMATION_GUIDE.md](AUTOMATION_GUIDE.md)
+- Security Policy: [SECURITY.md](SECURITY.md)
 
-### Community
-- GitHub Issues: https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues
-- Email: hello@stepheniesgem.io
+### Community & Support
+- **GitHub Issues**: [Report issues and get help](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues)
+- **Technical Support**: support@ridewireai.com
+- **Security Issues**: security@ridewireai.com
 
 ### Emergency Contacts
-- Technical Lead: (contact information)
-- DevOps: (contact information)
-- Security: (contact information)
+For critical production issues, use the appropriate support channel above with "URGENT" in the subject line.
 
 ---
 
-**Deployment Guide Version**: 1.0  
-**Last Updated**: January 2026  
+**Deployment Guide Version**: 1.1  
+**Last Updated**: February 2026  
 **For**: RideWire AI Hub Production Deployment
 
 © 2026 RideWire AI Hub. All rights reserved.
