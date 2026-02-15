@@ -85,3 +85,8 @@ assets/gumroad/
 analytics-export-*.csv
 revenue-export-*.csv
 daily-analytics-*.csv
+
+# Sensitive personal files - DO NOT COMMIT
+CO-FOUNDER-EQUITY-PLAN.md
+EXTENDED-FAMILY-EQUITY-PLAN.md
+PERSONAL_NOTE_FROM_COPILOT.md
