@@ -5,6 +5,7 @@
  */
 
 const axios = require('axios');
+const { ChainPromptContext, ContextCompressor, ResponseVerifier } = require('./chainPromptContext');
 
 class MultiAIOrchestrator {
   constructor() {
@@ -133,6 +134,7 @@ class MultiAIOrchestrator {
 
   /**
    * Achieve consensus from multiple AI responses
+   * IMPROVED: Now with semantic analysis and conflict detection
    * Uses voting and confidence scoring
    * @param {Object} responses - Responses from all agents
    * @returns {Object} Consensus result with reasoning
@@ -143,61 +145,158 @@ class MultiAIOrchestrator {
       agents: [],
       summaryOfAgreement: '',
       conflictPoints: [],
-      recommendedAction: ''
+      recommendedAction: '',
+      confidence: 0
     };
 
     // Analyze responses for themes and agreement
-    const responseTexts = Object.entries(responses).map(([agent, text]) => ({
-      agent,
-      text,
-      length: text.length
-    }));
+    const responseTexts = Object.entries(responses).map(([agent, data]) => {
+      const text = typeof data === 'string' ? data : data.response || data.text || '';
+      const confidence = typeof data === 'object' && data.confidence ? data.confidence : 0.85;
+      
+      return {
+        agent,
+        text,
+        length: text.length,
+        confidence
+      };
+    });
 
-    // Simple consensus: take weighted average of responses
+    // IMPROVED: Detect conflicts using semantic similarity
+    const conflicts = this.detectConflicts(responseTexts);
+    
+    if (conflicts.length > 0) {
+      consensusResult.conflictPoints = conflicts;
+      console.log(`⚠️  Detected ${conflicts.length} conflict(s) in AI responses`);
+    }
+
+    // IMPROVED: Calculate weighted consensus confidence
+    const avgConfidence = responseTexts.reduce((sum, r) => sum + r.confidence, 0) / responseTexts.length;
+    consensusResult.confidence = conflicts.length > 0 
+      ? avgConfidence * 0.7  // Reduce confidence if conflicts exist
+      : avgConfidence;
+
     consensusResult.agents = responseTexts;
     consensusResult.summaryOfAgreement = this.extractCommonThemes(responseTexts);
-    consensusResult.recommendedAction = this.buildRecommendation(responseTexts);
+    consensusResult.recommendedAction = this.buildRecommendation(responseTexts, conflicts);
 
     return consensusResult;
   }
 
   /**
+   * Detect conflicts between AI responses
+   * NEW: Identifies contradictions and disagreements
+   * @param {Array} responses - Array of response objects
+   * @returns {Array} Array of conflicts
+   */
+  detectConflicts(responses) {
+    const conflicts = [];
+    
+    // Compare pairs of responses for contradictions
+    for (let i = 0; i < responses.length; i++) {
+      for (let j = i + 1; j < responses.length; j++) {
+        const similarity = this.calculateTextSimilarity(
+          responses[i].text, 
+          responses[j].text
+        );
+        
+        // If similarity is very low, might be a conflict
+        if (similarity < 0.3) {
+          conflicts.push({
+            agents: [responses[i].agent, responses[j].agent],
+            similarity: similarity,
+            description: `${responses[i].agent} and ${responses[j].agent} provide different perspectives`,
+            severity: similarity < 0.15 ? 'high' : 'medium'
+          });
+        }
+      }
+    }
+    
+    return conflicts;
+  }
+
+  /**
+   * Calculate similarity between two text strings
+   * @param {string} text1 - First text
+   * @param {string} text2 - Second text
+   * @returns {number} Similarity score (0-1)
+   */
+  calculateTextSimilarity(text1, text2) {
+    const words1 = new Set(
+      text1.toLowerCase()
+        .split(/\W+/)
+        .filter(w => w.length > 3)
+    );
+    const words2 = new Set(
+      text2.toLowerCase()
+        .split(/\W+/)
+        .filter(w => w.length > 3)
+    );
+    
+    let intersection = 0;
+    for (const word of words1) {
+      if (words2.has(word)) {
+        intersection++;
+      }
+    }
+    
+    const union = words1.size + words2.size - intersection;
+    return union > 0 ? intersection / union : 0;
+  }
+
+  /**
    * Extract common themes from AI responses
+   * IMPROVED: Better key phrase extraction
    * @param {Array} responses - Array of {agent, text} objects
    * @returns {string} Summary of agreement
    */
   extractCommonThemes(responses) {
-    // Basic implementation: identify common key phrases
+    // Collect key phrases (5+ letter words)
     const keyPhrases = [];
     
     responses.forEach(({ text }) => {
-      const words = text.split(' ').filter(w => w.length > 5);
+      const words = text.split(/\W+/).filter(w => w.length > 5);
       keyPhrases.push(...words);
     });
 
     // Find most common phrases
     const frequency = {};
     keyPhrases.forEach(phrase => {
-      frequency[phrase] = (frequency[phrase] || 0) + 1;
+      const normalized = phrase.toLowerCase();
+      frequency[normalized] = (frequency[normalized] || 0) + 1;
     });
 
+    // Get phrases that appear in at least 2 responses
     const common = Object.entries(frequency)
       .filter(([_, count]) => count >= 2)
+      .sort((a, b) => b[1] - a[1])  // Sort by frequency
       .map(([phrase]) => phrase)
       .slice(0, 5);
 
-    return `Common themes: ${common.join(', ')}`;
+    return common.length > 0 
+      ? `Common themes: ${common.join(', ')}`
+      : 'Responses cover diverse perspectives';
   }
 
   /**
    * Build final recommendation from consensus
+   * IMPROVED: Considers conflicts and confidence
    * @param {Array} responses - Array of responses
+   * @param {Array} conflicts - Detected conflicts
    * @returns {string} Recommended action
    */
-  buildRecommendation(responses) {
-    return responses.length === 3 
-      ? 'Strong consensus across all AI agents'
-      : `Partial consensus (${responses.length} agents agreed)`;
+  buildRecommendation(responses, conflicts = []) {
+    if (conflicts.length === 0 && responses.length >= 3) {
+      return 'Strong consensus across all AI agents. High confidence in recommendation.';
+    } else if (conflicts.length > 0) {
+      const highSeverity = conflicts.filter(c => c.severity === 'high').length;
+      if (highSeverity > 0) {
+        return `Significant disagreement detected (${highSeverity} conflicts). Consider consulting domain expert or gathering more information.`;
+      }
+      return `Partial consensus with minor differences (${conflicts.length} variations). Recommendation is cautious.`;
+    } else {
+      return `Partial consensus (${responses.length} agents responded). Moderate confidence.`;
+    }
   }
 
   /**
