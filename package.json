@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "main": "server.js",
   "author": "Stephenie's Gem <business@ridewireai.com>",
-  "description": "Enterprise-grade multi-AI collaboration platform with consensus-driven decision intelligence for automotive diagnostics. Combines ChatGPT, Claude, and Gemini with zero-knowledge encryption and AR-ready architecture.",
+  "description": "Enterprise-grade multi-AI collaboration platform combining ChatGPT, Claude, and Gemini for consensus-driven automotive diagnostics.",
   "repository": {
     "type": "git",
     "url": "https://github.com/STEPHENIESGEM/ridewire-ai-hub.git"

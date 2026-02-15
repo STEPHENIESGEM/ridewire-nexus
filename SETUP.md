@@ -44,7 +44,7 @@ GOOGLE_API_KEY=AIza...               # Your Google Gemini API key
 JWT_SECRET=your_secure_jwt_secret    # Generate with: openssl rand -base64 32
 
 # Database Configuration
-DATABASE_URL=postgresql://your_username:your_password@localhost:5432/ridewire  # PostgreSQL
+DATABASE_URL=postgresql://username:password@localhost:5432/ridewire  # PostgreSQL
 # OR
 DB_PATH=./data/ridewire.db          # SQLite (development only)
 
