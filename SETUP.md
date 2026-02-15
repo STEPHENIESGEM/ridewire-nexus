@@ -1,4 +1,4 @@
-# RIDEWIRE AI Hub - Setup & Deployment Guide
+# RideWire AI Hub - Setup & Deployment Guide
 
 ## Quick Start (Local Development)
 
@@ -150,7 +150,7 @@ ridewire-ai-hub/
 ## Support & Issues
 
 - GitHub Issues: https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues
-- Email: support@ridewire.ai
+- Email: support@ridewireai.com
 
 ---
 

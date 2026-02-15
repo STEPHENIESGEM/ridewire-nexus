@@ -64,34 +64,34 @@ RideWire AI Hub is a cutting-edge platform that orchestrates multiple AI agents 
 Offer pre-built RideWire modules and diagnostic add-ons through Gumroad:
 
 - **Premium Diagnostic Packs**: Vehicle-specific diagnostic modules ($15-50 each)
-- - **AR Overlay Templates**: Pre-designed AR overlays for popular vehicle models ($10-25 each)
-  - - **API Keys & Webhooks**: Developer access for custom integrations ($29-99/month)
-    - - **Training Materials**: Tutorials for mechanics and technicians ($5-10 per course)
-     
-      - ### 2. **Stripe Payment Integration**
-     
-      - Implement Stripe for subscription management and one-time purchases:
-     
-      - - **Tiered Pricing Plans**:
-        -   - Free: Basic single-AI diagnostics (ChatGPT only)
-            -   - Pro ($29/month): Multi-AI consensus + basic AR overlays
-                -   - Enterprise ($99/month): Full AR diagnostic suite + custom integrations + API access
-                 
-                    - - **Stripe Integration Points**:
-                      -   - Subscription billing in dashboard
-                          -   - Webhook handling for payment events
-                              -   - License key generation on purchase
-                               
-                                  - ### 3. **Auto-Email System**
-                               
-                                  - Automated email campaigns for customer acquisition and retention:
-                               
-                                  - - **Welcome Series**: 5-email onboarding sequence after signup
-                                    - - **Weekly Diagnostic Tips**: Auto-email with vehicle tips and diagnostic best practices
-                                      - - **Upsell Campaigns**: Targeted emails for feature upgrades
-                                        - - **Email Service Integration**: Ready for Mailchimp, SendGrid, or AWS SES
-                                         
-                                          - ---
+- **AR Overlay Templates**: Pre-designed AR overlays for popular vehicle models ($10-25 each)
+- **API Keys & Webhooks**: Developer access for custom integrations ($29-99/month)
+- **Training Materials**: Tutorials for mechanics and technicians ($5-10 per course)
+
+### 2. **Stripe Payment Integration**
+
+Implement Stripe for subscription management and one-time purchases:
+
+- **Tiered Pricing Plans**:
+  - Free: Basic single-AI diagnostics (ChatGPT only)
+  - Pro ($29/month): Multi-AI consensus + basic AR overlays
+  - Enterprise ($99/month): Full AR diagnostic suite + custom integrations + API access
+
+- **Stripe Integration Points**:
+  - Subscription billing in dashboard
+  - Webhook handling for payment events
+  - License key generation on purchase
+
+### 3. **Auto-Email System**
+
+Automated email campaigns for customer acquisition and retention:
+
+- **Welcome Series**: 5-email onboarding sequence after signup
+- **Weekly Diagnostic Tips**: Auto-email with vehicle tips and diagnostic best practices
+- **Upsell Campaigns**: Targeted emails for feature upgrades
+- **Email Service Integration**: Ready for Mailchimp, SendGrid, or AWS SES
+
+---
 
 ## 🎯 Architecture Overview
 
