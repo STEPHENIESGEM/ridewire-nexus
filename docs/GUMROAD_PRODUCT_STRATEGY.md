@@ -526,6 +526,14 @@ This strategy focuses on the **blue ocean opportunity of motorcycle mechanics** 
 
 ---
 
-**Contact for questions:** hello@stepheniesgem.io
+## Contact & Support
 
-**Last Updated:** January 5, 2026
+**Questions or Implementation Help:**
+- **Technical Support**: support@ridewireai.com
+- **Business Inquiries**: business@ridewireai.com
+- **GitHub Issues**: [Report issues](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues)
+
+---
+
+**Strategy Document Version**: 1.1  
+**Last Updated**: February 2026
