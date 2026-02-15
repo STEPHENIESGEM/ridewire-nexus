@@ -1,8 +1,84 @@
 # GitHub Copilot Instructions for RideWire AI Hub
 
+## 🚀 Quick Start for Copilot Agent
+
+**Before making any changes:**
+1. Read the issue carefully and understand requirements
+2. Run `npm install` to install dependencies
+3. Check `.env.example` for required environment variables
+4. Review relevant code files before modifying
+5. Run `npm test` to understand baseline test status
+6. Make minimal, surgical changes to address the issue
+7. Test changes locally before committing
+8. Never commit secrets, API keys, or `.env` files
+
+**Common Commands:**
+- Install: `npm install`
+- Test: `npm test`
+- Start Backend: `npm start`
+- Start Frontend Dev: `npm run dev`
+- Build: `npm run build`
+- Database Setup: `npm run db:init`
+
 ## Repository Overview
 
 RideWire AI Hub is a **production-ready multi-AI orchestration platform** designed for enterprise auto diagnostics. This is a high-tech diagnostic platform company that provides AI-powered automotive analysis tools. The platform combines multiple AI agents (ChatGPT, Claude, Gemini) for consensus-based diagnostics with AR visualization capabilities.
+
+## 🔧 Build, Test, and Development Commands
+
+### Essential Commands
+```bash
+# Install dependencies
+npm install
+
+# Start development server (backend on port 3000)
+npm start
+
+# Start frontend development server with hot reload
+npm run dev
+
+# Build frontend for production
+npm run build
+
+# Initialize database schema
+npm run db:init
+
+# Run tests
+npm test
+
+# Test external links
+npm run test-links
+```
+
+### Development Workflow
+1. Install dependencies: `npm install`
+2. Set up environment variables: Copy `.env.example` to `.env` and configure
+3. Initialize database: `npm run db:init` (requires PostgreSQL running)
+4. Start backend: `npm start`
+5. In another terminal, start frontend: `npm run dev`
+6. Access the application at http://localhost:8080 (frontend) and http://localhost:3000 (backend API)
+
+## 🚫 Repository Boundaries - DO NOT MODIFY
+
+### Never Edit These Directories/Files
+- **`.github/workflows/`** - CI/CD workflows (unless explicitly required by issue)
+- **`node_modules/`** - Dependencies (managed by npm)
+- **`dist/` or `build/`** - Build artifacts (generated automatically)
+- **`.env`** - Environment secrets (never commit this file)
+- **`package-lock.json`** - Lock file (only update via npm commands)
+
+### Files Requiring Special Care
+- **`schema.sql`** - Database schema (test thoroughly, migrations may be needed)
+- **`server.js`** - Main server entry point (changes must not break existing routes)
+- **`multiAIOrchestrator.js`** - Core AI orchestration logic (comprehensive testing required)
+- **`encryption.js`** - Security-critical encryption module (security audit required)
+
+### Never Commit
+- API keys or secrets (use environment variables)
+- `.env` files with real credentials
+- Temporary files or test data
+- Personal configuration files
+- Large binary files or media assets without approval
 
 ## 🚨 CRITICAL LEGAL & COMPLIANCE REQUIREMENTS
 
@@ -355,6 +431,76 @@ When adding new features:
 4. Include legal disclaimers in user-facing docs
 5. Document environment variables in .env.example
 6. Add setup instructions if infrastructure changes
+
+## Troubleshooting Common Issues
+
+### Database Connection Errors
+```bash
+# Check PostgreSQL is running
+sudo service postgresql status
+
+# Verify DATABASE_URL in .env
+echo $DATABASE_URL
+
+# Reinitialize schema if needed
+npm run db:init
+```
+
+### Port Already in Use
+```bash
+# Find process using port 3000
+lsof -i :3000
+
+# Kill the process (replace PID with actual process ID)
+kill -9 <PID>
+```
+
+### Frontend Build Failures
+```bash
+# Clear node modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# Clear webpack cache
+rm -rf .cache dist
+npm run build
+```
+
+### AI API Integration Issues
+- Verify API keys are set in `.env`
+- Check API rate limits and quotas
+- Review error logs for specific API error messages
+- Ensure network connectivity to AI service endpoints
+- Test with single AI agent first, then enable multi-AI
+
+### Authentication/JWT Issues
+- Verify JWT_SECRET is set in `.env`
+- Check token expiration time (default 24 hours)
+- Clear browser localStorage/cookies and re-login
+- Verify bcrypt rounds configuration (12+ recommended)
+
+## Code Quality and Linting
+
+### Code Style Enforcement
+```bash
+# Format code (if prettier is configured)
+npx prettier --write "**/*.{js,jsx,json}"
+
+# Check for common issues
+npx eslint . --ext .js,.jsx
+
+# Type checking (if TypeScript is added)
+npx tsc --noEmit
+```
+
+### Pre-Commit Checklist
+- [ ] Run `npm test` and ensure all tests pass
+- [ ] Check `git status` to verify only intended files are staged
+- [ ] Verify no secrets or API keys in code
+- [ ] Test the feature manually in browser/CLI
+- [ ] Review code for security vulnerabilities
+- [ ] Ensure legal disclaimers are present (if user-facing)
+- [ ] Update relevant documentation
 
 ---
 
