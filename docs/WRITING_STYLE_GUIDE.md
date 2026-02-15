@@ -177,7 +177,7 @@ RideWire requires an account to save your diagnostic history and preferences.
 3. Verify your email address
 4. Log in to access your dashboard
 
-If you encounter issues during registration, contact support@stepheniesgem.io.
+If you encounter issues during registration, contact support@ridewireai.com.
 
 Next: [Submit Your First Diagnostic Query →]
 ```
@@ -344,7 +344,7 @@ Use markdown-style headers:
 - Don't: "Click [here](link) for our Privacy Policy"
 
 **Email links:**
-- Format: `contact@stepheniesgem.io` or `[Contact Support](mailto:support@stepheniesgem.io)`
+- Format: `contact@ridewireai.com` or `[Contact Support](mailto:support@ridewireai.com)`
 
 ---
 
@@ -474,11 +474,11 @@ Before publishing any content, verify:
 
 This guide is a living document. Suggest updates by:
 1. Opening an issue on GitHub
-2. Emailing team@stepheniesgem.io
+2. Emailing team@ridewireai.com
 3. Submitting a pull request
 
 ---
 
 **Last Updated:** January 5, 2026
 
-**Maintained by:** RideWire Team (team@stepheniesgem.io)
+**Maintained by:** RideWire Team (team@ridewireai.com)

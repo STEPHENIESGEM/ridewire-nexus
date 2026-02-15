@@ -44,7 +44,7 @@
 | **Engagement Rate** | Avg likes/comments/shares per post | 4.8% |
 | **Niche** | Content category | Auto Repair DIY |
 | **Audience Demographics** | Age, location, interests | 18-35, USA, car enthusiasts |
-| **Contact Email** | Primary email | chris@example.com |
+| **Contact Email** | Primary email | influencer@example.com |
 | **Contact Status** | Outreach stage | Pending Response |
 | **Initial Contact Date** | Date first email sent | 2025-12-20 |
 | **Last Follow-Up Date** | Date of most recent follow-up | 2025-12-23 |

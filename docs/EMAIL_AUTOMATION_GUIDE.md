@@ -2,27 +2,25 @@
 
 ## Overview
 
-This guide provides instructions for setting up email automation and organization for RideWire using the **stepheniesgem.io** domain.
+This guide provides instructions for setting up email automation and organization for RideWire using the **ridewireai.com** domain.
 
 ---
 
 ## Email Infrastructure Setup
 
-### Domain: stepheniesgem.io
+### Domain: ridewireai.com
 
-All RideWire emails use the stepheniesgem.io domain for unified branding and professional communication.
+All RideWire emails use the ridewireai.com domain for unified branding and professional communication.
 
 ### Primary Email Addresses
 
 | Email | Purpose | Forwarding |
 |-------|---------|------------|
-| coco@stepheniesgem.io | Founder personal | Direct to founder |
-| hello@stepheniesgem.io | General inquiries | Team inbox or founder |
-| aihub@stepheniesgem.io | Technical AI Hub questions | Technical team |
-| support@stepheniesgem.io | Customer support | Support team/ticketing system |
-| investors@stepheniesgem.io | Fundraising | Founder + finance team |
-| press@stepheniesgem.io | Media inquiries | Founder + marketing |
-| team@stepheniesgem.io | Internal team | All team members |
+| hello@ridewireai.com | General inquiries | Team inbox |
+| support@ridewireai.com | Customer support | Support team/ticketing system |
+| investors@ridewireai.com | Fundraising | Finance team |
+| press@ridewireai.com | Media inquiries | Marketing team |
+| team@ridewireai.com | Internal team | All team members |
 
 ---
 
@@ -30,7 +28,7 @@ All RideWire emails use the stepheniesgem.io domain for unified branding and pro
 
 ### Out of Office / Business Hours
 
-**For: support@stepheniesgem.io**
+**For: support@ridewireai.com**
 
 ```
 Subject: Thank you for contacting RideWire Support
@@ -52,7 +50,7 @@ RideWire Support Team
 
 ---
 
-**For: hello@stepheniesgem.io**
+**For: hello@ridewireai.com**
 
 ```
 Subject: Thank you for contacting RideWire
@@ -63,9 +61,9 @@ Thank you for reaching out to RideWire!
 We've received your inquiry and will respond shortly.
 
 If your question is urgent:
-- Technical support: support@stepheniesgem.io
-- Media inquiries: press@stepheniesgem.io
-- Investment opportunities: investors@stepheniesgem.io
+- Technical support: support@ridewireai.com
+- Media inquiries: press@ridewireai.com
+- Investment opportunities: investors@ridewireai.com
 
 Best regards,
 The RideWire Team
@@ -75,7 +73,7 @@ The RideWire Team
 
 ### Weekend / After Hours Auto-Responder
 
-**For: support@stepheniesgem.io (after 6PM MST or weekends)**
+**For: support@ridewireai.com (after 6PM MST or weekends)**
 
 ```
 Subject: RideWire Support - We'll respond on the next business day
@@ -103,7 +101,7 @@ RideWire Support Team
 
 ### Rule 1: Support Tickets
 
-**Trigger:** Email sent to support@stepheniesgem.io
+**Trigger:** Email sent to support@ridewireai.com
 
 **Actions:**
 1. Send auto-responder (see above)
@@ -119,10 +117,10 @@ RideWire Support Team
 
 ### Rule 2: Investor Inquiries
 
-**Trigger:** Email sent to investors@stepheniesgem.io
+**Trigger:** Email sent to investors@ridewireai.com
 
 **Actions:**
-1. Forward immediately to coco@stepheniesgem.io
+1. Forward to finance team
 2. Add label: "Investor-Inquiry"
 3. Flag for immediate attention
 4. Log in investor CRM (when implemented)
@@ -140,18 +138,16 @@ Founder, RideWire
 
 ### Rule 3: Press Inquiries
 
-**Trigger:** Email sent to press@stepheniesgem.io
+**Trigger:** Email sent to press@ridewireai.com
 
 **Actions:**
-1. Forward to coco@stepheniesgem.io
+1. Forward to marketing team
 2. Add label: "Press-Inquiry"
 3. Flag for immediate attention
 4. Send auto-responder:
 
 ```
 Thank you for your interest in RideWire. We'll respond to your press inquiry within 24 hours.
-
-For immediate questions, you can reach our founder directly at coco@stepheniesgem.io.
 
 Best regards,
 RideWire Media Relations
@@ -161,14 +157,14 @@ RideWire Media Relations
 
 ### Rule 4: General Inquiries
 
-**Trigger:** Email sent to hello@stepheniesgem.io
+**Trigger:** Email sent to hello@ridewireai.com
 
 **Actions:**
 1. Send auto-responder (see above)
 2. Route based on email content:
-   - Contains "support", "help", "issue" → Forward to support@stepheniesgem.io
-   - Contains "investor", "funding", "investment" → Forward to investors@stepheniesgem.io
-   - Contains "press", "media", "interview" → Forward to press@stepheniesgem.io
+   - Contains "support", "help", "issue" → Forward to support@ridewireai.com
+   - Contains "investor", "funding", "investment" → Forward to investors@ridewireai.com
+   - Contains "press", "media", "interview" → Forward to press@ridewireai.com
    - Otherwise → Keep in hello@ inbox for manual review
 3. Add appropriate labels based on content
 
@@ -176,7 +172,7 @@ RideWire Media Relations
 
 ### Rule 5: Team Communication
 
-**Trigger:** Email sent to team@stepheniesgem.io
+**Trigger:** Email sent to team@ridewireai.com
 
 **Actions:**
 1. Forward to all team members
@@ -414,7 +410,7 @@ The RideWire Team
 
 ### SPF, DKIM, DMARC Setup
 
-Ensure the following DNS records are configured for stepheniesgem.io:
+Ensure the following DNS records are configured for ridewireai.com:
 
 ```
 SPF Record:
@@ -424,7 +420,7 @@ DKIM Record:
 [Generated by email provider]
 
 DMARC Record:
-v=DMARC1; p=quarantine; rua=mailto:postmaster@stepheniesgem.io
+v=DMARC1; p=quarantine; rua=mailto:postmaster@ridewireai.com
 ```
 
 ### Two-Factor Authentication
@@ -493,4 +489,4 @@ All team members should use consistent email signatures. See EMAIL_TEMPLATES.md 
 
 **Last Updated:** January 5, 2026
 
-For questions about email automation, contact: team@stepheniesgem.io
+For questions about email automation, contact: team@ridewireai.com

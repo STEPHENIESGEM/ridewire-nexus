@@ -264,7 +264,7 @@ RideWire AI Hub uses three independent AI systems (ChatGPT, Claude, and Gemini) 
 
 **RideWire AI Hub**  
 Attn: Partnership Development  
-Email: hello@stepheniesgem.io  
+Email: hello@ridewireai.com  
 Website: github.com/STEPHENIESGEM/ridewire-ai-hub
 
 **Demo Access**:  

@@ -575,12 +575,10 @@ This initiative is powered by specialized AI agents with distinct roles:
 
 ### Email Contacts
 
-- **General Inquiries**: hello@stepheniesgem.io
-- **Technical Support**: support@stepheniesgem.io
-- **AI Hub Questions**: aihub@stepheniesgem.io
-- **Investor Relations**: investors@stepheniesgem.io
-- **Media Inquiries**: press@stepheniesgem.io
-- **Founder**: coco@stepheniesgem.io
+- **General Inquiries**: hello@ridewireai.com
+- **Technical Support**: support@ridewireai.com
+- **Investor Relations**: investors@ridewireai.com
+- **Media Inquiries**: press@ridewireai.com
 
 ### GitHub Support
 
