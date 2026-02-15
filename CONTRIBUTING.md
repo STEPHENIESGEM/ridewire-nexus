@@ -255,8 +255,10 @@ We are committed to providing a welcoming and inclusive environment:
 ### Enforcement
 
 Violations of the code of conduct should be reported to:
-- **Email**: conduct@ridewireai.com
-- **GitHub**: Contact repository maintainers
+- **GitHub**: Contact repository maintainers privately
+- **Email**: support@ridewireai.com with "Code of Conduct" in subject line
+
+All reports will be handled confidentially and investigated promptly.
 
 ---
 

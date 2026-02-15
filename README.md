@@ -599,7 +599,12 @@ This initiative is powered by specialized AI agents with distinct roles:
 
 ### Website
 
-Visit us at: **https://ridewireai.com**
+Visit us at: **https://ridewireai.com** (coming soon)
+
+For now, access the platform through:
+- **GitHub Repository**: https://github.com/STEPHENIESGEM/ridewire-ai-hub
+- **Documentation**: Comprehensive guides in the `/docs` directory
+- **Deployment**: Follow [SETUP.md](SETUP.md) to deploy your own instance
 
 ---
 
