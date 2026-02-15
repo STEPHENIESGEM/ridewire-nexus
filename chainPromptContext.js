@@ -341,7 +341,7 @@ class ResponseVerifier {
     // Check 5: Verify response addresses the request topic
     if (request && response) {
       const relevance = this.calculateRelevance(request, response);
-      if (relevance < 0.1) {
+      if (relevance < 0.3) { // At least 30% of request terms should appear in response
         issues.push('Response may not address the request');
       }
     }
@@ -355,24 +355,26 @@ class ResponseVerifier {
 
   /**
    * Simple relevance check between request and response
+   * Checks if key terms from request appear in response
    */
   static calculateRelevance(request, response) {
-    const requestWords = new Set(
-      request.toLowerCase()
-        .split(/\W+/)
-        .filter(w => w.length > 3)
-    );
+    const requestWords = request.toLowerCase()
+      .split(/\W+/)
+      .filter(w => w.length > 3);
     
-    const responseWords = response.toLowerCase().split(/\W+/);
+    if (requestWords.length === 0) return 1.0;
+    
+    const responseLower = response.toLowerCase();
     let matches = 0;
     
-    for (const word of responseWords) {
-      if (requestWords.has(word)) {
+    // Check if each request word appears in response
+    for (const word of requestWords) {
+      if (responseLower.includes(word)) {
         matches++;
       }
     }
     
-    return matches / Math.max(responseWords.length, 1);
+    return matches / requestWords.length;
   }
 }
 
