@@ -526,6 +526,6 @@ This strategy focuses on the **blue ocean opportunity of motorcycle mechanics** 
 
 ---
 
-**Contact for questions:** hello@stepheniesgem.io
+**Contact for questions:** hello@ridewireai.com
 
 **Last Updated:** January 5, 2026

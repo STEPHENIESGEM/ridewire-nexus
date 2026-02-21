@@ -445,7 +445,7 @@ node scripts/automation/coco-monitor.js
 - **This Document**: `AUTOMATION-README.md`
 
 ### Contact
-- **Email**: hello@stepheniesgem.io
+- **Email**: hello@ridewireai.com
 - **GitHub Issues**: https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues
 
 ---

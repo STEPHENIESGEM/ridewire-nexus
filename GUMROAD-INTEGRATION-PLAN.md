@@ -301,8 +301,8 @@ Perfect for:
 ✓ Automotive students
 ✓ Fleet maintenance teams
 
-Support: support@ridewire.ai
-Website: ridewire.ai
+Support: support@ridewireai.com
+Website: ridewireai.com
 ```
 
 ---

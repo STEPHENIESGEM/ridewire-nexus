@@ -202,4 +202,4 @@ All critical security measures are in place:
 **Date:** January 5, 2026  
 **Status:** ✅ APPROVED for merge with noted action items
 
-For security concerns, contact: aihub@stepheniesgem.io
+For security concerns, contact: support@ridewireai.com

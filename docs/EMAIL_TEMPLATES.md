@@ -2,17 +2,15 @@
 
 ## Email Contact Structure
 
-RideWire uses **stepheniesgem.io** as the unified brand domain for all email communications.
+RideWire uses **ridewireai.com** as the unified brand domain for all email communications.
 
 ### Primary Email Addresses
 
-- **coco@stepheniesgem.io** - Founder personal email
-- **hello@stepheniesgem.io** - General inquiries
-- **aihub@stepheniesgem.io** - AI Hub specific technical questions
-- **support@stepheniesgem.io** - Customer support
-- **investors@stepheniesgem.io** - Fundraising and investor relations
-- **press@stepheniesgem.io** - Media inquiries
-- **team@stepheniesgem.io** - Internal team communication
+- **hello@ridewireai.com** - General inquiries
+- **support@ridewireai.com** - Customer support
+- **investors@ridewireai.com** - Fundraising and investor relations
+- **press@ridewireai.com** - Media inquiries
+- **team@ridewireai.com** - Internal team communication
 
 ---
 
@@ -37,7 +35,7 @@ Need help? Reply to this email or visit our support portal.
 
 Best regards,
 The RideWire Team
-support@stepheniesgem.io
+support@ridewireai.com
 ```
 
 ---
@@ -63,7 +61,7 @@ For immediate help, you can also:
 Best regards,
 [Support Agent Name]
 RideWire Support Team
-support@stepheniesgem.io
+support@ridewireai.com
 ```
 
 ---
@@ -90,7 +88,7 @@ Thank you for your patience!
 
 Best regards,
 RideWire Support Team
-support@stepheniesgem.io
+support@ridewireai.com
 ```
 
 ---
@@ -120,8 +118,7 @@ Would you be open to a 20-minute call next week to discuss?
 Best regards,
 Stephanie
 Founder, RideWire
-coco@stepheniesgem.io
-investors@stepheniesgem.io
+investors@ridewireai.com
 ```
 
 ---
@@ -148,7 +145,7 @@ I've attached our pitch deck for your review.
 Best regards,
 Stephanie
 Founder, RideWire
-investors@stepheniesgem.io
+investors@ridewireai.com
 ```
 
 ---
@@ -182,7 +179,7 @@ Additional materials:
 
 Best regards,
 RideWire Media Relations
-press@stepheniesgem.io
+press@ridewireai.com
 ```
 
 ---
@@ -214,7 +211,7 @@ Would you be open to exploring a partnership? I'd love to set up a brief call.
 Best regards,
 Stephanie
 Founder, RideWire
-hello@stepheniesgem.io
+hello@ridewireai.com
 ```
 
 ---
@@ -244,7 +241,7 @@ Need help? Reply to this email anytime.
 
 Best,
 The RideWire Team
-support@stepheniesgem.io
+support@ridewireai.com
 ```
 
 ---
@@ -270,7 +267,7 @@ Need help? Reply to this email.
 
 Best,
 The RideWire Team
-support@stepheniesgem.io
+support@ridewireai.com
 ```
 
 ---
@@ -301,7 +298,7 @@ Questions? Reply to this email.
 
 Best,
 The RideWire Team
-support@stepheniesgem.io
+support@ridewireai.com
 ```
 
 ---
@@ -332,7 +329,7 @@ Let me know if you have questions.
 
 Best,
 [Team Lead]
-team@stepheniesgem.io
+team@ridewireai.com
 ```
 
 ---
@@ -366,7 +363,7 @@ Thanks for all your hard work!
 
 Best,
 [Sender Name]
-team@stepheniesgem.io
+team@ridewireai.com
 ```
 
 ---
@@ -381,7 +378,7 @@ team@stepheniesgem.io
 [Your Title]
 RideWire AI Hub
 
-Email: [specific@stepheniesgem.io]
+Email: [specific@ridewireai.com]
 Website: [coming soon]
 ```
 
@@ -393,8 +390,8 @@ Stephanie
 Founder & CEO
 RideWire AI Hub
 
-Email: coco@stepheniesgem.io
-Investors: investors@stepheniesgem.io
+Email: hello@ridewireai.com
+Investors: investors@ridewireai.com
 
 "Transforming automotive diagnostics with multi-AI intelligence"
 ```
@@ -405,7 +402,7 @@ Investors: investors@stepheniesgem.io
 --
 RideWire Support Team
 
-Email: support@stepheniesgem.io
+Email: support@ridewireai.com
 Documentation: [link when available]
 
 We typically respond within 24 hours
@@ -415,7 +412,7 @@ We typically respond within 24 hours
 
 ## Usage Guidelines
 
-1. **Always use stepheniesgem.io domain** - This is our unified brand domain
+1. **Always use ridewireai.com domain** - This is our unified brand domain
 2. **Professional tone** - Clear, helpful, and friendly
 3. **Quick response** - Aim for <24 hour response time
 4. **Personalize** - Use recipient's name and reference specific context

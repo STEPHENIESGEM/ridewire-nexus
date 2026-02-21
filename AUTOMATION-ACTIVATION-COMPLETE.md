@@ -282,7 +282,7 @@ Each document includes troubleshooting sections:
 - API authentication issues
 
 ### Contact
-- **Email**: hello@stepheniesgem.io
+- **Email**: hello@ridewireai.com
 - **GitHub Issues**: https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues
 - **Documentation**: See individual markdown files
 

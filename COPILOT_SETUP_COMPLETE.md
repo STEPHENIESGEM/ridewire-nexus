@@ -283,7 +283,7 @@ With these instructions in place:
 ⚠️ **ACTION REQUIRED**: Update these placeholders:
 
 1. **SECURITY.md**
-   - Line 12: Security email (use security@ridewire.ai or similar)
+   - Line 12: Security email (use security@ridewireai.com)
    - Line 149-150: Contact information
 
 2. **DEPLOYMENT_CHECKLIST.md**

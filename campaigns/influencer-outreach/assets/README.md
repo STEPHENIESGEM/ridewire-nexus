@@ -251,7 +251,7 @@ Voiceover: "Try RideWire AI Hub. Link in bio."
 - **Title**: RideWire AI Hub - Multi-AI Consensus Platform
 - **Subtitle**: Partnership Opportunity for [Influencer Name]
 - **Visual**: RideWire logo + multi-AI diagram
-- **Footer**: ridewire.ai | partnerships@ridewire.ai
+- **Footer**: ridewireai.com | hello@ridewireai.com
 
 ### Slide 2: The Problem
 - **Headline**: "Single-Model AI Has Limitations"
@@ -325,7 +325,7 @@ Voiceover: "Try RideWire AI Hub. Link in bio."
 - **Step 1**: Try the platform (free access link)
 - **Step 2**: Schedule a call to discuss partnership
 - **Step 3**: Create content and start earning
-- **CTA**: Email partnerships@ridewire.ai or reply to this email
+- **CTA**: Email hello@ridewireai.com or reply to this email
 - **Visual**: Calendar icon + email icon
 
 ---
@@ -387,7 +387,7 @@ Voiceover: "Try RideWire AI Hub. Link in bio."
 
 If influencers need custom assets:
 
-1. **Email request**: partnerships@ridewire.ai
+1. **Email request**: hello@ridewireai.com
 2. **Specify**:
    - Type of asset (video, graphic, deck)
    - Use case (YouTube, TikTok, blog post)

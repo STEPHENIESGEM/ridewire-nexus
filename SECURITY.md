@@ -9,7 +9,7 @@ RideWire AI Hub takes security seriously as a high-tech diagnostic platform hand
 If you discover a security vulnerability, please:
 
 1. **DO NOT** open a public GitHub issue
-2. Email security concerns to: security@ridewire.ai (Configure this email before deployment)
+2. Email security concerns to: security@ridewireai.com
 3. Include detailed steps to reproduce the vulnerability
 4. Allow up to 48 hours for initial response
 
@@ -147,7 +147,7 @@ Update dependencies regularly but test thoroughly before deploying.
 
 For security concerns or questions:
 - GitHub Security Advisories: [Enable in repository settings]
-- Email: security@ridewire.ai (Configure this email before deployment)
+- Email: security@ridewireai.com
 - Response time: 48 hours for initial acknowledgment
 
 ---

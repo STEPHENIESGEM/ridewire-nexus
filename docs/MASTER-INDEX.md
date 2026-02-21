@@ -197,7 +197,7 @@ All documentation is powered by specialized AI agents:
 
 ### Document Navigation Questions
 - **Slack:** #ridewire-documentation
-- **Email:** docs@ridewire.ai
+- **Email:** hello@ridewireai.com
 
 ### Technical Questions
 - **Contact:** @MANUS (The Architect)

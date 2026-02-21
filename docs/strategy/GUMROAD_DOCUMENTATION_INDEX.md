@@ -293,10 +293,10 @@ All product documents include required disclaimers:
 
 ## 🤝 TEAM CONTACTS
 
-**Strategy Questions**: strategy@ridewire.ai  
-**Product Implementation**: product@ridewire.ai  
-**Finance & Budget**: finance@ridewire.ai  
-**Marketing & Launch**: marketing@ridewire.ai  
+**General Inquiries**: hello@ridewireai.com  
+**Support**: support@ridewireai.com  
+**Investor Relations**: investors@ridewireai.com  
+**Press**: press@ridewireai.com  
 
 ---
 
