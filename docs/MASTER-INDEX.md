@@ -195,21 +195,23 @@ All documentation is powered by specialized AI agents:
 
 ## 📞 GETTING HELP
 
-### Document Navigation Questions
-- **Slack:** #ridewire-documentation
-- **Email:** docs@ridewire.ai
+### Documentation & Support
 
-### Technical Questions
-- **Contact:** @MANUS (The Architect)
-- **Slack:** #ridewire-engineering
+- **GitHub Issues**: [Report problems or ask questions](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues)
+- **Technical Support**: support@ridewireai.com
+- **Business Inquiries**: business@ridewireai.com
 
-### Business/Strategy Questions
-- **Contact:** @CLAUDE (The Strategist)
-- **Slack:** #ridewire-strategy
+### Navigation Tips
+
+1. **New to RideWire?** → Start with [README.md](../README.md)
+2. **Developers?** → Check [Technical Documentation](#technical-documentation)
+3. **Investors?** → Review [Execution Summary](strategy/EXECUTION-SUMMARY-INVESTOR-LAUNCH-CHECKLIST.md)
 
 ### Urgent Issues
-- **PagerDuty:** On-call engineer (24/7)
-- **Slack:** #ridewire-incidents
+
+For critical production issues:
+- Open a GitHub issue with "URGENT" label
+- Email: support@ridewireai.com with "URGENT" in subject
 
 ---
 
@@ -218,10 +220,14 @@ All documentation is powered by specialized AI agents:
 1. **Make changes** to relevant document
 2. **Update "Last Updated" date** in document header
 3. **Update this master index** if adding new documents
-4. **Commit with descriptive message** (e.g., "Update financial projections with Q4 data")
-5. **Notify team** in Slack (#ridewire-updates)
+4. **Commit with descriptive message** (e.g., "docs: update financial projections with Q4 data")
+5. **Open a pull request** for review if making significant changes
 
 ---
+
+**Master Index Version**: 1.1  
+**Last Updated**: February 2026  
+**Maintained By**: Technical Documentation Team
 
 ## 📈 KEY METRICS DASHBOARD
 

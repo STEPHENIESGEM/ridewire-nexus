@@ -281,10 +281,11 @@ Each document includes troubleshooting sections:
 - Database connection errors
 - API authentication issues
 
-### Contact
-- **Email**: hello@stepheniesgem.io
-- **GitHub Issues**: https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues
-- **Documentation**: See individual markdown files
+### Contact & Support
+
+- **GitHub Issues**: [Report issues and get help](https://github.com/STEPHENIESGEM/ridewire-ai-hub/issues)
+- **Technical Support**: support@ridewireai.com
+- **Documentation**: Comprehensive guides in markdown files
 
 ---
 
