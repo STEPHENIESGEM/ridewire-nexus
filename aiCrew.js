@@ -17,6 +17,12 @@ const fs = require('fs').promises;
 const { exec } = require('child_process');
 const util = require('util');
 const execPromise = util.promisify(exec);
+const { 
+  ChainPromptContext, 
+  SmartMemory, 
+  ContextCompressor,
+  ResponseVerifier 
+} = require('./chainPromptContext');
 
 class AICrew {
   constructor() {
@@ -29,8 +35,9 @@ class AICrew {
       apiKey: process.env.ANTHROPIC_API_KEY
     });
     
-    // Shared knowledge base (cross-agent memory)
-    this.sharedMemory = [];
+    // Shared knowledge base (cross-agent memory) - IMPROVED with SmartMemory
+    this.sharedMemory = new SmartMemory(1000); // Prevents unbounded growth
+    this.legacyMemory = []; // Keep legacy array for backward compatibility
     this.taskQueue = [];
     this.completedTasks = [];
     
@@ -50,6 +57,7 @@ class AICrew {
 
   /**
    * AI-to-AI prompting: One agent asks another for help
+   * IMPROVED: Now with verification, context compression, and smart memory
    */
   async agentPrompt({ from, to, message, context = {} }) {
     console.log(`\n🔄 Agent Communication: ${from} → ${to}`);
@@ -62,32 +70,62 @@ class AICrew {
       throw new Error(`Agent "${to}" not found`);
     }
     
-    // Add relevant context from shared memory
-    const relevantContext = this.sharedMemory
-      .filter(m => m.to === to || m.from === to)
-      .slice(-5); // Last 5 interactions
+    // IMPROVED: Get relevant context using smart memory (not just last 5)
+    const relevantContext = this.sharedMemory.getRelevant(to, message, 3);
+    
+    // IMPROVED: Compress context to reduce token usage
+    const compressedContext = ContextCompressor.compress(relevantContext, 800);
     
     const fullContext = {
       ...context,
       requestingAgent: from,
-      recentHistory: relevantContext,
+      recentHistory: compressedContext, // Compressed, not raw
       timestamp: new Date().toISOString()
     };
     
     // Target agent processes the request
-    const response = await toAgent.process(message, fullContext);
+    let response = await toAgent.process(message, fullContext);
     
-    // Store in shared memory for future reference
-    this.sharedMemory.push({
+    // IMPROVED: Verify response quality before propagating
+    const verification = ResponseVerifier.verify(message, response, fullContext);
+    
+    if (!verification.valid) {
+      console.log(`   ⚠️  Response failed verification: ${verification.issues.join(', ')}`);
+      
+      // Retry once with corrective prompt
+      const retryMessage = `Previous response had issues: ${verification.issues.join(', ')}. Please provide a complete, relevant response to: ${message}`;
+      response = await toAgent.process(retryMessage, fullContext);
+      
+      // Re-verify
+      const retryVerification = ResponseVerifier.verify(message, response, fullContext);
+      console.log(`   🔄 Retry verification: ${retryVerification.valid ? 'PASSED' : 'FAILED'}`);
+    }
+    
+    // IMPROVED: Store using ChainPromptContext structure
+    const chainContext = new ChainPromptContext(
+      response,
+      verification.confidence,
+      `Response to: ${message.substring(0, 100)}`,
+      []
+    ).setSource(to);
+    
+    if (verification.valid) {
+      chainContext.markVerified();
+    }
+    
+    // Store in both smart memory and legacy array
+    this.sharedMemory.add(chainContext);
+    this.legacyMemory.push({
       timestamp: Date.now(),
       from,
       to,
       message,
       response,
-      context: fullContext
+      context: fullContext,
+      verification
     });
     
-    console.log(`   ✅ Response received (${response.substring(0, 60)}...)`);
+    console.log(`   ✅ Response received (${response.substring(0, 60)}...) [Confidence: ${Math.round(verification.confidence * 100)}%]`);
     
     return response;
   }
@@ -213,6 +251,7 @@ class AICrew {
 
   /**
    * Get status of entire crew
+   * IMPROVED: Now includes memory statistics
    */
   async getStatus() {
     const status = {};
@@ -221,12 +260,37 @@ class AICrew {
       status[name] = await agent.getStatus();
     }
     
+    // Get memory statistics
+    const memoryStats = this.sharedMemory.getStats();
+    
     return {
       agents: status,
       pendingTasks: this.taskQueue.length,
       completedTasks: this.completedTasks.length,
-      sharedMemorySize: this.sharedMemory.length,
+      memory: {
+        smart: memoryStats,
+        legacy: this.legacyMemory.length
+      },
       timestamp: Date.now()
+    };
+  }
+
+  /**
+   * Get memory insights for debugging
+   * NEW: Helps diagnose chain prompt performance
+   */
+  getMemoryInsights() {
+    const stats = this.sharedMemory.getStats();
+    
+    return {
+      ...stats,
+      legacyMemorySize: this.legacyMemory.length,
+      recommendation: stats.totalMemories > 800 
+        ? 'Memory usage high. Consider clearing old memories.'
+        : 'Memory usage healthy.',
+      compressionRatio: this.legacyMemory.length > 0
+        ? (stats.totalMemories / this.legacyMemory.length).toFixed(2)
+        : 'N/A'
     };
   }
 
